@@ -168,7 +168,7 @@ Ao observar a saída, você verá que a tradução automática e o OCR requerem 
 
 Os resultados para o Exemplo Um mostram o quão importante é a qualidade da imagem de entrada. A imagem do Exemplo Um sofre tanto de angulação ruim quanto de uma quantidade significativa de ruídos. A presença de manchas, listras escuras e letras quebradas dificultam a classificação das letras pelo programa. A inclinação torna difícil para o programa reconhecer as linhas de texto. A combinação das duas fontes de erro produz uma transcrição muito pobre.
 
-![Figura 1: Transcrição do Exemplo Um](Traducoes-pt-PH/IMAGEM-1.png)
+![Figura 1: Transcrição do Exemplo Um](IMAGEM-1.png)
 
 Os resultados do Exemplo Dois demonstram que, mesmo com uma boa imagem, nossa transcrição e tradução iniciais ainda irão conter erros. O Exemplo Dois possui caligrafia errônea, mas, no geral, é livre de ruídos e não está inclinado. Mesmo que a conversão da imagem em texto tenha uma quantidade relativamente pequena de erros, a máquina pode não entender como traduzir todas as palavras corretamente. Por exemplo, a tradução da segunda página do Exemplo Dois contem erros de tradução, “The party’s connection to the owls.” (ver Figura 2). Esse erro vem da abreviação de “советский” (soviético), que é "COB.". Um leitor humano poderia reconhecer esse ponto como um sinal de que a palavra é uma abreviação e completar o resto da palavra se baseando no contexto. Embora o programa OCR tenha transcrito corretamente o ponto, o tradutor não entendeu o que fazer com ele.
 
