@@ -168,12 +168,12 @@ Ao observar a saída, você verá que a tradução automática e o OCR requerem 
 
 Os resultados para o Exemplo Um mostram o quão importante é a qualidade da imagem de entrada. A imagem do Exemplo Um sofre tanto de angulação ruim quanto de uma quantidade significativa de ruídos. A presença de manchas, listras escuras e letras quebradas dificultam a classificação das letras pelo programa. A inclinação torna difícil para o programa reconhecer as linhas de texto. A combinação das duas fontes de erro produz uma transcrição muito pobre.
 
-{% include figure.html filename="IMAGEM-1.png" caption="Figura 1: Transcrição do Exemplo Um" %}
+{% include figure.html filename="OCR-e-traducao-automatica-1.png" caption="Figura 1: Transcrição do Exemplo Um" %}
 
 Os resultados do Exemplo Dois demonstram que, mesmo com uma boa imagem, nossa transcrição e tradução iniciais ainda irão conter erros. O Exemplo Dois possui caligrafia errônea, mas, no geral, é livre de ruídos e não está inclinado. Mesmo que a conversão da imagem em texto tenha uma quantidade relativamente pequena de erros, a máquina pode não entender como traduzir todas as palavras corretamente. Por exemplo, a tradução da segunda página do Exemplo Dois contem erros de tradução, “The party’s connection to the owls.” (ver Figura 2). Esse erro vem da abreviação de “советский” (soviético), que é "COB.". Um leitor humano poderia reconhecer esse ponto como um sinal de que a palavra é uma abreviação e completar o resto da palavra se baseando no contexto. Embora o programa OCR tenha transcrito corretamente o ponto, o tradutor não entendeu o que fazer com ele.
 
-![Figura 2: A frase com "coruja" (owl) em russo](Traducoes-pt-PH/IMAGEM-2.png)
-![Figura 3: A frase com "coruja" (owl) está traduzida](Traducoes-pt-PH/IMAGEM-3.png)
+{% include figure.html filename="OCR-e-traducao-automatica-2.png" caption="Figura 2: A frase com "coruja" (owl) em russo" %}
+{% include figure.html filename="OCR-e-traducao-automatica-3.png" caption="Figura 3: A frase com "coruja" (owl) está traduzida" %}
 
 Outro problema na tradução são os hífens. Enquanto o Tesseract transcreve os hífens corretamente, nem o Tesseract nem o Yandex entenderam seus propósitos. Embora o hífen diga ao leitor para seguir a palavra até a próxima linha, os dois programas trataram as duas metades como palavras separadas. Obviamente é possível deletar os hífens individualmente, mas isso é tedioso. Uma forma de lidar com isso é criando um pequeno script de expressões regulares (ver o tutorial do Programming Historian ["Cleaning OCR’d text with Regular Expressions"](https://programminghistorian.org/en/lessons/cleaning-ocrd-text-with-regular-expressions)) para deletar o hífen e unir as duas linhas.
 
@@ -185,13 +185,13 @@ Se a frase terminar com um hífen, o script `sed` abaixo deletará todos os híf
 
 `sed -e :a -e '/-$/N; s/-\n//; ta' FICHEIRO.txt` 
 
-![Figura 4: A mudança após algumas edições](Traducoes-pt-PH/IMAGEM-4.png)
+{% include figure.html filename="OCR-e-traducao-automatica-4.png" caption="Figura 4: A mudança após algumas edições" %}
 
 De modo bastante similar com os outros comandos mostrados anteriormente, é possível manter uma lista de comandos `sed` em um script mais longo e aplicá-los a outros documentos nos quais você queira executar OCR.
 
 Após fazer as edições acima, coloque sua transcrição editada de volta na API de tradução. Veja a melhora na frase sobre corujas (_owls_). Fica evidente como algumas poucas edições podem melhorar radicalmente a qualidade das nossas traduções.
 
-![Figura 5: A tradução melhorada](Traducoes-pt-PH/IMAGEM-5.png)
+{% include figure.html filename="OCR-e-traducao-automatica-5.png" caption="Figura 5: A tradução melhorada" %}
 
 Outras Possibilidades com Scripting e ImageMagick
 ===================
@@ -237,7 +237,7 @@ Esse script pegará o nome do ficheiro fornecido e executará a operação `desp
 
 A figura a seguir ilustra como ficará a aparência do Exemplo Um após o corte, o enquadramento e as repetidas remoções de manchas:
 
-![Figura 6: A versão nova e melhorada do Exemplo Um](Traducoes-pt-PH/IMAGEM-6.png)
+{% include figure.html filename="OCR-e-traducao-automatica-6.png" caption="Figura 6: A versão nova e melhorada do Exemplo Um" %}
 
 Organize seus documentos
 ---------------------------------
