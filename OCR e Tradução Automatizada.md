@@ -104,7 +104,7 @@ E depois
 
 `chmod +x ./trans`
 
-Usar o Translate Shell é relativamente fácil. A linha abaixo pega um ficheiro, faz sua tradução para o inglês e salva o arquivo resultante dessa operação.
+Usar o Translate Shell é relativamente fácil. A linha abaixo pega um ficheiro, faz sua tradução para o inglês e salva o ficheiro resultante dessa operação.
 
 `trans -e yandex :eng file://NOME_FICHEIRO_ENTRADA > NOME_FICHEIRO_SAÍDA`
 
