@@ -267,7 +267,7 @@ Conclusão
 =========
 Nenhum programa ou script único irá revolucionar sua pesquisa. Por outro lado, aprender a como combinar uma variedade de ferramentas diferentes pode alterar radicalmente o modo como você utiliza ficheiros e que tipo de ficheiros pode utilizar. Essa lição usou a linguagem Bash de script para agrupar ferramentas, mas é possível escolher entre uma variedade de linguagens de programação diferentes para criar seus próprios fluxos de trabalho. Mais importante do que aprender a usar qualquer comando específico é aprender a conduzir sua pesquisa para aproveitar ao máximo as ferramentas digitais.
 
-A [página das lições](https://programminghistorian.org/en/lessons/) do Programming Historian oferece uma boa ideia de quais ferramentas estão disponíveis.
+A [página das lições](https://programminghistorian.org/en/lessons/) do Programming Historian oferece um bom panorama de quais ferramentas estão disponíveis.
 
 Saber as capacidades e limitações de ferramentas digitais ajudará a conduzir sua pesquisa a aproveitá-las ao máximo.
 
