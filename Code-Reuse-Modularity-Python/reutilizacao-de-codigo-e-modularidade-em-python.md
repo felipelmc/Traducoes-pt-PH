@@ -69,7 +69,7 @@ def cumprimentar_entidade (x):
 
 ## Modularidade
 
-Quando os programas são pequenos como o do exemplo acima, tipicamente ficam hospedados em um único ficheiro. Quando quiser executar um dos seus programas, pode simplesmente enviar o arquivo ao interpretador. À medida que os programas ficam maiores, faz sentido dividí-los em arquivos separados conhecidos como módulos. Essa modularidade torna mais fácil que trabalhe em seções de programas maiores. Aperfeiçoando cada seção do programa antes de unir todas as seções, torna-se mais fácil não apenas reutilizar módulos individuais em outros programas, como também torna mais fácil corrigir eventuais problemas ao ser capaz de identificar a origem do erro. Ao separar um programa em módulos, também se torna possivel ocultar os detalhes de como algo é feito dentro do módulo que o faz. Outros módulos 
+Quando os programas são pequenos como o do exemplo acima, tipicamente ficam hospedados em um único ficheiro. Quando quiser executar um dos seus programas, pode simplesmente enviar o arquivo ao interpretador. À medida que os programas ficam maiores, faz sentido dividí-los em arquivos separados conhecidos como módulos. Essa modularidade torna mais fácil que trabalhe em seções de programas maiores. Aperfeiçoando cada seção do programa antes de unir todas as seções, torna-se mais fácil não apenas reutilizar módulos individuais em outros programas, como também torna mais fácil corrigir eventuais problemas ao ser capaz de identificar a origem do erro. Ao separar um programa em módulos, também se torna possivel ocultar os detalhes de como algo é feito dentro do módulo que o faz. Outros módulos não precisam saber 
 
 
 
