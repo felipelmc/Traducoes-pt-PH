@@ -31,6 +31,7 @@ avatar_alt: Three caricature heads
 
 ### Objetivos da lição
 
+Programas de computador podem se tornar longos, pesados e confusos sem mecanismos especiais para gerenciar a complexidade. Esta lição mostrará como reutilizar partes do seu código escrevendo funções e dividindo seus programas em módulos, a fim de mantê-los concisos e fáceis de depurar. 
 
 
 
