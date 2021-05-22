@@ -69,7 +69,51 @@ def cumprimentar_entidade (x):
 
 ## Modularidade
 
-Quando os programas são pequenos como o do exemplo acima, tipicamente ficam hospedados em um único ficheiro. Quando quiser executar um dos seus programas, pode simplesmente enviar o arquivo ao interpretador. À medida que os programas ficam maiores, faz sentido dividí-los em arquivos separados conhecidos como módulos. Essa modularidade torna mais fácil que trabalhe em seções de programas maiores. Aperfeiçoando cada seção do programa antes de unir todas as seções, torna-se mais fácil não apenas reutilizar módulos individuais em outros programas, como também torna mais fácil corrigir eventuais problemas ao ser capaz de identificar a origem do erro. Ao separar um programa em módulos, também se torna possivel ocultar os detalhes de como algo é feito dentro do módulo que o faz. Outros módulos não precisam saber 
+Quando os programas são pequenos como o do exemplo acima, tipicamente ficam hospedados em um único ficheiro. Quando quiser executar um dos seus programas, pode simplesmente enviar o arquivo ao interpretador. À medida que os programas ficam maiores, faz sentido dividí-los em arquivos separados conhecidos como módulos. Essa modularidade torna mais fácil que trabalhe em seções de programas maiores. Aperfeiçoando cada seção do programa antes de unir todas as seções, torna-se mais fácil não apenas reutilizar módulos individuais em outros programas, como também torna mais fácil corrigir eventuais problemas ao ser capaz de identificar a origem do erro. Ao separar um programa em módulos, também se torna possivel ocultar os detalhes de como algo é feito dentro do módulo que o faz. Outros módulos não precisam saber como algo é feito se eles não são os responsáveis por fazê-lo. Esse princípio "need-to-know" (necessidade de saber) é chamado de "encapsulamento".
+
+Suponha que estejamos construindo um carro. É possível começar a adicionar peças à vontade, mas faria mais sentido começar construindo e testando um módulo - talvez o motor - antes de passar para os outros. O motor, por sua vez, pode ser imaginado como consistindo em vários outros módulos menores, como o carburador e o sistema de ignição, e esses são compostos de módulos ainda menores e mais básicos. O mesmo se aplica à codificação. Tenta-se quebrar um problema em pedaços menores e resolvê-los primeiro.
+
+Já criou um módulo quando escreveu o programa `cumprimento.py`. Agora escreverá um segundo programa, `utilizando-cumprimento.py`, que importará, através do comando `import`, o código do seu módulo e torná-lo utilizável. O Python possui um comando especial, `import`, que permite que um programa tenha acesso ao conteúdo de outro ficheiro de programa. É isso que será utilizado.
+
+Copie este código no Komodo Edit e salve-o como `utilizando-cumprimento.py`. Este ficheiro é o seu programa; `cumprimento.py` é o seu módulo.
+
+```
+# utilizando-cumprimento.py
+
+import cumprimento
+cumprimento.cumprimentar_entidade("mundo")
+cumprimento.cumprimentar_entidade("programming historian")
+```
+
+Fizemos algumas coisas aqui. Primeiro, dissemos ao Python para que ele importasse (carregasse), utilizando o comando `import`, o módulo `cumprimento.py` que criamos anteriormente.
+
+Você perceberá que, embora antes conseguíssemos executar a função chamando-a pelo nome: *cumprimentar_entidade("mundo")*, agora precisamos incluir o nome do módulo seguido por um ponto (.) na frente do nome da função. No português claro, isso significa: execute a função *cumprimentar_entidade*, que deve ser encontrada no módulo `cumprimento.py`.
+
+É possível executar o programa `utilizando-cumprimento.py` com o comando "Run Python" que você criou no Komodo Edit. Note que não é necessário executar o módulo… somente o programa que chama por ele. Se tudo correu bem, deverá ver o seguinte no painel de saída do Komodo Edit:
+
+```
+Olá mundo
+Olá Programming Historian
+```
+
+Tenha certeza de que entende a diferença entre carregar um arquivo de texto (ex.: olamundo.txt) e importar um arquivo de programa (ex.: cumprimento.py) antes de prosseguir.
+
+
+Leituras sugeridas
+-----------------------
+
+-   [Python Basics][] (em inglês)
+
+  [Python Basics]: http://www.astro.ufl.edu/~warner/prog/python.html
+
+### Sobre os autores
+
+William J. Turkel é Professor de História na University of Western Ontario.
+
+Adam Crymble, University College London.
+
+### Citação sugerida
+
 
 
 
