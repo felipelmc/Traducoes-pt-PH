@@ -44,7 +44,7 @@ mensagem = "Olá Mundo"
 
 Uma string é um tipo de objeto que consiste em uma série de caracteres. Python já sabe como lidar com várias representações poderosas e de uso geral, incluindo strings. Uma forma de manipular strings é utilizando *operadores de string*. Esses operadores são representados por símbolos associados à matemática, tais como +, -, \*, / e =. Quando utilizandos com strings, eles executam ações semelhantes, mas não iguais, às suas contrapartes matemáticas.
 
-# Concatenar
+## Concatenar
 
 Esse termo significa unir strings. O processo é conhecido como *concatenando* strings e é executado utilizando o operador de soma (+). Note que é necessário ser explícito quanto ao local onde deseja que os espaços em branco ocorram, colocando-os também entre aspas simples.
 
@@ -56,7 +56,7 @@ print(mensagem1)
 -> olá mundo
 ```
 
-# Multiplicar
+## Multiplicar
 
 Se quiser multiplas cópias de uma strings, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (*print*) as duas strings.
 
@@ -67,7 +67,7 @@ print(mensagem2a + mensagem2b)
 -> olá olá olá mundo
 ```
 
-# Append
+## Append
 
 E se quiser adicional material ao final de uma string sucessivamente? Há um operador especial para isso (+=).
 
@@ -80,6 +80,93 @@ mensagem3 += 'mundo'
 
 # Métodos de string: Encontrando, Modificando
 
-Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados.
+Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
+
+## Comprimento (Length)
+
+Você pode determinar o número de caracteres numa string usando `len`. Note que o espaço em branco conta como um caractere separado.
+
+```
+mensagem4 = 'olá' + ' ' + 'mundo'
+print(len(mensagem4))
+-> 9
+```
+
+## Encontrar (Find)
+
+É possível buscar uma substring em uma string, e seu programa retornará o índice da posição inicial dessa substring. Isso é útil para fases posteriores de processamento. Note que os índices são numerados da esquerda para a direita e que a contagem começa na posição 0, não 1.
+
+```
+mensagem5 = "olá mundo"
+mensagem5a = mensagem5.find(preencher isso aqui!!!)
+print(mensagem5a)
+-> preencher isso aqui!!!
+```
+
+Caso a substring não exista, o programa retornará o valor -1.
+
+```
+mensagem6 = "olá mundo"
+mensagem6b = mensagem6.find("esquilo")
+print(mensagem6b)
+-> -1
+```
+
+## Minúsculas (Lower Case)
+
+Por vezes é útil converter os caracteres de uma string para letras minúsculas. Por exemplo, se padronizarmos o caso, será mais fácil para o computador reconhecer que "Às vezes" é o mesmo que "às vezes".
+
+```
+mensagem7 = "OLÁ MUNDO"
+mensagem7a = mensagem7.lower()
+print(mensagem7a)
+-> olá mundo
+```
+
+O efeito oposto, isto é, tornar os caracteres maiúsculos, pode ser alcançado trocando `.lower` por `.upper`.
+
+## Substituir (Replace)
+
+Caso precise substituir uma substring ao longo da string, pode fazer isso através do método `replace`.
+
+```
+mensagem8 = "OLÁ MUNDO"
+mensagem8a = mensagem8.replace("O", "pizza")
+print(mensagem8a)
+-> pizzaLÁ MUNDpizza
+```
+
+## Slice (Slice)
+
+Se quiser cortar (`slice`) partes do início ou do fim de uma string, pode fazer isso criando uma substring. O mesmo tipo de técnica também permite quebrar uma string longa em componentes mais fáceis de gerenciar.
+
+```
+mensagem9 = "Olá Mundo"
+mensagem9a = mensagem9[1:8]
+print(mensagem9a)
+-> COMPLETAR ISSO AQUI
+```
+
+É possível substituir variáveis pelos inteiros usados nesse exemplo.
+
+```
+loc_inicial = 2
+loc_final = 8
+mensagem9b = mensagem9[loc_inicial:loc_final]
+print(mensagem9b)
+-> COMPLETAR ISSO AQUI
+```
+
+Isso torna muito mais fácil de utilizar esse método em conjunto com o método `find`, como no exemplo a seguir, que procura pela letra "COMPLETAR ISSO AQUI" nos primeiros seis caracteres de "Olá mundo" e corretamente informa que ela não está lá (-1). Essa técnica é muito mais útil em strings mais longas - documentos inteiros, por exemplo. Note que a ausência de um inteiro antes dos dois pontos significa que queremos começar no início da string. Poderíamos utilizar a mesma técnica para dizer ao programa para ir até o fim, não colocando nenhum número inteiro após os dois pontos. E lembre-se que as posições do índice começam a contar a partir do 0 ao invés de 1.
+
+
+
+
+
+
+
+
+
+
 
 
