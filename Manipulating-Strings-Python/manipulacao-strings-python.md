@@ -33,18 +33,18 @@ Objetivos da lição
 -----------------------
 Essa lição é uma breve introdução às técnicas de manipulação de [strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres) em Python. O conhecimento sobre manipulação de strings é crucial na maior parte das tarefas de processamento de texto. Se quiser experimentar as lições a seguir, você pode escrever e executar programas curtos como fizemos nas lições anteriores da série ou pode abrir um Python shell / Terminal para testá-los na linha de comando.
 
-# Manipulando strings Python
+## Manipulando strings Python
 
 Se já tiver tido contato com outras linguagens de programação, deve ter aprendido que é necessário *declarar* ou *digitar* variáveis antes de armazenar qualquer coisa nelas. Isso não é necessário ao trabalhar com strings em Python. Podemos criar uma string simplesmente colocando o conteúdo entre aspas com um sinal de igual (=):
 
 ```
 mensagem = "Olá Mundo"
 ```
-# Operadores de string: Adicionando e Multiplicando
+## Operadores de string: Adicionando e Multiplicando
 
 Uma string é um tipo de objeto que consiste em uma série de caracteres. Python já sabe como lidar com várias representações poderosas e de uso geral, incluindo strings. Uma forma de manipular strings é utilizando *operadores de string*. Esses operadores são representados por símbolos associados à matemática, tais como +, -, \*, / e =. Quando utilizandos com strings, eles executam ações semelhantes, mas não iguais, às suas contrapartes matemáticas.
 
-## Concatenar
+### Concatenar
 
 Esse termo significa unir strings. O processo é conhecido como *concatenando* strings e é executado utilizando o operador de soma (+). Note que é necessário ser explícito quanto ao local onde deseja que os espaços em branco ocorram, colocando-os também entre aspas simples.
 
@@ -56,7 +56,7 @@ print(mensagem1)
 -> olá mundo
 ```
 
-## Multiplicar
+### Multiplicar
 
 Se quiser multiplas cópias de uma strings, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (*print*) as duas strings.
 
@@ -67,7 +67,7 @@ print(mensagem2a + mensagem2b)
 -> olá olá olá mundo
 ```
 
-## Append
+### Append
 
 E se quiser adicional material ao final de uma string sucessivamente? Há um operador especial para isso (+=).
 
@@ -78,11 +78,11 @@ mensagem3 += 'mundo'
 -> oi mundo
 ```
 
-# Métodos de string: Encontrando, Modificando
+## Métodos de string: Encontrando, Modificando
 
 Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
 
-## Comprimento (Length)
+### Comprimento (Length)
 
 Você pode determinar o número de caracteres numa string usando `len`. Note que o espaço em branco conta como um caractere separado.
 
@@ -92,7 +92,7 @@ print(len(mensagem4))
 -> 9
 ```
 
-## Encontrar (Find)
+### Encontrar (Find)
 
 É possível buscar uma substring em uma string, e seu programa retornará o índice da posição inicial dessa substring. Isso é útil para fases posteriores de processamento. Note que os índices são numerados da esquerda para a direita e que a contagem começa na posição 0, não 1.
 
@@ -112,7 +112,7 @@ print(mensagem6b)
 -> -1
 ```
 
-## Minúsculas (Lower Case)
+### Minúsculas (Lower Case)
 
 Por vezes é útil converter os caracteres de uma string para letras minúsculas. Por exemplo, se padronizarmos o caso, será mais fácil para o computador reconhecer que "Às vezes" é o mesmo que "às vezes".
 
@@ -125,7 +125,7 @@ print(mensagem7a)
 
 O efeito oposto, isto é, tornar os caracteres maiúsculos, pode ser alcançado trocando `.lower` por `.upper`.
 
-## Substituir (Replace)
+### Substituir (Replace)
 
 Caso precise substituir uma substring ao longo da string, pode fazer isso através do método `replace`.
 
@@ -136,7 +136,7 @@ print(mensagem8a)
 -> pizzaLÁ MUNDpizza
 ```
 
-## Slice (Slice)
+### Slice (Slice)
 
 Se quiser cortar (`slice`) partes do início ou do fim de uma string, pode fazer isso criando uma substring. O mesmo tipo de técnica também permite quebrar uma string longa em componentes mais fáceis de gerenciar.
 
@@ -184,7 +184,7 @@ Essa sentença diz ao Python que aplique a função `lower` à string *mensagem7
 
 Os colchetes têm um propósito diferente. Se pensar em uma string como uma sequência de caracteres, e quer que seja possível acessar os conteúdos de uma string através das suas localizações dentro da sequência, então precisa, de alguma forma, enviar ao Python uma localização entro da sequência. É isso que os colchetes fazem: indicam a localização inicial e final dentro de uma sequência, como vimos ao utilizar o método `slice`.
 
-# Sequências de escape
+## Sequências de escape
 
 O que você faz quando precisa incluir aspas numa string? Você não quer que o interpretador do Python entenda de forma incorreta e termine a string quando passar por um desses caracteres. Em Python, é possível adicionar uma barra (\) na frente das aspas de modo que ela não termina a string. Isso é conhecido como sequências de escape.
 
@@ -206,7 +206,7 @@ print('olá\tolá\tolá\nmundo')
 mundo
 ```
 
-# Leituras sugeridas
+## Leituras sugeridas
 
 - Lutz, *Learning Python*
   - Capítulo 7: Strings
@@ -214,7 +214,7 @@ mundo
   - Capítulo 10: Introducing Python Statements
   - Capítulo 16: Function Basics
 
-# Sincronização de Código
+## Sincronização de Código
 
 Para continuar com as lições futuras, é importante que tenha os arquivos e programas corretos no seu diretório programming-historian. Ao final de cada capítulo você pode fazer o download do arquivo zip do programming-historian para garantir que possui os códigos corretos. Observe que foram removidos os arquivos desnecessários de lições anteriores. Seu diretório pode conter mais arquivos e não há problema nisso!
 
