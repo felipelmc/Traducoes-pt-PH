@@ -218,7 +218,7 @@ mundo
 
 Para continuar com as lições futuras, é importante que tenha os arquivos e programas corretos no seu diretório programming-historian. Ao final de cada capítulo você pode fazer o download do arquivo zip do programming-historian para garantir que possui os códigos corretos. Observe que foram removidos os arquivos desnecessários de lições anteriores. Seu diretório pode conter mais arquivos e não há problema nisso!
 
--   programming-historian-1 ([zip](/assets/python-lessons1.zip))
+-   programming-historian-1 ([zip](https://programminghistorian.org/assets/python-lessons1.zip))
 
 
 
