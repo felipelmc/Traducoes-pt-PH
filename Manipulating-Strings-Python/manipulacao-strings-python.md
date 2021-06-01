@@ -80,7 +80,7 @@ mensagem3 += 'mundo'
 
 # Métodos de string: Encontrando, Modificando
 
-Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
+Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
 
 ## Comprimento (Length)
 
@@ -186,8 +186,42 @@ Os colchetes têm um propósito diferente. Se pensar em uma string como uma sequ
 
 # Sequências de escape
 
+O que você faz quando precisa incluir aspas numa string? Você não quer que o interpretador do Python entenda de forma incorreta e termine a string quando passar por um desses caracteres. Em Python, é possível adicionar uma barra (\) na frente das aspas de modo que ela não termina a string. Isso é conhecido como sequências de escape.
 
+```
+print('\"')
+-> "
+```
 
+```
+print('O programa imprimiu \"olá mundo\"')
+-> The program printed "olá mundo"
+```
+
+Duas outras sequências de escape permitem imprimir tabulações e novas linhas:
+
+```
+print('olá\tolá\tolá\nmundo')
+->olá olá olá
+mundo
+```
+
+# Leituras sugeridas
+
+- Lutz, *Learning Python*
+  - Capítulo 7: Strings
+  - Capítulo 8: Lists and Dictionaries
+  - Capítulo 10: Introducing Python Statements
+  - Capítulo 16: Function Basics
+
+# Sincronização de Código
+
+Para continuar com as lições futuras, é importante que tenha os arquivos e programas corretos no seu diretório programming-historian. Ao final de cada capítulo você pode fazer o download do arquivo zip do programming-historian para garantir que possui os códigos corretos. Observe que foram removidos os arquivos desnecessários de lições anteriores. Seu diretório pode conter mais arquivos e não há problema nisso!
+
+-   programming-historian-1 ([zip][])
+
+  [site do Python]: https://docs.python.org/2/library/stdtypes.html#string-methods
+  [zip]: /assets/python-lessons1.zip
 
 
 
