@@ -80,7 +80,7 @@ mensagem3 += 'mundo'
 
 # Métodos de string: Encontrando, Modificando
 
-Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
+Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem fazer coisas com strings. Utilizandos sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
 
 ## Comprimento (Length)
 
@@ -220,7 +220,6 @@ Para continuar com as lições futuras, é importante que tenha os arquivos e pr
 
 -   programming-historian-1 ([zip][])
 
-  [site do Python]: https://docs.python.org/2/library/stdtypes.html#string-methods
   [zip]: /assets/python-lessons1.zip
 
 
