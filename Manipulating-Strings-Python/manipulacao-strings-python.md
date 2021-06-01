@@ -157,9 +157,34 @@ print(mensagem9b)
 -> COMPLETAR ISSO AQUI
 ```
 
-Isso torna muito mais fácil de utilizar esse método em conjunto com o método `find`, como no exemplo a seguir, que procura pela letra "COMPLETAR ISSO AQUI" nos primeiros seis caracteres de "Olá mundo" e corretamente informa que ela não está lá (-1). Essa técnica é muito mais útil em strings mais longas - documentos inteiros, por exemplo. Note que a ausência de um inteiro antes dos dois pontos significa que queremos começar no início da string. Poderíamos utilizar a mesma técnica para dizer ao programa para ir até o fim, não colocando nenhum número inteiro após os dois pontos. E lembre-se que as posições do índice começam a contar a partir do 0 ao invés de 1.
+Isso torna muito mais fácil de utilizar esse método em conjunto com o método `find`, como no exemplo a seguir, que procura pela letra "d" nos primeiros seis caracteres de "Olá mundo" e corretamente informa que ela não está lá (-1). Essa técnica é muito mais útil em strings mais longas - documentos inteiros, por exemplo. Note que a ausência de um inteiro antes dos dois pontos significa que queremos começar no início da string. Poderíamos utilizar a mesma técnica para dizer ao programa para ir até o fim, não colocando nenhum número inteiro após os dois pontos. E lembre-se que as posições do índice começam a contar a partir do 0 ao invés de 1.
 
+```
+mensagem9 = "Olá Mundo"
+print(mensagem9[:5].find("d"))
+-> -1
+```
 
+Há vários outros, mas os métodos de string acima são um bom começo. Observe que, neste último exemplo, utilizamos colchetes no lugar de parênteses. Essa diferença na *sintaxe* sinaliza uma diferença importante. Em Python, parênteses geralmente são utilizados para *passar um argumento* para uma função. Então, quando vemos algo do tipo
+
+```
+print(len(mensagem7))
+```
+
+significa passar a string *mensagem7* para a função `len` e depois enviar o valor retornado para a instrução de impressão (print). Se uma função pode ser chamada sem um argumento, geralmente é necessário incluir um par de parênteses vazios após o nome da função de qualquer modo. Vimos um exemplo disso também:
+
+```
+mensagem7 = "OLÁ MUNDO"
+mensagem7a = mensagem7.lower()
+print(mensagem7a)
+-> olá mundo
+```
+
+Essa sentença diz ao Python que aplique a função `lower` à string *mensagem7* e armazene o valor retornado na string *mensagem7a*.
+
+Os colchetes têm um propósito diferente. Se pensar em uma string como uma sequência de caracteres, e quer que seja possível acessar os conteúdos de uma string através das suas localizações dentro da sequência, então precisa, de alguma forma, enviar ao Python uma localização entro da sequência. É isso que os colchetes fazem: indicam a localização inicial e final dentro de uma sequência, como vimos ao utilizar o método `slice`.
+
+# Sequências de escape
 
 
 
