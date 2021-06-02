@@ -143,7 +143,7 @@ Se quiser cortar (`slice`) partes do início ou do fim de uma string, pode fazer
 
 ```
 mensagem9 = "Olá Mundo"
-mensagem9a = mensagem9[1:5]
+mensagem9a = mensagem9[1:7]
 print(mensagem9a)
 -> lá Mun
 ```
@@ -152,7 +152,7 @@ print(mensagem9a)
 
 ```
 loc_inicial = 2
-loc_final = 5
+loc_final = 7
 mensagem9b = mensagem9[loc_inicial:loc_final]
 print(mensagem9b)
 -> á Mun
