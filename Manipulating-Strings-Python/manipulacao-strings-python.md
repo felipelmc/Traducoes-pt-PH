@@ -101,7 +101,7 @@ print(len(mensagem4))
 mensagem5 = "olá mundo"
 mensagem5a = mensagem5.find("mun")
 print(mensagem5a)
--> 3
+-> 4
 ```
 
 Caso a substring não exista, o programa retornará o valor -1.
