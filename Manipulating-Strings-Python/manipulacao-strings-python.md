@@ -42,7 +42,7 @@ mensagem = "Olá Mundo"
 ```
 ## Operadores de string: Adicionando e Multiplicando
 
-Uma string é um tipo de objeto que consiste numa série de caracteres. A linguagem Python já sabe como lidar com várias representações poderosas e de uso geral, incluindo strings. Uma forma de manipular strings é utilizando *operadores de string*. Esses operadores são representados por símbolos associados à matemática, tais como +, -, \*, / e =. Quando utilizandos com strings, eles executam ações semelhantes, mas não iguais, aos seus correspondentes matemáticos.
+Uma string é um tipo de objeto que consiste numa série de caracteres. A linguagem Python já sabe como lidar com várias representações poderosas e de uso geral, incluindo strings. Uma forma de manipular strings é utilizando *operadores de string*. Esses operadores são representados por símbolos associados à matemática, tais como +, -, \*, / e =. Quando utilizados com strings, eles executam ações semelhantes, mas não iguais, aos seus correspondentes matemáticos.
 
 ### Concatenar
 
@@ -69,7 +69,7 @@ print(mensagem2a + mensagem2b)
 
 ### Append
 
-E se quiser adicional material ao final duma string sucessivamente? Há um operador especial para isso (+=).
+E se quiser adicionar material ao final duma string sucessivamente? Há um operador especial para isso (+=).
 
 ```
 mensagem3 = 'oi'
@@ -186,7 +186,7 @@ Os colchetes têm um propósito diferente. Se pensarmos numa string como uma seq
 
 ## Sequências de escape
 
-O que você faz quando precisa incluir aspas numa string? Você não quer que o interpretador do Python entenda de forma incorreta e termine a string quando passar por um desses caracteres. Em Python, é possível adicionar uma barra (\) na frente das aspas de modo que ela não termina a string. Isso é conhecido como sequências de escape.
+O que você faz quando precisa incluir aspas numa string? Você não quer que o interpretador do Python entenda de forma incorreta e termine a string quando passar por um desses caracteres. Em Python, é possível adicionar uma barra (\) na frente das aspas de modo que ela não termine a string. Isso é conhecido como sequências de escape.
 
 ```
 print('\"')
