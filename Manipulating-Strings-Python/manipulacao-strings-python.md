@@ -75,6 +75,7 @@ E se quiser adicionar material ao final duma string sucessivamente? Há um opera
 mensagem3 = 'oi'
 mensagem3 += ' '
 mensagem3 += 'mundo'
+print(mensagem3)
 -> oi mundo
 ```
 
