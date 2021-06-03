@@ -2,3 +2,5 @@ Aqui vamos começar a traduzir a lição "Visualização de Dados com Bokeh e Pa
 
 Tentando pra ver se isso aqui funciona de alguma forma.
 
+Será que agora vai funcionar normalmente?
+
