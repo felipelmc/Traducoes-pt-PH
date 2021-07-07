@@ -58,7 +58,7 @@ print(mensagem1)
 
 ### Multiplicar
 
-Se quiser múltiplas cópias duma strings, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (com a função *print*) as duas strings.
+Se quiser múltiplas cópias duma string, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (com a função *print*) as duas strings.
 
 ```
 mensagem2a = 'olá ' * 3
