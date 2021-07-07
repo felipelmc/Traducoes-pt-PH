@@ -29,9 +29,9 @@ avatar_alt: A man playing a guitar
 
 {% include toc.html %}
 
-Objetivos da lição
------------------------
-Essa lição é uma breve introdução às técnicas de manipulação de [strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres) em Python. O conhecimento sobre manipulação de strings é crucial na maior parte das tarefas de processamento de texto. Se quiser experimentar as lições a seguir, você pode escrever e executar programas curtos como fizemos nas lições anteriores da série ou pode abrir um Python shell / Terminal para testá-los na linha de comando.
+## Objetivos da lição
+
+Essa lição é uma breve introdução às técnicas de manipulação de [strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres) em Python. O conhecimento sobre manipulação de strings é crucial na maior parte das tarefas de processamento de texto. Caso deseje experimentar as lições a seguir, você pode escrever e executar programas curtos como fizemos nas lições anteriores da série ou pode abrir um Python shell / Terminal para testá-los na linha de comando.
 
 ## Manipulando strings Python
 
@@ -46,9 +46,9 @@ Uma string é um tipo de objeto que consiste numa série de caracteres. A lingua
 
 ### Concatenar
 
-Esse termo significa unir strings. O processo é conhecido como *concatenando* strings e é executado utilizando o operador de soma (+). Note que é necessário ser explícito quanto ao local onde deseja que os espaços em branco ocorram, colocando-os também entre aspas simples.
+Esse termo significa unir strings. O processo é conhecido como *concatenação* de strings e é executado utilizando o operador de soma (+). Note que é necessário ser explícito quanto ao local onde deseja que os espaços em branco ocorram, colocando-os também entre aspas simples.
 
-Nesse exemplo, a strings "mensagem1" recebe o conteúdo "olá mundo":
+Nesse exemplo, a string "mensagem1" recebe o conteúdo "olá mundo":
 
 ```
 mensagem1 = 'olá' + ' ' + 'mundo'
@@ -58,7 +58,7 @@ print(mensagem1)
 
 ### Multiplicar
 
-Se quiser multiplas cópias duma strings, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (com a função *print*) as duas strings.
+Se quiser múltiplas cópias duma strings, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (com a função *print*) as duas strings.
 
 ```
 mensagem2a = 'olá ' * 3
@@ -69,7 +69,7 @@ print(mensagem2a + mensagem2b)
 
 ### Append
 
-E se quiser adicionar material ao final duma string sucessivamente? Há um operador especial para isso (+=).
+E caso você deseje adicionar material ao final duma string sucessivamente? Há um operador especial para isso (+=).
 
 ```
 mensagem3 = 'oi'
@@ -81,7 +81,7 @@ print(mensagem3)
 
 ## Métodos de string: Encontrando, Modificando
 
-Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem executar ações com strings. Utilizados sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
+Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem executar ações com strings. Utilizados sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
 
 ### Comprimento (Length)
 
@@ -115,7 +115,7 @@ print(mensagem6b)
 
 ### Minúsculas (Lower Case)
 
-Por vezes é útil converter os caracteres duma string para letras minúsculas. Por exemplo, se padronizarmos o caso, será mais fácil para o computador reconhecer que "Às vezes" é o mesmo que "às vezes".
+Por vezes é útil converter os caracteres duma string para letras minúsculas. Por exemplo, se padronizarmos, será mais fácil para o computador reconhecer que "Às vezes" é o mesmo que "às vezes".
 
 ```
 mensagem7 = "OLÁ MUNDO"
@@ -148,7 +148,7 @@ print(mensagem9a)
 -> lá Mun
 ```
 
-É possível substituir variáveis para os inteiros usados nesse exemplo.
+É possível substituir variáveis pelos inteiros usados nesse exemplo.
 
 ```
 loc_inicial = 2
@@ -158,7 +158,7 @@ print(mensagem9b)
 -> á Mun
 ```
 
-Isso torna muito mais fácil de utilizar esse método em conjunto com o método `find`, como no exemplo a seguir, que procura pela letra "d" nos primeiros seis caracteres de "Olá mundo" e corretamente informa que ela não está lá (-1). Essa técnica é muito mais útil em strings mais longas - documentos inteiros, por exemplo. Note que a ausência dum inteiro antes dos dois pontos significa que queremos começar no início da string. Poderíamos utilizar a mesma técnica para dizer ao programa para ir até o fim da string, não colocando nenhum número inteiro após os dois pontos. E lembre-se que as posições do índice começam a contar a partir do 0 ao invés de 1.
+Isso torna muito mais fácil utilizar esse método em conjunto com o método `find`, como no exemplo a seguir, que procura pela letra "d" nos primeiros seis caracteres de "Olá mundo" e corretamente informa que ela não está presente (-1). Essa técnica é muito mais útil em strings mais longas - documentos inteiros, por exemplo. Note que a ausência dum inteiro antes dos dois pontos significa que queremos começar no início da string. Poderíamos utilizar a mesma técnica para dizer ao programa para ir até o fim da string, não colocando nenhum número inteiro após os dois pontos. E lembre-se que as posições do índice começam a contar a partir do 0 ao invés de 1.
 
 ```
 mensagem9 = "Olá Mundo"
@@ -166,7 +166,7 @@ print(mensagem9[:5].find("d"))
 -> -1
 ```
 
-Há vários outros, mas os métodos de string acima são um bom começo. Observe que, neste último exemplo, utilizamos colchetes no lugar de parênteses. Essa diferença na *sintaxe* sinaliza uma diferença importante. Em Python, parênteses geralmente são utilizados para *passar um argumento* para uma função. Então, quando vemos algo do tipo
+Há vários outros, mas os métodos de string acima são um bom começo. Observe que, neste último exemplo, utilizamos colchetes no lugar de parênteses. Essa diferença na *sintaxe* é importante. Em Python, parênteses geralmente são utilizados para *passar um argumento* para uma função. Então, quando vemos algo do tipo
 
 ```
 print(len(mensagem7))
@@ -217,7 +217,7 @@ mundo
 
 ## Sincronização de Código
 
-Para continuar com as lições futuras, é importante que tenha os ficheiros e programas corretos no seu diretório programming-historian. Ao final de cada capítulo você pode fazer o download do ficheiro zip do programming-historian para garantir que possui os códigos corretos. Observe que foram removidos os ficheiros desnecessários de lições anteriores. Seu diretório pode conter mais ficheiros e não há problema nisso!
+Para continuar com as lições futuras, é importante que você tenha os ficheiros e programas corretos no seu diretório programming-historian. Ao final de cada capítulo você pode fazer o download do ficheiro zip do programming-historian para garantir que possui os códigos corretos. Observe que foram removidos os ficheiros desnecessários de lições anteriores. Seu diretório pode conter mais ficheiros e não há problema nisso!
 
 -   programming-historian-1 ([zip](https://programminghistorian.org/assets/python-lessons1.zip))
 
