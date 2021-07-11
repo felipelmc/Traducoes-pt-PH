@@ -1,5 +1,3 @@
-# LEMBRAR DE REVISAR TUDO E TRADUZIR TAMBÉM O JUPYTER NOTEBOOK TAMBÉM
-
 ---
 title: Visualização de dados com Bokeh e Pandas
 layout: lesson
@@ -30,6 +28,7 @@ original: visualizing-with-bokeh
 avatar_alt: Men with torches in an antique tomb
 ---
 
+# Devo lembrar que existe um notebook a ser traduzido nesta lição
 
 # Sumário
 
