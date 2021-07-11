@@ -15,8 +15,8 @@ translator:
 - Felipe Lamarca
 translation-editor:
 - 
-translation-reviewer:
-- 
+translation-reviewer: 
+- Flávio Codeço Coelho
 difficulty: 2
 review-ticket: 
 activity:
@@ -35,7 +35,7 @@ Essa lição é uma breve introdução às técnicas de manipulação de [string
 
 ## Manipulando strings Python
 
-Se já tiver tido contato com outras linguagens de programação, deve ter aprendido que é necessário *declarar* ou *digitar* variáveis antes de armazenar qualquer coisa nelas. Isso não é necessário ao trabalhar com strings em Python. Podemos criar uma string simplesmente colocando o conteúdo entre aspas com um sinal de igual (=):
+Se já tiver tido contato com outras linguagens de programação, deve ter aprendido que é necessário *declarar*, isto é, especificar os tipos das variáveis antes de armazenar qualquer coisa nelas. Isso não é necessário ao trabalhar com strings em Python. Podemos criar uma string simplesmente colocando o conteúdo entre aspas com um sinal de igual (=):
 
 ```
 mensagem = "Olá Mundo"
@@ -48,7 +48,7 @@ Uma string é um tipo de objeto que consiste numa série de caracteres. A lingua
 
 Esse termo significa unir strings. O processo é conhecido como *concatenação* de strings e é executado utilizando o operador de soma (+). Note que é necessário ser explícito quanto ao local onde deseja que os espaços em branco ocorram, colocando-os também entre aspas simples.
 
-Nesse exemplo, a string "mensagem1" recebe o conteúdo "olá mundo":
+Nesse exemplo, a variável "mensagem1" recebe o conteúdo "olá mundo":
 
 ```
 mensagem1 = 'olá' + ' ' + 'mundo'
@@ -58,7 +58,7 @@ print(mensagem1)
 
 ### Multiplicar
 
-Se quiser múltiplas cópias duma string, use o operador de multiplicação (\*). Nesse exemplo, a string *mensagem2a* recebe o conteúdo "olá" três vezes; a string *message2b* recebe o conteúdo "mundo"; depois imprimimos (com a função *print*) as duas strings.
+Se quiser múltiplas cópias duma string, use o operador de multiplicação (\*). Nesse exemplo, a variável *mensagem2a* recebe uma concatenação repetida do conteúdo "olá", nesse caso por três vezes; a variável *message2b* recebe o conteúdo "mundo"; depois imprimimos (com a função *print*) as duas strings.
 
 ```
 mensagem2a = 'olá ' * 3
@@ -81,7 +81,7 @@ print(mensagem3)
 
 ## Métodos de string: Encontrando, Modificando
 
-Além dos operadores, Python vem pré-instalado com dezenas de métodos de string que permitem executar ações com strings. Utilizados sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
+Além dos operadores, Python possui dezenas de métodos. Estes métodos são parte da implementação de strings e permitem executar ações com elas. Utilizados sozinhos ou combinados, esses métodos podem fazer com strings qualquer coisa que você imaginar. A boa notícia é que é possível consultar uma lista de Métodos de String no [site do Python](https://docs.python.org/2/library/stdtypes.html#string-methods), incluindo informações sobre como usar cada um corretamente. Para garantir que você tenha uma compreensão básica dos métodos de string, o que se segue é uma breve visão geral de alguns dos mais comumente usados:
 
 ### Comprimento (Length)
 
