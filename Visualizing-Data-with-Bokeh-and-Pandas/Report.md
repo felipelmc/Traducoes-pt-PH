@@ -1,0 +1,1 @@
+Na seção em que explica o dataset, manda baixar o .csv de nome `thor_wwii.csv`. Ao longo da lição, no entanto, se refere ao dataset como `wwii_thor.csv`.

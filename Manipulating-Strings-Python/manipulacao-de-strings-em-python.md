@@ -15,7 +15,7 @@ translator:
 - Felipe Lamarca
 translation-editor:
 - 
-translation-reviewer: 
+translation-reviewer:
 - Flávio Codeço Coelho
 difficulty: 2
 review-ticket: 
@@ -23,7 +23,7 @@ activity:
 topics: [python]
 abstract: "Esta lição é uma breve introdução às técnicas de manipulação de strings em Python."
 redirect_from:
-original: https://programminghistorian.org/en/lessons/manipulating-strings-in-python
+original: manipulating-strings-in-python
 avatar_alt: A man playing a guitar
 ---
 

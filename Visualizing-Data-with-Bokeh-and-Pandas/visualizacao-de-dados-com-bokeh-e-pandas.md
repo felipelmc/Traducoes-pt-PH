@@ -30,10 +30,6 @@ avatar_alt: Men with torches in an antique tomb
 
 # Devo lembrar que existe um notebook a ser traduzido nesta lição
 
-# Sumário
-
-{% include toc.html %}
-
 # Visão geral
 
 A capacidade de carregar dados brutos, amostrá-los e, em seguida, explorar e apresentá-los visualmente é uma habilidade valiosa entre as disciplinas. Neste tutorial, você aprenderá como fazer isso em Python utilizando as bibliotecas Bokeh e Pandas. Mais especificamente, trabalharemos visualizando e explorando aspectos dos bombardeiros da Segunda Guerra Mundial conduzidos por potências Aliadas.
@@ -164,3 +160,44 @@ Um Jupyter Notebook contendo o código utilizado neste tutorial também está [d
 # O Básico de Bokeh
 
 ## O que é Bokeh?
+
+Bokeh é uma biblioteca que serve para criar visualizações de dados interativas num navegador web. Ele oferece uma sintaxe concisa e legível, que permite a apresentação de  de uma maneira rápida e esteticamente agradável. Caso você já tenha trabalhado com visualização em Python antes, é provável que tenha usado o Matplotlib. Vale a pena mencionar brevemente as diferenças entre Bokeh e Matplotlib e quando se deve dar preferência à utilização de um em detrimento de outro.
+
+Matplotlib existe desde 2002 e há muito tempo tem sido uma biblioteca padrão para visualização de dados em Python. Bokeh surgiu em 2013. Essa diferença de idade significa que o Matplotlib amadureceu muito antes do lançamento do Bokeh; ainda assim, Bokeh alcançou um alto nível de maturidade em um curto período de tempo. 
+
+As intenções de uso do Matplotlib e do Bokeh são bastante diferentes. Matplotlib cria gráficos estáticos que são úteis para visualizações rápidas e simples, ou para a criação de imagens com qualidade para publicação. Bokeh cria visualizações para exibição na web (tanto localmente quanto incorporados numa página web) e, mais importante, as visualizações são idealizadas para serem altamente interativas. Matplotlib não oferece nenhum desses recursos.
+
+Caso deseje interagir visualmente com os seus dados de maneira exploratória ou queira oferecer visualizações de dados interativas para um público na web, Bokeh é a biblioteca para você! Se seu interesse principal é produzir visualizações voltadas à publicação, Matplotlib deve ser melhor, embora o Bokeh também oferece modos de criar gráficos estáticos.
+
+Com essas diferenças em mente, enfatizarei ao longo da lição os aspectos interativos que tornam o Bokeh útil para explorar e disseminar dados históricos e que o diferenciam de outras bibliotecas, como o próprio Matplotlib.
+
+## Sua primeira visualização
+
+Primeiro, crie um novo arquivo chamado `minha_primeira_visualizacao.py` no mesmo diretório que `wwii_thor.csv` e depois abra-o num editor de texto. Adicionaremos linhas a esse arquivo para executá-lo.
+
+```
+#minha_primeira_visualizacao.py
+from bokeh.plotting import figure, output_file, show
+```
+
+Para implementar e utilizar o Bokeh, primeiro importamos alguns recursos básicos que serão necessários do módulo `bokeh.plotting`.
+
+`figure` é o objeto principal que utilizaremos para criar visualizações. `figure` lida com a estilização das visualizações, incluindo título, identificações (*labels*), eixos e **grades ((*grids*) REVISAR ISSO AQUI)**, e expõe métodos par adicionar dados ao gráfico. A função `output_file` define como a visualização será renderizada (ou seja, para um arquivo html) e a função `show` será chamada quando a visualização estiver pronta para ser apresentada. `show` informa ao Bokeh que todos os dados foram adicionados ao gráfico e que é hora de renderizá-lo.
+
+``` 
+output_file('meu_primeiro_grafico.html')
+```
+
+Bokeh recomenda que a função `output_file`, para a qual passamos um nome de arquivo, seja chamada no início de seu script, imediatamente após as importações. Uma função de saída alternativa é a `output_notebook`, que é utilizada para mostrar gráficos em linha em um Jupyter Notebook. Para saber mais sobre como instalar e usar notebooks Jupyter, veja a [documentação do Jupyter](https://jupyter.readthedocs.io/en/latest/).
+
+```
+x = [1, 3, 5, 7]
+y = [2, 4, 6, 8]
+```
+
+Em seguida criaremos alguns dados para o gráfico. Dados no Bokeh podem assumir diferentes formatos, mas na sua forma mais simples, os dados são apenas uma lista de valores. Criamos uma lista para o nosso eixo x e outra para nosso eixo y.
+
+Com o formato e os dados da nossa saída fixados, podemos instanciar uma `figure` e adicionar os dados a ela.
+
+
+
