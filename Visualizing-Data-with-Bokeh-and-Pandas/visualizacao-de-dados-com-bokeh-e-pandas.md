@@ -30,7 +30,11 @@ avatar_alt: Men with torches in an antique tomb
 
 # Devo lembrar que existe um notebook a ser traduzido nesta lição
 
-# Visão geral
+# Sumário
+
+{% include toc.html %}
+
+# Visão Geral
 
 A capacidade de carregar dados brutos, amostrá-los e, em seguida, explorar e apresentá-los visualmente é uma habilidade valiosa entre as disciplinas. Neste tutorial, você aprenderá como fazer isso em Python utilizando as bibliotecas Bokeh e Pandas. Mais especificamente, trabalharemos visualizando e explorando aspectos dos bombardeiros da Segunda Guerra Mundial conduzidos por potências Aliadas.
 
@@ -43,7 +47,7 @@ Ao final dessa lição, você será capaz de:
 
 Para alcançar esses objetivos, trabalharemos com uma variedade de exemplos de visualização usando THOR, dataset (conjunto de dados) que descreve as operações históricas de bombardeio.
 
-## O Dataset THOR sobre a Segunda Guerra Mundial
+## O Dataset WWII THOR 
 
 O Theatre History of Operations (THOR) lista as operações de bombardeio aéreo durante a Primeira Guerra Mundial, a Segunda Guerra Mundial, a Guerra da Coréia e a Guerra do Vietnã realizadas pelos Estados Unidos e pelas potências aliadas. Os registros foram compilados a partir de documentos liberados pelo tenente-coronel Jenns Robertson. O THOR é disponibilizado ao público por meio de uma parceria entre o Departamento de Defesa dos Estados Unidos e o [data.world](https://data.world/datamil).
 
@@ -171,26 +175,26 @@ Caso deseje interagir visualmente com os seus dados de maneira exploratória ou 
 
 Com essas diferenças em mente, enfatizarei ao longo da lição os aspectos interativos que tornam o Bokeh útil para explorar e disseminar dados históricos e que o diferenciam de outras bibliotecas, como o próprio Matplotlib.
 
-## Sua primeira visualização
+## Seu primeiro plot
 
-Primeiro, crie um novo arquivo chamado `minha_primeira_visualizacao.py` no mesmo diretório que `wwii_thor.csv` e depois abra-o num editor de texto. Adicionaremos linhas a esse arquivo para executá-lo.
+Primeiro, crie um novo arquivo chamado `meu_primeiro_plot.py` no mesmo diretório que `wwii_thor.csv` e depois abra-o num editor de texto. Adicionaremos linhas a esse arquivo para executá-lo.
 
-```
-#minha_primeira_visualizacao.py
+```python
+#meu_primeiro_plot.py
 from bokeh.plotting import figure, output_file, show
 ```
 
 Para implementar e utilizar o Bokeh, primeiro importamos alguns recursos básicos que serão necessários do módulo `bokeh.plotting`.
 
-`figure` é o objeto principal que utilizaremos para criar visualizações. `figure` lida com a estilização das visualizações, incluindo título, identificações (*labels*), eixos e **grades ((*grids*) REVISAR ISSO AQUI)**, e expõe métodos par adicionar dados ao gráfico. A função `output_file` define como a visualização será renderizada (ou seja, para um arquivo html) e a função `show` será chamada quando a visualização estiver pronta para ser apresentada. `show` informa ao Bokeh que todos os dados foram adicionados ao gráfico e que é hora de renderizá-lo.
+`figure` é o objeto principal que utilizaremos para criar plots. `figure` lida com a estilização dos plots, incluindo título, rótulos (*labels*), eixos e **grades ((*grids*) REVISAR ISSO AQUI)**, e expõe métodos par adicionar dados ao gráfico. A função `output_file` define como a visualização será renderizada (ou seja, para um arquivo html) e a função `show` será chamada quando o plot estiver pronta para ser apresentada. `show` informa ao Bokeh que todos os dados foram adicionados ao gráfico e que é hora de renderizá-lo.
 
-``` 
+```python
 output_file('meu_primeiro_grafico.html')
 ```
 
 Bokeh recomenda que a função `output_file`, para a qual passamos um nome de arquivo, seja chamada no início de seu script, imediatamente após as importações. Uma função de saída alternativa é a `output_notebook`, que é utilizada para mostrar gráficos em linha em um Jupyter Notebook. Para saber mais sobre como instalar e usar notebooks Jupyter, veja a [documentação do Jupyter](https://jupyter.readthedocs.io/en/latest/).
 
-```
+```python
 x = [1, 3, 5, 7]
 y = [2, 4, 6, 8]
 ```
@@ -199,5 +203,180 @@ Em seguida criaremos alguns dados para o gráfico. Dados no Bokeh podem assumir 
 
 Com o formato e os dados da nossa saída fixados, podemos instanciar uma `figure` e adicionar os dados a ela.
 
+```python
+p = figure()
+
+p.circle(x, y, size=10, color='red', legend='círculo')
+p.line(x, y, color='blue', legend='linha')
+p.triangle(y, x, color='gold', size=10, legend='triângulo')
+``` 
+
+{% include alert.html text="`p` é um nome de variável comum para um objeto `figure`, uma vez que uma figura é um tipo de plot." %}
+
+Após instanciar a figura, chamamos os métodos `circle`, `line` e `triangle` para plotar nossos dados. Esses tipos de métodos são conhecidos como *métodos de glifo* (*glyph method*). O termo *glifo* no Bokeh se refere às linhas, círculos, barras e outros formatos que são adicionados aos plots para apresentar dados.
+
+Se quiséssemos, poderíamos continuar adicionando glifos ao plot! Há muitos outros glifos além de `circle`, `line` e `triangle`, incluindo `asterisk`, `circle_cross`, `circle_x`, `cross`, `diamond`, `diamond_cross`, `inverted_triangle`, `square`, `square_cross`, `square_x` e `x`.
+
+Ao chamar por um método de glifo, o mínimo que deve ser feito é passar os dados que gostaríamos de plotar, mas frequentemente podemos adicionar argumentos de estilo. Aqui, definimos um tamanho, uma cor e um nome de legenda para cada glifo.
+
+```python
+p.legend.click_policy='hide'
+``` 
+
+Também adicionaremos nosso primeiro trecho de código que traz alguma interatividade ao plot. Ao definir uma `click_policy` na nossa legenda, um usuário pode agora clicar em cada entrada de legenda (por exemplo, círculo, linha, triângulo) para mostrar/ocultar esses dados! O `click_policy` também pode ser configurado para `mute` ao invés de `hide`. Isso diminuiria a saturação da cor daqueles dados ao clicar, em vez de ocultá-los completamente.
+
+```python
+show(p)
+```
+
+Chamar pelo `show` e passar a `figure` instanciada produzirá os resultados em nosso arquivo html. Agora vamos executar este código! 
+
+Na sua linha de comando, tenha certeza de que está no diretório onde você salvou o arquivo e depois execute este arquivo com o comando `python`.
+
+```
+python meu_primeiro_plot.py
+``` 
+{% include figure.html filename="visualizando-com-bokeh-1.png" caption="Plotando um Único Glifo" %}
+
+Um navegador web surgirá mostrando o arquivo html com a sua visualização. Os círculos vermelhos, linha azul e triângulos amarelos são resultado dos métodos de glifo que chamamos. Clicar na legenda no canto superior direito mostrará/ocultará cada tipo de glifo. Observe que o Bokeh controlou automaticamente a criação das **linhas de grade (REVISAR ISSO AQUI)** e rótulos de escala.
+
+No lado direito, a barra de ferramentas padrão também é exibida. As ferramentas incluem arrastar, zoom de caixa, zoom de roda, salvar, redefinir e ajuda. Usando essas ferramentas, um usuário pode fazer deslocamentos ao longo do gráfico ou ampliar porções interessantes dos dados. Como esta é uma página HTML independente, que inclui uma referência a BokehJS, ela pode ser imediatamente passada para um colega de trabalho para exploração ou postada na web. 
+
+# Bokeh e Pandas: Explorando o Dataset WWII THOR 
+
+No exemplo anterior, criamos manualmente duas listas curtas de Python para os nossos dados de x e y. O que acontece quando temos dados do mundo real com dezenas de milhares de linhas e dezenas de colunas armazenadas em um formato externo? Pandas, uma biblioteca de ciência de dados amplamente utilizada, é ideal para esse tipo de dado e se integra perfeitamente ao Bokeh para criar visualizações de dados interativas.
+
+## Visão Geral de Pandas
+
+Para os propósitos deste tutorial, serão abordadas apenas as funções básicas do Pandas que são necessárias para produzir nossas visualizações. [10 Minutes to Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) e [Lessons for New Pandas Users](https://pandas.pydata.org/pandas-docs/stable/getting_started/tutorials.html) são excelentes introduções que eu recomendaria para expandir seu conhecimento além do básico abordado aqui.
+
+Pandas rapidamente se tornou a biblioteca Python *de facto* para fluxos de trabalhos de dados e ciência de dados; a integração com outras bibliotecas importantes de ciência de dados e aprendizado e máquinas só aumentou sua popularidade.[^1]. Pandas oferece funcionalidades para, de forma rápida e eficiente, ler, escrever e modificar conjuntos de dados para análise. Para fazer isso, Pandas oferece estruturas de dados que contêm diferentes dimensionalidades de dados. O `DataFrame` contém dados bidimensionais na forma de uma planilha com linhas e colunas. É por meio desse objeto que interagiremos com nosso conjunto de dados THOR sobre a Segunda Guerra Mundial. Vamos primeiro examinar o `DataFrame` do Pandas carregando nosso ficheiro .csv em uma estrutura desse tipo.
+
+## Carregando Dados no Pandas
+
+Para começar, crie um novo arquivo chamado `carregando_dados.py`.
+
+```python
+#carregando_dados.py
+
+import pandas as pd
+
+df = pd.read.csv('thor_wwii.csv')
+print(df)
+```
+
+Começamos importando a biblioteca Pandas e depois chamando o `read_csv()` e passando um nome de ficheiro a ele. Note que a biblioteca Pandas é apelidada de *pd*. Esse apelido é uma convenção seguida na [documentação oficial do Pandas](https://pandas.pydata.org/pandas-docs/stable/) e é amplamente utilizada pela comunidade Pandas. Por essa razão, utilizarei o apelido *pd* ao longo do tutorial.
+
+Nesse código, `read_csv()` cria um `DataFrame` que contém as linhas e colunas de nossos dados em csv. Por convenção, o nome de variável *df* é usado para representar o dataframe carregado em tutoriais e códigos básicos de exemplo. Há [muitos outros métodos](https://pandas.pydata.org/pandas-docs/stable/api.html#input-output) no Pandas para ler formatos de dados além de csv, como JSON, tabelas SQL, ficheiros Excel e HTML.
+
+Ao executar o código, `print(df)` retornará uma representação resumida dos dados carregados.
+
+```python
+MSNDATE      THEATER    COUNTRY_FLYING_MISSION    ...     TONS_IC TONS_FRAG TOTAL_TONS
+03/30/1941          ETO          GREAT BRITAIN    ...         0.0       0.0        0.0
+11/24/1940          ETO          GREAT BRITAIN    ...         0.0       0.0        0.0
+12/04/1940          ETO          GREAT BRITAIN    ...         0.0       0.0        0.0
+12/31/1940          ETO          GREAT BRITAIN    ...         0.0       0.0        0.0
+
+[178281 rows x 19 columns]
+```
+Isso mostra que temos 178.281 registros de missões com 19 colunas por registro. Para ver o que são as 19 colunas completas, podemos acessar o objeto `columns` do dataframe substituindo `print(df)` no código acima por:
+
+```python
+df.columns.tolist()
+```
+
+A saída deve ser semelhante a:
+
+```python
+['MSNDATE', 'THEATER', 'COUNTRY_FLYING_MISSION', 'NAF', 'UNIT_ID', 'AIRCRAFT_NAME', 'AC_ATTACKING', 'TAKEOFF_BASE', 'TAKEOFF_COUNTRY', 'TAKEOFF_LATITUDE', 'TAKEOFF_LONGITUDE', 'TGT_COUNTRY', 'TGT_LOCATION', 'TGT_LATITUDE', 'TGT_LONGITUDE', 'TONS_HE', 'TONS_IC', 'TONS_FRAG', 'TOTAL_TONS']
+```
+
+Alguns desses nomes de coluna são autoexplicativos, mas vale a pena apontar o seguinte: MSNDATE (data da missão), NAF (número da força aérea responsável pela missão), AC_ATTACKING (número de aeronaves), TONS_HE (explosivos), TONS_IC (dispositivos incendiários), TONS_FRAG (bombas de fragmentação).
+
+Quando se trata de acessar dados dentro de um `DataFrame`, neste tutorial usamos uma abordagem básica: indexação. Aqui, para acessar uma única coluna, passamos uma string para o indexador do nosso dataframe: por exemplo, `df['MSNDATE']`. Para acessar múltiplas colunas, passamos uma lista de nomes para o indexador do nosso dataframe: por exemplo, `df[['MSNDATE', 'THEATER']]`.
+
+## O Bokeh ColumnDataSource
+
+Agora que aprendemos como criar um gráfico Bokeh e como carregar dados tabulares no Pandas, é hora de aprendermos como conectar um `DataFrame` Pandas a visualizações Bokeh. O objeto Bokeh `ColumnDataSource` oferece essa integração.
+
+O construtor de objetos aceita um `DataFrame` Pandas como argumento. Depois de criado, o `ColumnDataSource` pode ser passado a métodos de glifo através do parâmetro `source`, ao mesmo tempo que outros parâmetros, como os nossos dados x e y, podem então referenciar nomes de coluna em nossa fonte. Vamos ver um exemplo disso.
+
+Usando o dataset THOR, criaremos um gráfico de dispersão do número de aeronaves de ataque versus as toneladas de munições lançadas. Usaremos um novo arquivo chamado `column_datasource.py` para fazer isso. Também aproveitaremos a oportunidade para aprender o recurso de foco interativo do Bokeh.
+
+```python
+#column_datasource.py
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource
+from bokeh.models.tools import HoverTool
+
+output_file('columndatasource_example.html')
+
+df = pd.read_csv('thor_wwii.csv')
+```
+
+Aqui, importamos o Pandas, o objeto `figure` e funções básicas do `bokeh.plotting`, e o objeto `ColumnDataSource` do `bokeh.models`. Também expandiremos nosso conhecimento sobre interações nesse exemplo adicionando um recurso de foco que é facilitado pelo `HoverTool`.
+
+Em seguida, configuramos imediatamente nosso arquivo de saída seguindo as práticas recomendadas pelo Bokeh. Finalmente, chamamos o método `read_csv()` do Pandas para carregar nosso csv em um `DataFrame`.
+
+```python
+amostra = df.sample(50)
+fonte = ColumnDataSource(sample)
+```
+
+Uma vez que não queremos plotar as mais de 170.000 linhas no nosso gráfico de dispersão (o que iria requerer um tempo de processamento mais longo para ser gerado e criaria um plot confuso em função do volume de dados sobrepostos), pegamos uma amostra aleatória de 50 linhas usando o método `sample` de dataframes. Depois passamos essa amostra ao construtor `ColumnDataSource` e o armazenamos em uma variável chamada `fonte`.
+
+```python
+p = figure()
+p.circle(x='TOTAL_TONS', y='AC_ATTACKING',
+         source=fonte,
+         size=10, color='green')
+```
+
+Em seguida, criamos nosso objeto `figure` e chamamos o método de glifo `circle` para plotar nossos dados. Aqui é onde a variável `fonte`, que armazena nosso `ColumnDataSource`, entra em jogo. Ela é passada como nosso argumento `source` ao método de glifo e os nomes de coluna contendo o número de aeronaves atacantes (AC_ATTACKING) e toneladas de munições lançadas (TOTAL_TONS) são passadas como nossos argumentos `x` e `y`.
+
+Curiosamente, quando usamos um `ColumnDataSource` não estamos limitados a usar somente nomes de coluna para parâmetros `x` e `y`. Também podemos passar um nome de coluna para outros parâmetros como `size`, `line_color` ou `fill_color`. Isso permite que as opções de estilo sejam determinadas por colunas na própria fonte de dados! Caso queira ver isso em ação, no código acima, altere `size = 10` para `size = 'TONS_HE'`. O tamanho de cada ponto refletirá as toneladas de explosivos usados.
+
+{% include alert.html text="Ao longo do tutorial, costumo passar argumentos por nome, onde eles poderiam ser transmitidos de forma mais sucinta por posição. Isso é útil, na minha opinião, para o leitor acompanhar quais argumentos estão sendo passados." %}
+
+Em seguida, adicionamos um título e rotulamos nossos eixos.
+
+```python
+p.title.text = 'Aeronave de Ataque e Munições Lançadas'
+p.xaxis.axis_label = 'Toneladas de Munições Lançadas'
+p.yaxis.axis_label = 'Número de Aeronaves de Ataque'
+```
+
+Podemos também, neste estágio, aprender um pouco mais sobre a forte natureza interativa e personalizável dos gráficos Bokeh. Em nosso primeiro gráfico Bokeh, vimos a barra de ferramentas Bokeh padrão, mas o Bokeh nos permite personalizar nosso gráfico adicionando novas ferramentas interativas a ele.
+
+```python
+hover = HoverTool()
+hover.tooltips=[
+    ('Attack Date', '@MSNDATE'),
+    ('Attacking Aircraft', '@AC_ATTACKING'),
+    ('Tons of Munitions', '@TOTAL_TONS'),
+    ('Type of Aircraft', '@AIRCRAFT_NAME')
+]
+
+p.add_tools(hover)
+
+show(p)
+```
+
+Bokeh dá suporte a [várias ferramentas de plotagem](https://docs.bokeh.org/en/latest/docs/user_guide/tools.html), mas introduzo `HoverTool` aqui porque é particularmente útil para exploração e interação de dados. `HoverTool` permite que você defina uma propriedade `tooltipis` que recebe uma lista de [tuplas](https://www.w3schools.com/python/python_tuples.asp). A primeira parte da tupla é um nome de exibição e a segunda é um nome de coluna de seu `ColumnDataSource` precedido por `@`. Depois de instanciar essa ferramenta, nós a adicionamos ao gráfico usando o método `add_tool`. Logo veremos como isso se parece na prática.
+
+Finalmente, nos certificamos de adicionar a linha para mostrar o gráfico, `show(p)`. Agora podemos executar `column_datasource.py` e interagir com nossos dados no navegador.
+
+{% include figure.html filename="visualizando-com-bokeh-2.png" caption="Plotagem com ColumnDataSource e mais opções de estilização" %}
+
+Note que, uma vez que estamos obtendo uma amostra aleatória dos dados, nosso plot será diferente a cada vez que o código for executado.
+
+No topo e ao longo dos eixos do gráfico, vemos os rótulos que adicionamos. Também existe uma nova ferramenta na barra de ferramentas. Esta é a ferramenta de foco que adicionamos. Para vê-lo em ação, passe o mouse sobre qualquer ponto de dados no gráfico de dispersão. Uma janela aparecerá mostrando as colunas que definimos em nossa propriedade `tooltil`!
+
+Antes de passar para a próxima seção da lição, tente retornar ao exemplo acima e adicionar/remover outras variáveis e alterar os nomes de exibição.
+
+# Dados Categóricos e Gráficos de Barra: Munições Lançadas por País
 
 
+[^1]: David Robinson, 'Why is Python Growing so Quickly?', *Stack Overflow Blog*, 14 September 2017 [https://stackoverflow.blog/2017/09/14/python-growing-quickly/](https://stackoverflow.blog/2017/09/14/python-growing-quickly/)
