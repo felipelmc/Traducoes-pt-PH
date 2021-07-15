@@ -236,7 +236,7 @@ Na sua linha de comando, tenha certeza de que está no diretório onde você sal
 ```
 python meu_primeiro_plot.py
 ``` 
-{% include figure.html filename="visualizando_com_bokeh_1.png" caption="Plotando um Único Glifo" %}
+{% include figure.html filename="visualizando-com-bokeh-1.png" caption="Plotando um Único Glifo" %}
 
 Um navegador web surgirá mostrando o arquivo html com a sua visualização. Os círculos vermelhos, linha azul e triângulos amarelos são resultado dos métodos de glifo que chamamos. Clicar na legenda no canto superior direito mostrará/ocultará cada tipo de glifo. Observe que o Bokeh controlou automaticamente a criação das **linhas de grade (REVISAR ISSO AQUI)** e rótulos de escala.
 
@@ -367,7 +367,7 @@ Bokeh dá suporte a [várias ferramentas de plotagem](https://docs.bokeh.org/en/
 
 Finalmente, nos certificamos de adicionar a linha para mostrar o gráfico, `show(p)`. Agora podemos executar `column_datasource.py` e interagir com nossos dados no navegador.
 
-{% include figure.html filename="visualizando_com_bokeh_2.png" caption="Plotagem com ColumnDataSource e mais opções de estilização" %}
+{% include figure.html filename="visualizando-com-bokeh-2.png" caption="Plotagem com ColumnDataSource e mais opções de estilização" %}
 
 Note que, uma vez que estamos obtendo uma amostra aleatória dos dados, nosso plot será diferente a cada vez que o código for executado.
 
@@ -472,7 +472,7 @@ show(p)
 
 Adicionamos uma ferramenta de foco novamente, mas agora vemos que poodemos usar várias variáveis de dados em uma única linha e adicionar nosso próprio texto para que o pop-up de foco liste os quilotons de cada tipo de explosivo. O `hover.mode` é novo. Existem três modos para a ferramenta hover: `mouse`, `vline` e `hline`. Eles informam à ferramenta de foco quando mostrar o pop-up. `mouse` é o valor padrão e mostra um pop-up quando diretamente sobre um glifo. `vline` e `hline` informam ao pop-up para surgir quando uma linha vertical ou horizontal cruza um glifo. Com `vline` definido aqui, sempre que o mouse passar por uma linha vertical imaginária que se estende a partir de cada barra, um pop-up será exibido.
 
-{% include figure.html filename="visualizando_com_bokeh_3.png" caption="Um Gráfico de Barras com Dados Categóricos e Coloração" %}
+{% include figure.html filename="visualizando-com-bokeh-3.png" caption="Um Gráfico de Barras com Dados Categóricos e Coloração" %}
 
 {% include alert.html text="Caso tenha tempo, vale a pena explorar as [paletas de cores](https://bokeh.pydata.org/en/latest/docs/reference/palettes.html) do Bokeh. No exemplo acima, tente reescrever o código para usar algo diferente de `Spectral5`, como `Inferno5` ou `RdGy5`. Para dar um passo a diante, você pode tentar usar paletas integradas em qualquer exemplo que use cores." %}
 
@@ -546,30 +546,240 @@ show(p)
 
 Adicionamos um estilo básico e rotulagem e, em seguida, produzimos o gráfico.
 
-{% include figure.html filename="visualizando_com_bokeh_4.png" caption="Um Gráfico de Barras Empilhadas com Dados Categóricos e Coloração" %}
+{% include figure.html filename="visualizando-com-bokeh-4.png" caption="Um Gráfico de Barras Empilhadas com Dados Categóricos e Coloração" %}
+
+# Séries Temporais e Anotações: Operações de Bombardeio ao longo do Tempo
+
+Vamos agora explorar um pouco mais o uso de explosivos incendiários e de fragmentação, vendo se há alguma tendência em seu uso ao longo do tempo em comparação com o total de munições lançadas. Como você já teve algum tempo para se acostumar com a sintaxe do Bokeh, vamos mergulhar direto com um exemplo de código completo em um novo arquivo chamado `minha_primeira_serie_temporal.py`.
+
+```python
+#minha_primeira_serie_temporal.py
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource
+from bokeh.palettes import Spectral3
+output_file('simple_timeseries_plot.html')
+
+df = pd.read_csv('thor_wwii.csv')
+
+#certifique-se de que MSNDATE tenha um formato de data
+df['MSNDATE'] = pd.to_datetime(df['MSNDATE'], format='%m/%d/%Y')
+
+agrupado = df.groupby('MSNDATE')['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
+agrupado = agrupado/1000
+
+fonte = ColumnDataSource(agrupado)
+
+p = figure(x_axis_type='datetime')
+
+p.line(x='MSNDATE', y='TOTAL_TONS', line_width=2, source=fonte, legend='Todas as munições')
+p.line(x='MSNDATE', y='TONS_FRAG', line_width=2, source=fonte, color=Spectral3[1], legend='Fragmentação')
+p.line(x='MSNDATE', y='TONS_IC', line_width=2, source=fonte, color=Spectral3[2], legend='Incendiária')
+
+p.yaxis.axis_label = 'Quilotons de Munições Lançadas'
+
+show(p)
+```
+
+Reserve um minuto para examinar com atenção este código e ver o que você reconhece. Dois itens devem se destacar como novos.
+
+Primeiro, a instrução `df['MSNDATE'] = pd.to_datetime(df['MSNDATE'], format='%m/%d/%Y')` garante que nossa coluna MSNDATE seja uma data. Isso é importante porque muitas vezes os dados carregados de um ficheiro csv não serão digitados corretamente como data. Fornecer um argumento `format` não é obrigatório, mas isso acelera significativamente o processo.
+
+Em segundo lugar, passamos o argumento `x_axis_type='datetime'` ao nosso construtor `figure` para informá-lo que nossos dados do eixo x serão datas. Caso contrário, Bokeh funciona perfeitamente com os dados de tempo, como qualquer outro tipo de dados numéricos!
+
+Olhando para a saída, porém, você pode notar um grande problema.
+
+{% include figure.html filename="visualizando-com-bokeh-5.png" caption="Um Gráfico Básico de Série Temporal" %}
+
+Esses dados são voláteis e difíceis de ler porque estão muito **desagregados (REVER ISSO AQUI)** para as nossas necessidades. Ter dados diários ao longo de cinco anos é ótimo, mas traçá-los dessa forma obscurece as tendências dos dados. Para plotar dados de série temporal com sucesso e procurar tendências de longo prazo, precisamos de uma maneira de mudar a escala de tempo que estamos olhando para que, por exemplo, possamos plotar dados resumidos por semanas, meses ou anos.
+
+Felizmente, Pandas oferece uma maneira rápida e fácil de fazer isso. Ao modificar uma única linha de código no exemplo acima, podemos *reamostrar* nossos dados de série temporal para qualquer unidade de tempo válida.
+
+## Reamostragem de Dados de Série Temporal
+
+A reamostragem de dados de série temporal pode envolver upsampling (criar mais registros) ou downsampling (criando menos registros). Por exemplo, uma lista de temperaturas diárias pode ser aumentada para uma lista de temporaturas de hora em hora ou reduzida para uma lista de temperaturas semanais. Estaremos fazendo somente um downsampling neste tutorial, mas upsampling é muito útil quando você está tentando combinar um dataset medido esporadicamente com um que é medido mais periodicamente.
+
+Para reamostrar nossos dados, usamos o objeto `Grouper` do Pandas, ao qual passaremos o nome da coluna que contém as nossas datas e um código representando a frequência desejada para a reamostragem. No caso dos nossos dados, o comando `pd.Grouper(key='MSNDATE', freq='M')` será utilizado para reamostrar nossa coluna MSNDATE por *M*onth (Mês). Da mesma forma, poderíamos reamostrar por *W*eek (Semana), *Y*ear (Ano), *H*our (hora) e [assim por diante](http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases). Essas designações de frequência também podem ser precedidas de números de forma que, por exemplo, `freq = '2W'` reamostra em intervalos de duas semanas!
+
+Para completar o processo de reamostragem e plotar nossos dados, passamos o objeto `Grouper` acima para a nossa função `groupy` no lugar do nome bruto da coluna. A instrução `groupy` do exemplo de código anterior agora deve ter a seguinte aparência:
+
+``` python
+grouped = df.groupby(pd.Grouper(key='MSNDATE', freq='M'))['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
+```
+
+Executando novamente o exemplo de código acima produzirá um gráfico muito mais limpo e com tendências óbvias. O gráfico agora mostra quatro pontos de interesse:
+
+- Primeiro, tanto na primavera de 1944 quando na de 1945, a escala das operações de bombardeio dos Aliados atingiu maior intensidade;
+- Segundo, há um pico menor no verão de 1945 durante a aceleração dos bombardeios contra os japoneses após a rendição da Alemanha;
+- Terceiro, há quatro picos no uso de armas incendiárias aparecem que poderiam ser mais exploradas;
+- Quarto e último, há alguns pequenos picos no uso de bombas de fragmentação, cujo uso para efetivamente após a rendição da Alemanha.
+
+{% include figure.html filename="visualizando-com-bokeh-6.png" caption="Um Gráfico de Série Temporal com Dados Reamostrados para Meses" %}
+
+## Anotando Tendências em Gráficos
+
+Vamos examinar mais de perto agora os bombardeios na Europa em 1944 e 1945 para ver quais tendências existem com munições de fragmentação e incendiárias. Também apontaremos algumas dessas tendências em nosso gráfico com anotações. Para fazer isso, vamos filtrar nosso conjunto de dados para trabalharmos apenas com bombardeios no Teatro Europeu de Operações (*European Theater of Operations - ETO*), reamostrar os dados em intervalos de um mês e, em seguida, plotar os resultados da mesma maneira que antes.
+
+```python
+#anotando_tendencias.py
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource
+from datetime import datetime
+from bokeh.palettes import Spectral3
+output_file('eto_operacoes.html')
+
+df = pd.read_csv('thor_wwii.csv')
+
+#filtrar para o Teatro Europeu de Operações
+filtro = df['THEATER']=='ETO'
+df = df[filtro]
+
+df['MSNDATE'] = pd.to_datetime(df['MSNDATE'], format='%m/%d/%Y')
+agrupado = df.groupby(pd.Grouper(key='MSNDATE', freq='M'))['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
+agrupado = agrupado / 1000
+
+source = ColumnDataSource(agrupado)
+
+p = figure(x_axis_type="datetime")
+
+p.line(x='MSNDATE', y='TOTAL_TONS', line_width=2, source=source, legend='Todas as Munições')
+p.line(x='MSNDATE', y='TONS_FRAG', line_width=2, source=source, color=Spectral3[1], legend='Fragmentação')
+p.line(x='MSNDATE', y='TONS_IC', line_width=2, source=source, color=Spectral3[2], legend='Incendiária')
+
+p.title.text = 'Teatro Europeu de Operações'
+
+p.yaxis.axis_label = 'Quilotons de Munições Lançadas'
+
+show(p)
+```
+
+{% include figure.html filename="visualizando-com-bokeh-7.png" caption="Um Gráfico de Série Temporal do ETO com Dados Reamostrados para Meses" %}
+
+Alguns padrões emergem dos dados do ETO. Em primeiro lugar, vemos uma escalada muito clara dos bombardeios gerais que levaram até 6 de junho de 1994 e uma queda notável durante o inverno de 1944/1945. Munições incendiárias mostram três picos e confirmam que o quarto pico visto no exemplo anterior foi direcionado ao bombardeio do Japão após a rendição da Alemanha. O padrão das bombas de fragmentação é mais difícil de ler, mas agora está claro que elas só foram usadas seriamente no Teatro Europeu após o Dia D.
+
+{% include alert.html text="Tente reamostrar esses dados usando qualquer uma das [frequências de tempo do Pandas](http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases) para ver quais outras tendências podem surgir. Lembre-se de que você também pode prefaciar essas tendências com números (por exemplo, se você estiver trabalhando com dados históricos do mercado de ações, o 2Q fornecerá dados bimestrais." %}
+
+Como estabelecemos que o 6 de junho de 1944 e o inverno de 1944/1945 marcam mudanças nos padrões de bombardeio no ETO, vamos destacar essas tendências usando os recursos de anotação do Bokeh.
+
+Para fazer isso, criaremos um `BoxAnnotation` e, em seguida, adicioná-los à nossa figura antes de mostrá-la. Primeiro, precisamos adicionar uma instrução import adicional ao nosso código.
 
 
+```python
+from bokeh.models import BoxAnnotation
+```
 
+Para criar a caixa, primeiro precisamos determinar suas coordenadas. Coordenadas para anotações do Bokeh podem ser absolutas (ou seja, posicionadas usando unidades de tela), o que significa que elas podem sempre ficar em um lugar específico, ou podem ser posicionadas em relação aos dados. Nossas anotações serão todas posicionadas usando coordenadas de dados.
 
+```python
+caixa_esquerda = pd.to_datetime('6-6-1944')
+caixa_direita = pd.to_datetime('16-12-1944')
+```
 
+A esquerda da caixa será 6 de junho de 1994 (Dia D) e à direita da caixa escolheremos o primeiro dia da Batalha de Bulge: 16 de dezembro de 1994. Neste caso, as datas seguem um formato mês-dia_ano, mas `to_datetime` também funciona com [os formatos dia-primeiro (day-first) e ano-primeiro (year-first)](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html).
 
+Passamos essas coordenadas ao construtor `BoxAnnotation` junto com alguns argumentos de estilização. Depois, o adicionamos à nossa figura usando o método `add_layout()`.
 
+```python
+caixa = BoxAnnotation(left=caixa_esquerda, right=caixa_direita,
+                    line_width=1, line_color='black', line_dash='dashed',
+                    fill_alpha=0.2, fill_color='orange')
 
+p.add_layout(caixa)
+```
+{% include figure.html filename="visualizando-com-bokeh-8.png" caption="Um Gráfico de Série Temporal do ETO com Anotações Adicionadas" %}
 
+{% include alert.html text="Tente criar um gráfico semelhante para o Teatro de Operações do Pacífico (*Pacific Theater os Operations - PTO*). Anote a invasão de Iwo Jima (19 de fevereiro de 1945) e o anúncio de rendição do Japão (15 de agosto de 1945)." %}
 
+# Dados Espaciais: Mapeando Localização de Alvos
 
+Nesta parte final da lição, veremos os componentes espaciais das bombas de fragmentação.
 
+Bokeh oferece [provedores de blocos integrados (built-in tile providers)](https://bokeh.pydata.org/en/latest/docs/reference/tile_providers.html) que renderizam mapas básicos do mundo. Eles estão contidos no módulo `bokeh.tile_providers`. Para esse exemplo, usaremos o CartoDB Tile Service (CARTODBPOSITRON).
 
+Também utilizaremos funções importadas da biblioteca `pyproj`. Já que nossas coordenadas estão armazenadas como latitude e longitude, definiremos uma função personalizada para convertê-las antes do mapeamento. Observe que, embora Bokeh seja neutro em relação ao sistema de coordenadas, ele usa a projeção Web Mercator para mapeamento, um padrão encontrado em provedores de web tiles. O assunto de sistemas de coordenadas e projeções está fora do escopo deste tutorial, mas o leitor interessado encontrará muitos recursos da web úteis sobre esses tópicos.
 
+{% include alert.html text="Se o seu próprio dataset tiver nomes de lugares, mas não de latitude e longitude, não se preocupe! Você pode encontrar maneiras de obter facilmente coordenadas de nomes de lugares na lição do Programming Historian [Geocoding Historical Data using QGIS](/lessons/geocoding-qgis) ou [Web Mapping with Python and Leaflet](/lessons/mapping-with-python-leaflet#geocoding-with-python).." %}
 
+```python
+#localizacao_alvos.py
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource, Range1d
+from bokeh.layouts import layout
+from bokeh.palettes import Spectral3
+from bokeh.tile_providers import CARTODBPOSITRON
+from pyproj import Proj, transform
+output_file('mapeando_alvos.html')
 
+#função auxiliar para converter latitude/longitude para easting/northing para mapeamento
+#isso depende de funções da biblioteca pyproj
+def LongLat_to_EN(long, lat):
+    try:
+      easting, northing = transform(
+        Proj(init='epsg:4326'), Proj(init='epsg:3857'), long, lat)
+      return easting, northing
+    except:
+      return None, None
 
+df = pd.read_csv('thor_wwii.csv')
+#auxiliar para converter todas as latitudes e longitudes para webmercator e armazenar numa nova coluna
+df['E'], df['N'] = zip(*df.apply(lambda x: LongLat_to_EN(x['TGT_LONGITUDE'], x['TGT_LATITUDE']), axis=1))
+```
 
+As importações padrão e nossa função e conversão estão definidas. Em seguida, carregamos nossos dados e aplicamos nossa função de conversão para criar novas colunas E e N que armazenam nosso We Mercator easting e northing.
 
+```python
+agrupado = df.groupby(['E', 'N'])['TONS_IC',
+'TONS_FRAG'].sum().reset_index()
 
+filter = agrupado['TONS_FRAG']!=0
+agrupado = agrupado[filter]
 
+fonte = ColumnDataSource(agrupado)
+```
 
+Considerando que um único alvo pode aparecer em vários registros, precisamos agrupar os dados por E e N para obter localizações únicas. Caso contrário, mapearíamos o mesmo destino sempre que ele aparecesse em um registro.
 
+A função `reset_index` aplicada após a agregação é uma novidade. Por padrão, quando Pandas agrupa essas duas colunas, ele fará com que E e N sejam os índices de cada linha no novo dataframe. Uma vez que queremos que E e N permaneçam como colunas normais para mapeamento, chamamos `reset_index`.
+
+```python
+esquerda = -2150000
+direita = 18000000
+inferior = -5300000
+superior = 11000000
+
+p = figure(x_range=Range1d(esquerda, direita), y_range=Range1d(inferior, superior))
+```
+Para definir os limites do nosso mapa, definiremos um valor mínimo e máximo para o `x_range` e `y_range` do nosso gráfico. Usamos o objeto `Range1D`, que representa dados unidimensionais no Bokeh.
+
+```python
+provedor = get_provider('CARTODBPOSITRON')
+p.add_tile(provedor)
+p.circle(x='E', y='N', source=fonte, line_color='grey', fill_color='yellow')
+
+p.axis.visible = False
+
+show(p)
+```
+
+Por fim, chamamos `add_tile` e passamos o provedor de tile que importamos. Em seguida, usamos métodos de glifo como em qualquer outro gráfico. Aqui, chamamos `circle` e passamos as colunas easting e northing como nossos dados x e y.
+
+{% include figure.html filename="visualizando-com-bokeh-9.png" caption="Um Mapa com Localização de Alvos" %}
+
+Tendo plotado quais alvos na Europa e na Ásia foram bombardeados com bombas de fragmentação, podemos agora começar a examinar os padrões de destruição com mais detalhes. No código acima, também somamos bombas incendiárias. Tente alterar o código para criar um mapa desses alvos.
+
+# Bokeh como uma Ferramenta de Visualização
+
+A força do Bokeh como uma ferramenta de visualização está na sua capacidade de mostrar diferentes tipos de dados de maneira interativa e amigável para a web. Este tutorial apenas arranhou a superfície dos recursos do Bokeh e o leitor é encorajado a se aprofundar no funcionamento da biblioteca. Um ótimo lugar para começar é a [galeria do Bokeh](https://bokeh.pydata.org/en/latest/docs/gallery.html), onde você pode ver uma variedade de visualizações e decidir como aplicar essas técnicas a seus próprios dados. Se você estiver mais inclinado a mergulhar direto em outros exemplos de código, o [notebook online](https://mybinder.org/v2/gh/bokeh/bokeh-notebooks/master?filepath=tutorial%2F00%20-%20Introduction%20and%20Setup.ipynb) do Bokeh é um excelente lugar para começar!
+
+# Recursos Adicionais
+
+- [Guia de Usuário do Bokeh](https://bokeh.pydata.org/en/latest/docs/user_guide.html)
+- [Galeria do Bokeh](https://bokeh.pydata.org/en/latest/docs/gallery.html)
+- [Documentação do Pandas](https://pandas.pydata.org/pandas-docs/stable/index.html)
+- [Cheat Sheet do Pandas](https://www.kdnuggets.com/2017/01/pandas-cheat-sheet.html)
+- [Cheat Sheet do Bokeh](https://www.kdnuggets.com/2017/03/bokeh-cheat-sheet.html)
 
 
 [^1]: David Robinson, 'Why is Python Growing so Quickly?', *Stack Overflow Blog*, 14 September 2017 [https://stackoverflow.blog/2017/09/14/python-growing-quickly/](https://stackoverflow.blog/2017/09/14/python-growing-quickly/)
