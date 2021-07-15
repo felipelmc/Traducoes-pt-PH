@@ -236,7 +236,7 @@ Na sua linha de comando, tenha certeza de que está no diretório onde você sal
 ```
 python meu_primeiro_plot.py
 ``` 
-{% include figure.html filename="visualizando-com-bokeh-1.png" caption="Plotando um Único Glifo" %}
+{% include figure.html filename="visualizando_com_bokeh_1.png" caption="Plotando um Único Glifo" %}
 
 Um navegador web surgirá mostrando o arquivo html com a sua visualização. Os círculos vermelhos, linha azul e triângulos amarelos são resultado dos métodos de glifo que chamamos. Clicar na legenda no canto superior direito mostrará/ocultará cada tipo de glifo. Observe que o Bokeh controlou automaticamente a criação das **linhas de grade (REVISAR ISSO AQUI)** e rótulos de escala.
 
@@ -258,7 +258,6 @@ Para começar, crie um novo arquivo chamado `carregando_dados.py`.
 
 ```python
 #carregando_dados.py
-
 import pandas as pd
 
 df = pd.read.csv('thor_wwii.csv')
@@ -322,7 +321,7 @@ Em seguida, configuramos imediatamente nosso arquivo de saída seguindo as prát
 
 ```python
 amostra = df.sample(50)
-fonte = ColumnDataSource(sample)
+fonte = ColumnDataSource(amostra)
 ```
 
 Uma vez que não queremos plotar as mais de 170.000 linhas no nosso gráfico de dispersão (o que iria requerer um tempo de processamento mais longo para ser gerado e criaria um plot confuso em função do volume de dados sobrepostos), pegamos uma amostra aleatória de 50 linhas usando o método `sample` de dataframes. Depois passamos essa amostra ao construtor `ColumnDataSource` e o armazenamos em uma variável chamada `fonte`.
@@ -368,15 +367,209 @@ Bokeh dá suporte a [várias ferramentas de plotagem](https://docs.bokeh.org/en/
 
 Finalmente, nos certificamos de adicionar a linha para mostrar o gráfico, `show(p)`. Agora podemos executar `column_datasource.py` e interagir com nossos dados no navegador.
 
-{% include figure.html filename="visualizando-com-bokeh-2.png" caption="Plotagem com ColumnDataSource e mais opções de estilização" %}
+{% include figure.html filename="visualizando_com_bokeh_2.png" caption="Plotagem com ColumnDataSource e mais opções de estilização" %}
 
 Note que, uma vez que estamos obtendo uma amostra aleatória dos dados, nosso plot será diferente a cada vez que o código for executado.
 
-No topo e ao longo dos eixos do gráfico, vemos os rótulos que adicionamos. Também existe uma nova ferramenta na barra de ferramentas. Esta é a ferramenta de foco que adicionamos. Para vê-lo em ação, passe o mouse sobre qualquer ponto de dados no gráfico de dispersão. Uma janela aparecerá mostrando as colunas que definimos em nossa propriedade `tooltil`!
+No topo e ao longo dos eixos do gráfico, vemos os rótulos que adicionamos. Também existe uma nova ferramenta na barra de ferramentas. Esta é a ferramenta de foco que adicionamos. Para vê-lo em ação, passe o mouse sobre qualquer ponto de dados no gráfico de dispersão. Uma janela aparecerá mostrando as colunas que definimos em nossa propriedade `tooltip`!
 
 Antes de passar para a próxima seção da lição, tente retornar ao exemplo acima e adicionar/remover outras variáveis e alterar os nomes de exibição.
 
 # Dados Categóricos e Gráficos de Barra: Munições Lançadas por País
+
+No exemplo anterior, plotamos dados quantitativos. Frequentemente, porém, queremos representar graficamente dados categóricos. Dados categóricos, ao contrário dos quantitativos, são dados que podem ser divididos em grupos, mas que não têm necessariamente um aspecto numérico. Por exemplo, enquanto sua altura seja numérica, a cor do seu cabelo é categórica. No que diz respeito ao nosso dataset, elementos como o país atacante contêm dados categóricos, enquanto elementos como o peso das munições contêm dados quantitativos.
+
+Nesta seção, aprenderemos como utilizar dados categóricos como nossos valores do eixo x no Bokeh e como usar o método de glifo `vbar` para criar um gráfico de barras verticais (o método de glifo `hbar` funciona de forma semelhante para criar um gráfico de barras horizontais). Além disso, aprenderemos como preparar dados categóricos no Pandas através do agrupamento de dados. Também expandiremos nosso conhecimento sobre estilização com Bokeh e sobre a ferramenta de foco.
+
+Para trabalhar com essas informações, criaremos um gráfico de barras que mostra o total de toneladas de munições lançadas por cada país listado em nosso csv.
+
+Começamos criando um novo arquivo chamado `municoes_por_pais.py` e adicionando algum código inicial.
+
+```python
+#municoes_por_pais.py
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource
+from bokeh.models.tools import HoverTool
+
+from bokeh.palettes import Spectral5
+from bokeh.transform import factor_cmap
+output_file('municoes_por_pais.html')
+
+df = pd.read_csv('thor_wwii.csv')
+```
+Primeiro, importamos a biblioteca Pandas e os elementos básicos do Bokeh (por exemplo, `figure`, `output_file`, `show` e `ColumnDataSource`). Também fazemos duas novas importações: `Spectral5` é uma paleta de cinco cores pré-fabricada, uma das muitas [paletas de cores pré-fabricadas]((https://bokeh.pydata.org/en/latest/docs/reference/palettes.html)) do Bokeh, e `factor_cmap` é um método auxiliar para mapear cores para barras em gráficos de barras.
+
+Após as importações, definimos nosso `output_file` e carregamos o ficheiro thor_wwii.csv em um `DataFrame`.
+
+Agora precisamos ir dos mais de 170.000 registros de missões individuais para um registro por país atacante com o total de munições lançadas.
+
+```python
+agrupado = df.groupby('COUNTRY_FLYING_MISSION')['TOTAL_TONS', 'TONS_HE', 'TONS_IC', 'TONS_FRAG'].sum()
+```
+
+Pandas nos permite fazer isso numa única linha de código utilizando o método de dataframe `groupby`. Esse método aceita uma coluna para agrupar os dados e um ou mais métodos de agregação que informam ao Pandas como agrupar os dados. O resultado é um novo dataframe.
+
+Vamos pegar um pedaço de cada vez. O `groupby('COUYTRY_FLYING_MISSION')` define a coluna que estamos agrupando. Em outras palavras, isso diz que queremos que o dataframe resultante tenha uma linha por entrada única na coluna `COUNTRY_FLYING_MISSION`. Como não nos importamos em agregar todas as 19 colunas do dataframe, escolhemos apenas as colunas que dizem respeito às toneladas de munição através do indexador `['TOTAL_TONS', 'TONS_HE', 'TONS_IC', 'TONS_FRAG']`. Por fim, usamos o método `sum` para permitir que o Pandas saiba como agregar todas as diferentes linhas. Existem outros métodos de agregação, como `count`, `mean`, `max` e `min`.
+
+Se você executar `print(agrupado)`, verá que o Pandas agrupou pelos cinco países em nosso dataset e somou o total de toneladas lançadas por cada um. Também é possível perceber que o dataset tem alguns problemas: A África do Sul e a Nova Zelândia lançaram mais explosivos do que a coluna do total de toneladas. Problemas como esse são típicos de ggrandes conjuntos de dados criados manualmente e esse é um ótimo lembrete da importância explorar e visualizar seus dados antes de criar resultados de pesquisa.
+
+```
+                        TOTAL_TONS     TONS_HE     TONS_IC  TONS_FRAG
+COUNTRY_FLYING_MISSION
+AUSTRALIA                   479.89      453.90      13.600      18.64
+GREAT BRITAIN           1112598.95   868277.23  209036.158    1208.00
+NEW ZEALAND                2629.06     4263.70     166.500       0.00
+SOUTH AFRICA                 11.69       15.00       0.000       0.00
+USA                     1625487.68  1297955.65  205288.200  127655.98
+
+```
+
+Para plotar esses dados, vamos converter para quilotons dividindo por 1000.
+
+```python
+agrupado = agrupado / 1000
+```
+
+Essa é uma conveniência que continuaremos a usar em exemplos futuros.
+
+```python
+fonte = ColumnDataSource(agrupado)
+paises = fonte.data['COUNTRY_FLYING_MISSION'].tolist()
+p = figure(x_range=paises)
+```
+
+Agora, precisamos fazer um `ColumnDataSource` de nossos dados agrupados e criar uma `figure`. Como nosso eixo x listará os cinco países (em vez de dados numéricos), precisamos dizer à figura como lidar com o eixo x;
+
+Para fazer isso, criaremos uma lista de países a partir do nosso objeto fonte, usando `fonte.data` e o nome da coluna como chave. A lista de países é passada como `x_range` ao nosso construtor `figure`. Já que esta é uma lista de dados textuais, a figura sabe que o eixo x é categórico e também sabe quais valores possíveis nosso intervalo de x pode assumir (ou seja, AUSTRALIA, GREAT BRITAIN, etc.).
+
+```python
+mapa_de_cores = factor_cmap(field_name='COUNTRY_FLYING_MISSION',
+                    palette=Spectral5, factors=paises)
+
+p.vbar(x='COUNTRY_FLYING_MISSION', top='TOTAL_TONS', source=source, width=0.70, color=mapa_de_cores)
+
+p.title.text ='Munições Lançadas por País Aliado'
+p.xaxis.axis_label = 'País'
+p.yaxis.axis_label = 'Quilotons de Munição'
+```
+
+Agora, plotamos nossos dados como barras coloridas individualmente e adicionamos rótulos básicos. Para colorir nossas barras, usamos a função auxiliar `factor_cmap`. Isso cria um mapa de cores especial que corresponde a uma cor individual para cada categoria (ou seja, o que o Bokeh chama de *factor*). O mapa de cores é então passado como argumento de cores para o nosso método de glifo `vbar`.
+
+Para os dados no nosso método de glifo, estamos passando a fonte e mais uma vez referenciando o nome das colunas. Ao invés de usar o parâmetro `y`, porém, o método `vbar` recebe um parâmetro `top`. Um parâmetro `bottom` pode igualmente ser especificado, mas, se deixado de fora, seu valor padrão é 0.
+
+```python
+hover = HoverTool()
+hover.tooltips = [
+    ("Totais", "@TONS_HE Explosivo / @TONS_IC Incendiário / @TONS_FRAG Fragmentação")]
+
+hover.mode = 'vline'
+
+p.add_tools(hover)
+
+show(p)
+```
+
+Adicionamos uma ferramenta de foco novamente, mas agora vemos que poodemos usar várias variáveis de dados em uma única linha e adicionar nosso próprio texto para que o pop-up de foco liste os quilotons de cada tipo de explosivo. O `hover.mode` é novo. Existem três modos para a ferramenta hover: `mouse`, `vline` e `hline`. Eles informam à ferramenta de foco quando mostrar o pop-up. `mouse` é o valor padrão e mostra um pop-up quando diretamente sobre um glifo. `vline` e `hline` informam ao pop-up para surgir quando uma linha vertical ou horizontal cruza um glifo. Com `vline` definido aqui, sempre que o mouse passar por uma linha vertical imaginária que se estende a partir de cada barra, um pop-up será exibido.
+
+{% include figure.html filename="visualizando_com_bokeh_3.png" caption="Um Gráfico de Barras com Dados Categóricos e Coloração" %}
+
+{% include alert.html text="Caso tenha tempo, vale a pena explorar as [paletas de cores](https://bokeh.pydata.org/en/latest/docs/reference/palettes.html) do Bokeh. No exemplo acima, tente reescrever o código para usar algo diferente de `Spectral5`, como `Inferno5` ou `RdGy5`. Para dar um passo a diante, você pode tentar usar paletas integradas em qualquer exemplo que use cores." %}
+
+# Gráficos de Barras Empilhadas e Dados de Subamostragem: Tipos de Munições Lançadas por País
+
+Como o gráfico anterior mostra que os Estados Unidos e a Grã-Bretanha respondem pela esmagadora maioria dos bombardeios, agora nos concentramos nesses dois países e aprendemos como fazer um gráfico de barras empilhadas que mostra os tipos de munições que cada país usou.
+
+Começaremos um novo arquivo chamado `municoes_por_pais_empilhadas.py`.
+
+```python
+#municoes_por_pais_empilhadas.py
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource
+from bokeh.palettes import Spectral3
+output_file('types_of_munitions.html')
+
+df = pd.read_csv('thor_wwii.csv')
+```
+
+Além das nossas importações padrão, dessa vez utilizaremos uma paleta Spectral de três cores, uma cor para cada tipo de explosivo (Explosivo, Incendiário e Fragmentação).
+
+```python
+filtro = df['COUNTRY_FLYING_MISSION'].isin(('USA','GREAT BRITAIN'))
+df = df[filtro]
+```
+
+Uma vez que o eixo x é categórico mais uma vez, precisaremos agrupar e agregar nossos dados. Dessa vez, porém, precisamos excluir quaisquer registros que não tenham um COUNTRY_FLYING_MISSION como um valor de GREAT BRITAIN ou USA. Para fazer isso, filtramos nosso dataframe.
+
+Para cada linha em `df`, a função `isin` verifica se COUNTRY_FLYING_MISSION possui um valor de USA ou GREAT BRITAIN. Caso tenha, o valor correspondente na variável `filtro` é `True` e, caso contrário, o valor é `False`.
+
+Quando aplicado ao nosso dataframe através do `df[filtro]`, um novo dataframe é criado, no qual as linhas com valor `True` são mantidas e linhas com valor `False` são discartadas. Após a aplicação do filtro, a execução de `df.shape` mostra que há 125.526 linhas sobrando do valor original de 178.281.
+
+```python
+agrupado = df.groupby('COUNTRY_FLYING_MISSION')['TONS_IC', 'TONS_FRAG', 'TONS_HE'].sum()
+
+#convertemos para quilotons novamente
+agrupado = agrupado / 1000
+```
+
+Agora que já reduzimos nosso dataframe para mostrar somente os registros dos Estados Unidos e Grã-Bretanha, agrupamos nossos dados com o `groupy` e agregamos as três colunas que contêm tipos de bombas com o `sum`.
+
+```python
+fonte = ColumnDataSource(agrupado)
+paises = fonte.data['COUNTRY_FLYING_MISSION'].tolist()
+p = figure(x_range=paises)
+```
+
+Como no exemplo anterior, criamos um objeto fonte a partir dos nossos dados agrupados e garantimos que nossa figura use dados categóricos no eixo x definindo o `x_range` com a lista de países.
+
+```python
+p.vbar_stack(stackers=['TONS_HE', 'TONS_FRAG', 'TONS_IC'],
+             x='COUNTRY_FLYING_MISSION', source=fonte,
+             legend = ['Explosivo', 'Fragmentação', 'Incendiário'],
+             width=0.5, color=Spectral3)
+```
+
+Para criar o gráfico de barras empilhadas, chamamos o método de glifo `vbar_stack`. Ao invés de passar um único nome de coluna ao parâmetro `y`, passamos uma lista de nomes de coluna como `stackers`. A ordem dessa lista determina a ordem pela qual as colunas serão empilhadas de baixo para cima (depois de trabalhar neste exemplo, tente mudar a ordem das colunas para ver o que acontece). O argumento `legend` fornece texto para cada empilhador e a paleta `Spectral3` fornece cores para cada um deles.
+
+```python
+p.title.text ='Tipos de Munições Lançadas por País Aliado'
+p.legend.location = 'top_left'
+
+p.xaxis.axis_label = 'País'
+p.xgrid.grid_line_color = None	#remove as linhas de grade de x
+
+p.yaxis.axis_label = 'Quilotons de Munição'
+
+show(p)
+```
+
+Adicionamos um estilo básico e rotulagem e, em seguida, produzimos o gráfico.
+
+{% include figure.html filename="visualizando_com_bokeh_4.png" caption="Um Gráfico de Barras Empilhadas com Dados Categóricos e Coloração" %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 [^1]: David Robinson, 'Why is Python Growing so Quickly?', *Stack Overflow Blog*, 14 September 2017 [https://stackoverflow.blog/2017/09/14/python-growing-quickly/](https://stackoverflow.blog/2017/09/14/python-growing-quickly/)
