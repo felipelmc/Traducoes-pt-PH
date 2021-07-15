@@ -5,3 +5,8 @@ Fiquei em dúvida quanto à melhor forma de traduzir "hover tool" (o Google Trad
 Qual seria a melhor tradução para grid?
 
 Qual seria a melhor tradução para Annotate? Anotar? Marcar?
+
+Ver a tradução de Easting e Northing
+
+Traduzir o Jupyter Notebook da lição
+
