@@ -10,9 +10,9 @@ Ver a tradução de Easting e Northing
 
 Traduzir o Jupyter Notebook da lição
 
-Verificar por que não consigo rodar o mapa da lição
-
 Fazer a revisão
 
-Adicionar tudo em pastas específicas
+Não consegui rodar o mapa da última seção da lição, tanto com o código original quanto com o código traduzido. Não me retorna erro algum, então não consegui identificar o problema. Talvez meu computador não esteja conseguindo renderizar a imagem.
+
+
 

@@ -260,7 +260,7 @@ Para começar, crie um novo arquivo chamado `carregando_dados.py`.
 #carregando_dados.py
 import pandas as pd
 
-df = pd.read.csv('thor_wwii.csv')
+df = pd.read_csv('thor_wwii.csv')
 print(df)
 ```
 
@@ -352,10 +352,10 @@ Podemos também, neste estágio, aprender um pouco mais sobre a forte natureza i
 ```python
 hover = HoverTool()
 hover.tooltips=[
-    ('Attack Date', '@MSNDATE'),
-    ('Attacking Aircraft', '@AC_ATTACKING'),
-    ('Tons of Munitions', '@TOTAL_TONS'),
-    ('Type of Aircraft', '@AIRCRAFT_NAME')
+    ('Data do Ataque', '@MSNDATE'),
+    ('Aeronave Atacante', '@AC_ATTACKING'),
+    ('Toneladas de Munições', '@TOTAL_TONS'),
+    ('Tipo de Aeronave', '@AIRCRAFT_NAME')
 ]
 
 p.add_tools(hover)
@@ -447,7 +447,7 @@ Para fazer isso, criaremos uma lista de países a partir do nosso objeto fonte, 
 mapa_de_cores = factor_cmap(field_name='COUNTRY_FLYING_MISSION',
                     palette=Spectral5, factors=paises)
 
-p.vbar(x='COUNTRY_FLYING_MISSION', top='TOTAL_TONS', source=source, width=0.70, color=mapa_de_cores)
+p.vbar(x='COUNTRY_FLYING_MISSION', top='TOTAL_TONS', source=fonte, width=0.70, color=mapa_de_cores)
 
 p.title.text ='Munições Lançadas por País Aliado'
 p.xaxis.axis_label = 'País'
@@ -488,7 +488,7 @@ import pandas as pd
 from bokeh.plotting import figure, output_file, show
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Spectral3
-output_file('types_of_munitions.html')
+output_file('tipos_de_municoes.html')
 
 df = pd.read_csv('thor_wwii.csv')
 ```
@@ -558,7 +558,7 @@ import pandas as pd
 from bokeh.plotting import figure, output_file, show
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Spectral3
-output_file('simple_timeseries_plot.html')
+output_file('serie_temporal_simples.html')
 
 df = pd.read_csv('thor_wwii.csv')
 
@@ -604,7 +604,7 @@ Para reamostrar nossos dados, usamos o objeto `Grouper` do Pandas, ao qual passa
 Para completar o processo de reamostragem e plotar nossos dados, passamos o objeto `Grouper` acima para a nossa função `groupy` no lugar do nome bruto da coluna. A instrução `groupy` do exemplo de código anterior agora deve ter a seguinte aparência:
 
 ``` python
-grouped = df.groupby(pd.Grouper(key='MSNDATE', freq='M'))['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
+agrupado = df.groupby(pd.Grouper(key='MSNDATE', freq='M'))['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
 ```
 
 Executando novamente o exemplo de código acima produzirá um gráfico muito mais limpo e com tendências óbvias. O gráfico agora mostra quatro pontos de interesse:
@@ -702,39 +702,43 @@ Também utilizaremos funções importadas da biblioteca `pyproj`. Já que nossas
 {% include alert.html text="Se o seu próprio dataset tiver nomes de lugares, mas não de latitude e longitude, não se preocupe! Você pode encontrar maneiras de obter facilmente coordenadas de nomes de lugares na lição do Programming Historian [Geocoding Historical Data using QGIS](/lessons/geocoding-qgis) ou [Web Mapping with Python and Leaflet](/lessons/mapping-with-python-leaflet#geocoding-with-python).." %}
 
 ```python
-#localizacao_alvos.py
+# localizacao_alvos.py
 import pandas as pd
 from bokeh.plotting import figure, output_file, show
 from bokeh.models import ColumnDataSource, Range1d
 from bokeh.layouts import layout
 from bokeh.palettes import Spectral3
-from bokeh.tile_providers import CARTODBPOSITRON
-from pyproj import Proj, transform
+from bokeh.tile_providers import get_provider
+from pyproj import Transformer
 output_file('mapeando_alvos.html')
 
-#função auxiliar para converter latitude/longitude para easting/northing para mapeamento
-#isso depende de funções da biblioteca pyproj
-def LongLat_to_EN(long, lat):
-    try:
-      easting, northing = transform(
-        Proj(init='epsg:4326'), Proj(init='epsg:3857'), long, lat)
-      return easting, northing
-    except:
-      return None, None
+# função auxiliar para converter latitude/longitude para easting/northing para mapeamento
+# isso depende de funções da biblioteca pyproj
 
-df = pd.read_csv('thor_wwii.csv')
-#auxiliar para converter todas as latitudes e longitudes para webmercator e armazenar numa nova coluna
-df['E'], df['N'] = zip(*df.apply(lambda x: LongLat_to_EN(x['TGT_LONGITUDE'], x['TGT_LATITUDE']), axis=1))
+
+def LongLat_para_EN(long, lat):
+    try:
+        conversor = Transformer.from_crs('epsg:4326', 'epsg:3857')
+        easting, northing = conversor.transform(long, lat)
+        return easting, northing
+    except:
+        return None, None
+
+
+df = pd.read_csv("thor_wwii.csv")
+
+
+df['E'], df['N'] = zip(
+    *df.apply(lambda x: LongLat_para_EN(x['TGT_LONGITUDE'], x['TGT_LATITUDE']), axis=1))
 ```
 
 As importações padrão e nossa função e conversão estão definidas. Em seguida, carregamos nossos dados e aplicamos nossa função de conversão para criar novas colunas E e N que armazenam nosso We Mercator easting e northing.
 
 ```python
-agrupado = df.groupby(['E', 'N'])['TONS_IC',
-'TONS_FRAG'].sum().reset_index()
+agrupado = df.groupby(['E', 'N'])[['TONS_IC', 'TONS_FRAG']].sum().reset_index()
 
-filter = agrupado['TONS_FRAG']!=0
-agrupado = agrupado[filter]
+filtro = agrupado['TONS_FRAG'] != 0
+agrupado = agrupado[filtro]
 
 fonte = ColumnDataSource(agrupado)
 ```
@@ -756,6 +760,7 @@ Para definir os limites do nosso mapa, definiremos um valor mínimo e máximo pa
 ```python
 provedor = get_provider('CARTODBPOSITRON')
 p.add_tile(provedor)
+
 p.circle(x='E', y='N', source=fonte, line_color='grey', fill_color='yellow')
 
 p.axis.visible = False
