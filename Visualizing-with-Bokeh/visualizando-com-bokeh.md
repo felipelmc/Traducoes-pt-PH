@@ -28,8 +28,6 @@ original: visualizing-with-bokeh
 avatar_alt: Men with torches in an antique tomb
 ---
 
-# Devo lembrar que existe um notebook a ser traduzido nesta lição
-
 # Sumário
 
 {% include toc.html %}
