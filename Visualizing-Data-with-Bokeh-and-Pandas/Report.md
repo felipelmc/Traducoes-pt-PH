@@ -13,3 +13,6 @@ Traduzir o Jupyter Notebook da lição
 Verificar por que não consigo rodar o mapa da lição
 
 Fazer a revisão
+
+Adicionar tudo em pastas específicas
+
