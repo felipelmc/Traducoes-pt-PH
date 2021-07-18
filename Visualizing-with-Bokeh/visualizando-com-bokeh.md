@@ -34,7 +34,7 @@ avatar_alt: Men with torches in an antique tomb
 
 # Visão Geral
 
-A capacidade de carregar dados brutos, amostrá-los e, em seguida, explorar e apresentá-los visualmente é uma habilidade valiosa entre as disciplinas. Neste tutorial, você aprenderá como fazer isso em Python utilizando as bibliotecas Bokeh e Pandas. Mais especificamente, trabalharemos visualizando e explorando aspectos dos bombardeiros da Segunda Guerra Mundial conduzidos por potências Aliadas.
+A capacidade de carregar dados brutos, amostrá-los e, em seguida, explorar e apresentá-los visualmente é uma habilidade valiosa. Neste tutorial, você aprenderá como fazer isso em Python utilizando as bibliotecas Bokeh e Pandas. Mais especificamente, trabalharemos visualizando e explorando aspectos dos bombardeiros da Segunda Guerra Mundial conduzidos por potências Aliadas.
 
 Ao final dessa lição, você será capaz de:
 
@@ -43,7 +43,7 @@ Ao final dessa lição, você será capaz de:
 - Visualizar dados quantitativos, categóricos e geográficos para exibição na web;
 - Adicionar diversos tipos de interação às suas visualizações;
 
-Para alcançar esses objetivos, trabalharemos com uma variedade de exemplos de visualização usando THOR, dataset (conjunto de dados) que descreve as operações históricas de bombardeio.
+Para alcançar esses objetivos, trabalharemos com uma variedade de exemplos de visualização usando THOR, um dataset (conjunto de dados) que descreve as operações históricas de bombardeio.
 
 ## O Dataset WWII THOR 
 
@@ -59,7 +59,7 @@ Utilizaremos Bokeh e Pandas para responder algumas das perguntas a seguir:
 
 - Quais os tipos e pesos das munições que foram lançadas durante a Segunda Guerra Mundial? Quais padrões podemos discernir no uso de diferentes tipos de munições?
 - De que modo os tipos e pesos das munições lançadas mudam no decorrer da Segunda Guerra Mundial? Como essas mudanças correspondem a eventos militares mais gerais?
-- Em quais alvos as munições foram lançadas durante a guerra? Foram determinados tipos de munições limitados a certos teatros de operações ou alvos?
+- Em quais alvos as munições foram lançadas durante a guerra?  Determinados tipos de munições foram limitados a certos teatros de operações ou alvos?
 
 ## Outros Datasets Possíveis
 
@@ -71,7 +71,7 @@ Caso este dataset não se adeque aos seus interesses ou caso queira praticar mai
 
 - [Comércio Transatlântico de Escravos](https://www.slavevoyages.org/voyage/database): Dados tabulares pesquisáveis e personalizáveis sobre 36.000 viagens de escravos que transporaram mais de 10 milhões de escravos dos séculos XVI a XIX.
   
-Todos os três datasets contêm dados quantitativos, qualitativos e temporais comparáveis aos encontrados no dataset THOR. Os datasets de Eventos de Agitação Civil e Comércio Transatlântico de Escravos possue dados espaciais, embora isso esteja faltando nos dados sobre Julgamento de Feitiçaria na Escócia.
+Todos os três datasets contêm dados quantitativos, qualitativos e temporais comparáveis aos encontrados no dataset THOR. Os datasets de Eventos de Agitação Civil e Comércio Transatlântico de Escravos possuem dados espaciais, embora isso esteja faltando nos dados sobre Julgamento de Feitiçaria na Escócia.
 
 # Iniciando
 
@@ -85,7 +85,7 @@ Caso você trabalhe no Python 2, será necessário criar um ambiente virtual par
 
 ## Criando um Ambiente Virtual de Python 3
 
-Um ambiente virtual Python é um ambiente isolado no qual você pode instalar bibliotecas e executar código. Vários ambientes virtuais diferentes podem ser criados para trabalhar com diferentes versões de Python e bibliotecas Python. Ambientes virtuais são úteis porque garantem que você tenha instaladas somente as bibliotecas necessárias e que você não precise lidar com conflitos de versão. Um benefício adicional dos ambientes virtuais é que você pode compartilhá-los com outras pessoas de modo que você saiba que seu código poderá ser executado em outra máquina.
+Um ambiente virtual Python é um ambiente isolado no qual você pode instalar bibliotecas e executar código. Vários ambientes virtuais diferentes podem ser criados para trabalhar com diferentes versões e bibliotecas de Python. Ambientes virtuais são úteis porque garantem que você tenha instaladas somente as bibliotecas necessárias e que você não precise lidar com conflitos de versão. Um benefício adicional dos ambientes virtuais é que você pode compartilhá-los com outras pessoas de modo que você saiba que seu código poderá ser executado em outra máquina.
 
 [Miniconda](https://conda.io/miniconda.html) é uma forma fácil de criar ambientes virtuais que é simples de instalar em qualquer sistema operacional. Você deve instalar o Miniconda e seguir as instruções para [Windows](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html), [Mac](https://conda.io/projects/conda/en/latest/user-guide/install/macos.html), ou [Linux](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html) conforme apropriado para seu sistema operacional.
 
@@ -110,13 +110,13 @@ Utilizaremos o Miniconda para criar um ambiente virtual de Python 3 chamado *bok
 conda create --name bokeh-amb python=3.6
 ```
 
-Diga 'yes' quando for solicitado a instalar novos pacotes.
+Diga 'yes' quando for solicitada a instalação de novos pacotes.
 
 Para ativar o ambiente virtual *bokeh-amb*, o comando é um pouco diferente dependendo do sistema operacional.
 
 ```python
-source activate bokeh-amb #For Linux/MacOS
-activate bokeh-amb #For Windows
+source activate bokeh-amb #Para Linux/MacOS
+activate bokeh-amb #Para Windows
 ```
 
 Sua linha de comando deve agora mostrar que você está no ambiente virtual *bokeh-amb*. 
@@ -124,8 +124,8 @@ Sua linha de comando deve agora mostrar que você está no ambiente virtual *bok
 Quando quiser deixar o ambiente virtual, basta digitar o comando apropriado para o seu sistema operacional.
 
 ```python
-source deactivate #For Linux/MacOS
-deactivate #For Windows
+source deactivate #Para Linux/MacOS
+deactivate #Para Windows
 ```
 
 ## Instalando pacotes
@@ -139,7 +139,7 @@ pip install pandas bokeh pyproj
 Para obter as versões exatas utilizadas para escrever esse tutorial (nota: essas podem não ser as versões mais recentes de cada um dos pacotes do Python) você pode passar os seguintes números de versão ao `pip`.
 
 ```python
-pip install pandas==0.23.1 bokeh==0.13.0 pyproj==1.9.5.1
+pip install "pandas>=1.2.0,<1.2.3" "bokeh>=2.0.0,<2.3.0" "pyproj>=3.0,<3.0.1"
 ```
 
 ## Executando Exemplos de Código
@@ -147,8 +147,8 @@ pip install pandas==0.23.1 bokeh==0.13.0 pyproj==1.9.5.1
 É mais fácil criar primeiro um único diretório e salvar cada exemplo de código como *.py* dentro dele. Quando estiver pronto para executar o arquivo de código, navegue até esse diretório no prompt de comando e certifique-se de que seu ambiente virtual esteja ativado. Lembre-se de que você sempre pode ativar o ambiente com o seguinte comando apropriado para o seu sistema operacional.
 
 ```python
-source activate bokeh-amb #For Linux/MacOS
-activate bokeh-amb #For Windows
+source activate bokeh-amb #Para Linux/MacOS
+activate bokeh-amb #Para Windows
 ```
 
 Dentro do ambiente virtual, você pode executar o código digitando:
@@ -157,13 +157,13 @@ Dentro do ambiente virtual, você pode executar o código digitando:
 python nome-do-arquivo.py
 ```
 
-Um Jupyter Notebook contendo o código utilizado neste tutorial também está [disponível](https://raw.githubusercontent.com/programminghistorian/ph-submissions/gh-pages/assets/visualizing-with-bokeh/visualizing-with-bokeh.ipynb) no caso de você preferir trabalhar ao longo do tutorial sem instalar um ambiente virtual. Você pode aprender mais sobre Jupyter Notebook [aqui](http://jupyter.org). Caso tenha criado um ambiente virtual utilizando Miniconda, como discutido acima, você pode instalar Jupyter Notebook no ambiente digitando `conda install jupyter`.
+Um Jupyter Notebook contendo o código utilizado neste tutorial também está [disponível]() no caso de você preferir trabalhar ao longo do tutorial sem instalar um ambiente virtual. Você pode aprender mais sobre Jupyter Notebook [aqui](http://jupyter.org). Caso tenha criado um ambiente virtual utilizando Miniconda, como discutido acima, você pode instalar Jupyter Notebook no ambiente digitando `conda install jupyter`.
 
 # O Básico de Bokeh
 
 ## O que é Bokeh?
 
-Bokeh é uma biblioteca que serve para criar visualizações de dados interativas num navegador web. Ele oferece uma sintaxe concisa e legível, que permite a apresentação de  de uma maneira rápida e esteticamente agradável. Caso você já tenha trabalhado com visualização em Python antes, é provável que tenha usado o Matplotlib. Vale a pena mencionar brevemente as diferenças entre Bokeh e Matplotlib e quando se deve dar preferência à utilização de um em detrimento de outro.
+Bokeh é uma biblioteca que serve para criar visualizações de dados interativas num navegador web. Ele oferece uma sintaxe concisa e legível, que permite a apresentação de dados de uma maneira rápida e esteticamente agradável. Caso você já tenha trabalhado com visualização em Python antes, é provável que tenha usado o Matplotlib. Vale a pena mencionar brevemente as diferenças entre Bokeh e Matplotlib e quando se deve dar preferência à utilização de um em detrimento de outro.
 
 Matplotlib existe desde 2002 e há muito tempo tem sido uma biblioteca padrão para visualização de dados em Python. Bokeh surgiu em 2013. Essa diferença de idade significa que o Matplotlib amadureceu muito antes do lançamento do Bokeh; ainda assim, Bokeh alcançou um alto nível de maturidade em um curto período de tempo. 
 
@@ -175,29 +175,29 @@ Com essas diferenças em mente, enfatizarei ao longo da lição os aspectos inte
 
 ## Seu primeiro plot
 
-Primeiro, crie um novo arquivo chamado `meu_primeiro_plot.py` no mesmo diretório que `wwii_thor.csv` e depois abra-o num editor de texto. Adicionaremos linhas a esse arquivo para executá-lo.
+Primeiro, crie um novo arquivo chamado `meu_primeiro_plot.py` no mesmo diretório que `thor_wwii.csv` e depois abra-o num editor de texto. Adicionaremos linhas a esse arquivo para executá-lo.
 
 ```python
 #meu_primeiro_plot.py
 from bokeh.plotting import figure, output_file, show
 ```
 
-Para implementar e utilizar o Bokeh, primeiro importamos alguns recursos básicos que serão necessários do módulo `bokeh.plotting`.
+Para implementar e utilizar o Bokeh, primeiro importamos do módulo `bokeh.plotting` alguns recursos básicos que serão necessários.
 
-`figure` é o objeto principal que utilizaremos para criar plots. `figure` lida com a estilização dos plots, incluindo título, rótulos (*labels*), eixos e **grades ((*grids*) REVISAR ISSO AQUI)**, e expõe métodos par adicionar dados ao gráfico. A função `output_file` define como a visualização será renderizada (ou seja, para um arquivo html) e a função `show` será chamada quando o plot estiver pronta para ser apresentada. `show` informa ao Bokeh que todos os dados foram adicionados ao gráfico e que é hora de renderizá-lo.
+`figure` é o objeto principal que utilizaremos para criar plots. `figure` lida com a estilização dos plots, incluindo título, rótulos (*labels*), eixos e grades (*grids*), e expõe métodos para adicionar dados ao gráfico. A função `output_file` define como a visualização será renderizada (ou seja, para um arquivo html) e a função `show` será chamada quando o plot estiver pronto para ser apresentado. `show` informa ao Bokeh que todos os dados foram adicionados ao gráfico e que é hora de renderizá-lo.
 
 ```python
 output_file('meu_primeiro_grafico.html')
 ```
 
-Bokeh recomenda que a função `output_file`, para a qual passamos um nome de arquivo, seja chamada no início de seu script, imediatamente após as importações. Uma função de saída alternativa é a `output_notebook`, que é utilizada para mostrar gráficos em linha em um Jupyter Notebook. Para saber mais sobre como instalar e usar notebooks Jupyter, veja a [documentação do Jupyter](https://jupyter.readthedocs.io/en/latest/).
+Bokeh recomenda que a função `output_file`, para a qual passamos um nome de arquivo, seja chamada no início de seu script, imediatamente após as importações. Uma função alternativa é a `output_notebook`, que é utilizada para mostrar gráficos em linha em um Jupyter Notebook. Para saber mais sobre como instalar e usar notebooks Jupyter, veja a [documentação do Jupyter](https://jupyter.readthedocs.io/en/latest/).
 
 ```python
 x = [1, 3, 5, 7]
 y = [2, 4, 6, 8]
 ```
 
-Em seguida criaremos alguns dados para o gráfico. Dados no Bokeh podem assumir diferentes formatos, mas na sua forma mais simples, os dados são apenas uma lista de valores. Criamos uma lista para o nosso eixo x e outra para nosso eixo y.
+Em seguida criaremos alguns dados para o gráfico. Dados no Bokeh podem assumir diferentes formatos, mas, na sua forma mais simples, os dados são apenas uma lista de valores. Criamos uma lista para o nosso eixo x e outra para nosso eixo y.
 
 Com o formato e os dados da nossa saída fixados, podemos instanciar uma `figure` e adicionar os dados a ela.
 
@@ -236,9 +236,9 @@ python meu_primeiro_plot.py
 ``` 
 {% include figure.html filename="visualizando-com-bokeh-1.png" caption="Plotando um Único Glifo" %}
 
-Um navegador web surgirá mostrando o arquivo html com a sua visualização. Os círculos vermelhos, linha azul e triângulos amarelos são resultado dos métodos de glifo que chamamos. Clicar na legenda no canto superior direito mostrará/ocultará cada tipo de glifo. Observe que o Bokeh controlou automaticamente a criação das **linhas de grade (REVISAR ISSO AQUI)** e rótulos de escala.
+Um navegador web surgirá mostrando o arquivo html com a sua visualização. Os círculos vermelhos, linha azul e triângulos dourados são resultado dos métodos de glifo que chamamos. Clicar na legenda no canto superior direito mostrará/ocultará cada tipo de glifo. Observe que o Bokeh controlou automaticamente a criação das linhas de grade e rótulos de escala.
 
-No lado direito, a barra de ferramentas padrão também é exibida. As ferramentas incluem arrastar, zoom de caixa, zoom de roda, salvar, redefinir e ajuda. Usando essas ferramentas, um usuário pode fazer deslocamentos ao longo do gráfico ou ampliar porções interessantes dos dados. Como esta é uma página HTML independente, que inclui uma referência a BokehJS, ela pode ser imediatamente passada para um colega de trabalho para exploração ou postada na web. 
+Ao lado direito, a barra de ferramentas padrão também é exibida. As ferramentas incluem arrastar, zoom de caixa, zoom de roda, salvar, redefinir e ajuda. Usando essas ferramentas, um usuário pode fazer deslocamentos ao longo do gráfico ou ampliar porções interessantes dos dados. Como esta é uma página HTML independente, que inclui uma referência a BokehJS, ela pode ser imediatamente passada para um colega de trabalho para exploração ou postada na web. 
 
 # Bokeh e Pandas: Explorando o Dataset WWII THOR 
 
@@ -248,7 +248,7 @@ No exemplo anterior, criamos manualmente duas listas curtas de Python para os no
 
 Para os propósitos deste tutorial, serão abordadas apenas as funções básicas do Pandas que são necessárias para produzir nossas visualizações. [10 Minutes to Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) e [Lessons for New Pandas Users](https://pandas.pydata.org/pandas-docs/stable/getting_started/tutorials.html) são excelentes introduções que eu recomendaria para expandir seu conhecimento além do básico abordado aqui.
 
-Pandas rapidamente se tornou a biblioteca Python *de facto* para fluxos de trabalhos de dados e ciência de dados; a integração com outras bibliotecas importantes de ciência de dados e aprendizado e máquinas só aumentou sua popularidade.[^1]. Pandas oferece funcionalidades para, de forma rápida e eficiente, ler, escrever e modificar conjuntos de dados para análise. Para fazer isso, Pandas oferece estruturas de dados que contêm diferentes dimensionalidades de dados. O `DataFrame` contém dados bidimensionais na forma de uma planilha com linhas e colunas. É por meio desse objeto que interagiremos com nosso conjunto de dados THOR sobre a Segunda Guerra Mundial. Vamos primeiro examinar o `DataFrame` do Pandas carregando nosso ficheiro .csv em uma estrutura desse tipo.
+Pandas rapidamente se tornou a biblioteca Python *de facto* para fluxos de trabalhos de dados e ciência de dados; a integração com outras bibliotecas importantes de ciência de dados e aprendizado e máquinas só aumentou sua popularidade[^1]. Pandas oferece funcionalidades para, de forma rápida e eficiente, ler, escrever e modificar conjuntos de dados para análise. Para fazer isso, Pandas oferece estruturas de dados que contêm diferentes dimensionalidades de dados. A estrutura de `DataFrame` contém dados bidimensionais na forma de uma planilha com linhas e colunas. É por meio desse objeto que interagiremos com nosso conjunto de dados THOR sobre a Segunda Guerra Mundial. Vamos primeiro examinar o `DataFrame` do Pandas carregando nosso ficheiro .csv em uma estrutura desse tipo.
 
 ## Carregando Dados no Pandas
 
@@ -308,7 +308,7 @@ from bokeh.plotting import figure, output_file, show
 from bokeh.models import ColumnDataSource
 from bokeh.models.tools import HoverTool
 
-output_file('columndatasource_example.html')
+output_file('columndatasource_exemplo.html')
 
 df = pd.read_csv('thor_wwii.csv')
 ```
@@ -369,13 +369,13 @@ Finalmente, nos certificamos de adicionar a linha para mostrar o gráfico, `show
 
 Note que, uma vez que estamos obtendo uma amostra aleatória dos dados, nosso plot será diferente a cada vez que o código for executado.
 
-No topo e ao longo dos eixos do gráfico, vemos os rótulos que adicionamos. Também existe uma nova ferramenta na barra de ferramentas. Esta é a ferramenta de foco que adicionamos. Para vê-lo em ação, passe o mouse sobre qualquer ponto de dados no gráfico de dispersão. Uma janela aparecerá mostrando as colunas que definimos em nossa propriedade `tooltip`!
+No topo e ao longo dos eixos do gráfico, vemos os rótulos que adicionamos. Também existe uma nova ferramenta na barra de ferramentas. Esta é a ferramenta de foco que adicionamos. Para vê-la em ação, passe o mouse sobre qualquer ponto de dados no gráfico de dispersão. Uma janela aparecerá mostrando as colunas que definimos em nossa propriedade `tooltip`!
 
 Antes de passar para a próxima seção da lição, tente retornar ao exemplo acima e adicionar/remover outras variáveis e alterar os nomes de exibição.
 
 # Dados Categóricos e Gráficos de Barra: Munições Lançadas por País
 
-No exemplo anterior, plotamos dados quantitativos. Frequentemente, porém, queremos representar graficamente dados categóricos. Dados categóricos, ao contrário dos quantitativos, são dados que podem ser divididos em grupos, mas que não têm necessariamente um aspecto numérico. Por exemplo, enquanto sua altura seja numérica, a cor do seu cabelo é categórica. No que diz respeito ao nosso dataset, elementos como o país atacante contêm dados categóricos, enquanto elementos como o peso das munições contêm dados quantitativos.
+No exemplo anterior, plotamos dados quantitativos. Frequentemente, porém, queremos representar graficamente dados categóricos. Dados categóricos, ao contrário dos quantitativos, são dados que podem ser divididos em grupos, mas que não têm necessariamente um aspecto numérico. Por exemplo, enquanto sua altura é numérica, a cor do seu cabelo é categórica. No que diz respeito ao nosso dataset, elementos como o país atacante contêm dados categóricos, enquanto elementos como o peso das munições contêm dados quantitativos.
 
 Nesta seção, aprenderemos como utilizar dados categóricos como nossos valores do eixo x no Bokeh e como usar o método de glifo `vbar` para criar um gráfico de barras verticais (o método de glifo `hbar` funciona de forma semelhante para criar um gráfico de barras horizontais). Além disso, aprenderemos como preparar dados categóricos no Pandas através do agrupamento de dados. Também expandiremos nosso conhecimento sobre estilização com Bokeh e sobre a ferramenta de foco.
 
@@ -410,7 +410,7 @@ Pandas nos permite fazer isso numa única linha de código utilizando o método 
 
 Vamos pegar um pedaço de cada vez. O `groupby('COUYTRY_FLYING_MISSION')` define a coluna que estamos agrupando. Em outras palavras, isso diz que queremos que o dataframe resultante tenha uma linha por entrada única na coluna `COUNTRY_FLYING_MISSION`. Como não nos importamos em agregar todas as 19 colunas do dataframe, escolhemos apenas as colunas que dizem respeito às toneladas de munição através do indexador `['TOTAL_TONS', 'TONS_HE', 'TONS_IC', 'TONS_FRAG']`. Por fim, usamos o método `sum` para permitir que o Pandas saiba como agregar todas as diferentes linhas. Existem outros métodos de agregação, como `count`, `mean`, `max` e `min`.
 
-Se você executar `print(agrupado)`, verá que o Pandas agrupou pelos cinco países em nosso dataset e somou o total de toneladas lançadas por cada um. Também é possível perceber que o dataset tem alguns problemas: A África do Sul e a Nova Zelândia lançaram mais explosivos do que a coluna do total de toneladas. Problemas como esse são típicos de ggrandes conjuntos de dados criados manualmente e esse é um ótimo lembrete da importância explorar e visualizar seus dados antes de criar resultados de pesquisa.
+Se você executar `print(agrupado)`, verá que o Pandas agrupou pelos cinco países em nosso dataset e somou o total de toneladas lançadas por cada um. Também é possível perceber que o dataset tem alguns problemas: a África do Sul e a Nova Zelândia lançaram mais explosivos do que a coluna do total de toneladas. Problemas como esse são típicos de grandes conjuntos de dados criados manualmente e esse é um ótimo lembrete da importância de explorar e visualizar seus dados antes de criar resultados de pesquisa.
 
 ```
                         TOTAL_TONS     TONS_HE     TONS_IC  TONS_FRAG
@@ -468,7 +468,7 @@ p.add_tools(hover)
 show(p)
 ```
 
-Adicionamos uma ferramenta de foco novamente, mas agora vemos que poodemos usar várias variáveis de dados em uma única linha e adicionar nosso próprio texto para que o pop-up de foco liste os quilotons de cada tipo de explosivo. O `hover.mode` é novo. Existem três modos para a ferramenta hover: `mouse`, `vline` e `hline`. Eles informam à ferramenta de foco quando mostrar o pop-up. `mouse` é o valor padrão e mostra um pop-up quando diretamente sobre um glifo. `vline` e `hline` informam ao pop-up para surgir quando uma linha vertical ou horizontal cruza um glifo. Com `vline` definido aqui, sempre que o mouse passar por uma linha vertical imaginária que se estende a partir de cada barra, um pop-up será exibido.
+Adicionamos uma ferramenta de foco novamente, mas agora vemos que podemos usar várias variáveis em uma única linha e adicionar nosso próprio texto para que o pop-up de foco liste os quilotons de cada tipo de explosivo. O `hover.mode` é novo. Existem três modos para a ferramenta hover: `mouse`, `vline` e `hline`. Eles informam à ferramenta de foco quando mostrar o pop-up. `mouse` é o valor padrão e mostra um pop-up quando diretamente sobre um glifo. `vline` e `hline` informam ao pop-up para surgir quando uma linha vertical ou horizontal cruza um glifo. Com `vline` definido aqui, sempre que o mouse passar por uma linha vertical imaginária que se estende a partir de cada barra, um pop-up será exibido.
 
 {% include figure.html filename="visualizando-com-bokeh-3.png" caption="Um Gráfico de Barras com Dados Categóricos e Coloração" %}
 
@@ -502,7 +502,7 @@ Uma vez que o eixo x é categórico mais uma vez, precisaremos agrupar e agregar
 
 Para cada linha em `df`, a função `isin` verifica se COUNTRY_FLYING_MISSION possui um valor de USA ou GREAT BRITAIN. Caso tenha, o valor correspondente na variável `filtro` é `True` e, caso contrário, o valor é `False`.
 
-Quando aplicado ao nosso dataframe através do `df[filtro]`, um novo dataframe é criado, no qual as linhas com valor `True` são mantidas e linhas com valor `False` são discartadas. Após a aplicação do filtro, a execução de `df.shape` mostra que há 125.526 linhas sobrando do valor original de 178.281.
+Quando aplicado ao nosso dataframe através do `df[filtro]`, um novo dataframe é criado, no qual as linhas com valor `True` são mantidas e linhas com valor `False` são descartadas. Após a aplicação do filtro, a execução de `df.shape` mostra que há 125.526 linhas sobrando do valor original de 178.281.
 
 ```python
 agrupado = df.groupby('COUNTRY_FLYING_MISSION')['TONS_IC', 'TONS_FRAG', 'TONS_HE'].sum()
@@ -589,13 +589,13 @@ Olhando para a saída, porém, você pode notar um grande problema.
 
 {% include figure.html filename="visualizando-com-bokeh-5.png" caption="Um Gráfico Básico de Série Temporal" %}
 
-Esses dados são voláteis e difíceis de ler porque estão muito **desagregados (REVER ISSO AQUI)** para as nossas necessidades. Ter dados diários ao longo de cinco anos é ótimo, mas traçá-los dessa forma obscurece as tendências dos dados. Para plotar dados de série temporal com sucesso e procurar tendências de longo prazo, precisamos de uma maneira de mudar a escala de tempo que estamos olhando para que, por exemplo, possamos plotar dados resumidos por semanas, meses ou anos.
+Esses dados são voláteis e difíceis de ler porque estão desagregados demais para as nossas necessidades. Ter dados diários ao longo de cinco anos é ótimo, mas traçá-los dessa forma obscurece as tendências dos dados. Para plotar dados de série temporal com sucesso e procurar tendências de longo prazo, precisamos de uma maneira de mudar a escala de tempo que estamos olhando para que, por exemplo, possamos plotar dados resumidos por semanas, meses ou anos.
 
 Felizmente, Pandas oferece uma maneira rápida e fácil de fazer isso. Ao modificar uma única linha de código no exemplo acima, podemos *reamostrar* nossos dados de série temporal para qualquer unidade de tempo válida.
 
 ## Reamostragem de Dados de Série Temporal
 
-A reamostragem de dados de série temporal pode envolver upsampling (criar mais registros) ou downsampling (criando menos registros). Por exemplo, uma lista de temperaturas diárias pode ser aumentada para uma lista de temporaturas de hora em hora ou reduzida para uma lista de temperaturas semanais. Estaremos fazendo somente um downsampling neste tutorial, mas upsampling é muito útil quando você está tentando combinar um dataset medido esporadicamente com um que é medido mais periodicamente.
+A reamostragem de dados de série temporal pode envolver upsampling (criar mais registros) ou downsampling (criar menos registros). Por exemplo, uma lista de temperaturas diárias pode ser aumentada para uma lista de temperaturas de hora em hora ou reduzida para uma lista de temperaturas semanais. Estaremos fazendo somente um downsampling neste tutorial, mas upsampling é muito útil quando você está tentando combinar um dataset medido esporadicamente com um que é medido mais periodicamente.
 
 Para reamostrar nossos dados, usamos o objeto `Grouper` do Pandas, ao qual passaremos o nome da coluna que contém as nossas datas e um código representando a frequência desejada para a reamostragem. No caso dos nossos dados, o comando `pd.Grouper(key='MSNDATE', freq='M')` será utilizado para reamostrar nossa coluna MSNDATE por *M*onth (Mês). Da mesma forma, poderíamos reamostrar por *W*eek (Semana), *Y*ear (Ano), *H*our (hora) e [assim por diante](http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases). Essas designações de frequência também podem ser precedidas de números de forma que, por exemplo, `freq = '2W'` reamostra em intervalos de duas semanas!
 
@@ -605,18 +605,18 @@ Para completar o processo de reamostragem e plotar nossos dados, passamos o obje
 agrupado = df.groupby(pd.Grouper(key='MSNDATE', freq='M'))['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
 ```
 
-Executando novamente o exemplo de código acima produzirá um gráfico muito mais limpo e com tendências óbvias. O gráfico agora mostra quatro pontos de interesse:
+Executado novamente, o exemplo de código acima produzirá um gráfico muito mais limpo e com tendências óbvias. O gráfico agora mostra quatro pontos de interesse:
 
 - Primeiro, tanto na primavera de 1944 quando na de 1945, a escala das operações de bombardeio dos Aliados atingiu maior intensidade;
 - Segundo, há um pico menor no verão de 1945 durante a aceleração dos bombardeios contra os japoneses após a rendição da Alemanha;
-- Terceiro, há quatro picos no uso de armas incendiárias aparecem que poderiam ser mais exploradas;
+- Terceiro, há quatro picos no uso de armas incendiárias que aparecem e poderiam ser mais exploradas;
 - Quarto e último, há alguns pequenos picos no uso de bombas de fragmentação, cujo uso para efetivamente após a rendição da Alemanha.
 
 {% include figure.html filename="visualizando-com-bokeh-6.png" caption="Um Gráfico de Série Temporal com Dados Reamostrados para Meses" %}
 
 ## Anotando Tendências em Gráficos
 
-Vamos examinar mais de perto agora os bombardeios na Europa em 1944 e 1945 para ver quais tendências existem com munições de fragmentação e incendiárias. Também apontaremos algumas dessas tendências em nosso gráfico com anotações. Para fazer isso, vamos filtrar nosso conjunto de dados para trabalharmos apenas com bombardeios no Teatro Europeu de Operações (*European Theater of Operations - ETO*), reamostrar os dados em intervalos de um mês e, em seguida, plotar os resultados da mesma maneira que antes.
+Agora vamos examinar mais de perto os bombardeios na Europa em 1944 e 1945 para ver quais tendências existem com munições de fragmentação e incendiárias. Também apontaremos algumas dessas tendências em nosso gráfico com anotações. Para fazer isso, vamos filtrar nosso conjunto de dados para trabalharmos apenas com bombardeios no Teatro Europeu de Operações (*European Theater of Operations - ETO*), reamostrar os dados em intervalos de um mês e, em seguida, plotar os resultados da mesma maneira que antes.
 
 ```python
 #anotando_tendencias.py
@@ -637,13 +637,13 @@ df['MSNDATE'] = pd.to_datetime(df['MSNDATE'], format='%m/%d/%Y')
 agrupado = df.groupby(pd.Grouper(key='MSNDATE', freq='M'))['TOTAL_TONS', 'TONS_IC', 'TONS_FRAG'].sum()
 agrupado = agrupado / 1000
 
-source = ColumnDataSource(agrupado)
+fonte = ColumnDataSource(agrupado)
 
 p = figure(x_axis_type="datetime")
 
-p.line(x='MSNDATE', y='TOTAL_TONS', line_width=2, source=source, legend='Todas as Munições')
-p.line(x='MSNDATE', y='TONS_FRAG', line_width=2, source=source, color=Spectral3[1], legend='Fragmentação')
-p.line(x='MSNDATE', y='TONS_IC', line_width=2, source=source, color=Spectral3[2], legend='Incendiária')
+p.line(x='MSNDATE', y='TOTAL_TONS', line_width=2, source=fonte, legend='Todas as Munições')
+p.line(x='MSNDATE', y='TONS_FRAG', line_width=2, source=fonte, color=Spectral3[1], legend='Fragmentação')
+p.line(x='MSNDATE', y='TONS_IC', line_width=2, source=fonte, color=Spectral3[2], legend='Incendiária')
 
 p.title.text = 'Teatro Europeu de Operações'
 
@@ -656,11 +656,11 @@ show(p)
 
 Alguns padrões emergem dos dados do ETO. Em primeiro lugar, vemos uma escalada muito clara dos bombardeios gerais que levaram até 6 de junho de 1994 e uma queda notável durante o inverno de 1944/1945. Munições incendiárias mostram três picos e confirmam que o quarto pico visto no exemplo anterior foi direcionado ao bombardeio do Japão após a rendição da Alemanha. O padrão das bombas de fragmentação é mais difícil de ler, mas agora está claro que elas só foram usadas seriamente no Teatro Europeu após o Dia D.
 
-{% include alert.html text="Tente reamostrar esses dados usando qualquer uma das [frequências de tempo do Pandas](http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases) para ver quais outras tendências podem surgir. Lembre-se de que você também pode prefaciar essas tendências com números (por exemplo, se você estiver trabalhando com dados históricos do mercado de ações, o 2Q fornecerá dados bimestrais." %}
+{% include alert.html text="Tente reamostrar esses dados usando qualquer uma das [frequências de tempo do Pandas](http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases) para ver quais outras tendências podem surgir. Lembre-se de que você também pode prefaciar essas tendências com números (por exemplo, se você estiver trabalhando com dados históricos do mercado de ações, o 2Q fornecerá dados bimestrais!)" %}
 
 Como estabelecemos que o 6 de junho de 1944 e o inverno de 1944/1945 marcam mudanças nos padrões de bombardeio no ETO, vamos destacar essas tendências usando os recursos de anotação do Bokeh.
 
-Para fazer isso, criaremos um `BoxAnnotation` e, em seguida, adicioná-los à nossa figura antes de mostrá-la. Primeiro, precisamos adicionar uma instrução import adicional ao nosso código.
+Para fazer isso, criaremos um `BoxAnnotation` e, em seguida, adicioná-lo à nossa figura antes de mostrá-la. Primeiro, precisamos adicionar uma instrução import adicional ao nosso código.
 
 
 ```python
@@ -674,7 +674,7 @@ caixa_esquerda = pd.to_datetime('6-6-1944')
 caixa_direita = pd.to_datetime('16-12-1944')
 ```
 
-A esquerda da caixa será 6 de junho de 1994 (Dia D) e à direita da caixa escolheremos o primeiro dia da Batalha de Bulge: 16 de dezembro de 1994. Neste caso, as datas seguem um formato mês-dia_ano, mas `to_datetime` também funciona com [os formatos dia-primeiro (day-first) e ano-primeiro (year-first)](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html).
+A esquerda da caixa será o 6 de junho de 1994 (Dia D) e à direita da caixa escolheremos o primeiro dia da Batalha de Bulge: 16 de dezembro de 1994. Neste caso, as datas seguem um formato mês-dia-ano, mas `to_datetime` também funciona com [os formatos dia-primeiro (*day-first*) e ano-primeiro (*year-first*)](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html).
 
 Passamos essas coordenadas ao construtor `BoxAnnotation` junto com alguns argumentos de estilização. Depois, o adicionamos à nossa figura usando o método `add_layout()`.
 
@@ -687,7 +687,7 @@ p.add_layout(caixa)
 ```
 {% include figure.html filename="visualizando-com-bokeh-8.png" caption="Um Gráfico de Série Temporal do ETO com Anotações Adicionadas" %}
 
-{% include alert.html text="Tente criar um gráfico semelhante para o Teatro de Operações do Pacífico (*Pacific Theater os Operations - PTO*). Anote a invasão de Iwo Jima (19 de fevereiro de 1945) e o anúncio de rendição do Japão (15 de agosto de 1945)." %}
+{% include alert.html text="Tente criar um gráfico semelhante para o Teatro de Operações do Pacífico (*Pacific Theater of Operations - PTO*). Anote a invasão de Iwo Jima (19 de fevereiro de 1945) e o anúncio de rendição do Japão (15 de agosto de 1945)." %}
 
 # Dados Espaciais: Mapeando Localização de Alvos
 
@@ -697,7 +697,7 @@ Bokeh oferece [provedores de blocos integrados (built-in tile providers)](https:
 
 Também utilizaremos funções importadas da biblioteca `pyproj`. Já que nossas coordenadas estão armazenadas como latitude e longitude, definiremos uma função personalizada para convertê-las antes do mapeamento. Observe que, embora Bokeh seja neutro em relação ao sistema de coordenadas, ele usa a projeção Web Mercator para mapeamento, um padrão encontrado em provedores de web tiles. O assunto de sistemas de coordenadas e projeções está fora do escopo deste tutorial, mas o leitor interessado encontrará muitos recursos da web úteis sobre esses tópicos.
 
-{% include alert.html text="Se o seu próprio dataset tiver nomes de lugares, mas não de latitude e longitude, não se preocupe! Você pode encontrar maneiras de obter facilmente coordenadas de nomes de lugares na lição do Programming Historian [Geocoding Historical Data using QGIS](/lessons/geocoding-qgis) ou [Web Mapping with Python and Leaflet](/lessons/mapping-with-python-leaflet#geocoding-with-python).." %}
+{% include alert.html text="Se o seu próprio dataset possuir nomes de lugares, mas não de latitude e longitude, não se preocupe! Você pode encontrar maneiras de obter facilmente coordenadas de nomes de lugares na lição do Programming Historian [Geocoding Historical Data using QGIS](/lessons/geocoding-qgis) ou [Web Mapping with Python and Leaflet](/lessons/mapping-with-python-leaflet#geocoding-with-python)." %}
 
 ```python
 # localizacao_alvos.py
@@ -730,7 +730,7 @@ df['E'], df['N'] = zip(
     *df.apply(lambda x: LongLat_para_EN(x['TGT_LONGITUDE'], x['TGT_LATITUDE']), axis=1))
 ```
 
-As importações padrão e nossa função e conversão estão definidas. Em seguida, carregamos nossos dados e aplicamos nossa função de conversão para criar novas colunas E e N que armazenam nosso We Mercator easting e northing.
+As importações padrão e nossa função de conversão estão definidas. Em seguida, carregamos nossos dados e aplicamos nossa função de conversão para criar novas colunas E e N que armazenam nosso Web Mercator easting e northing.
 
 ```python
 agrupado = df.groupby(['E', 'N'])[['TONS_IC', 'TONS_FRAG']].sum().reset_index()
@@ -774,7 +774,7 @@ Tendo plotado quais alvos na Europa e na Ásia foram bombardeados com bombas de 
 
 # Bokeh como uma Ferramenta de Visualização
 
-A força do Bokeh como uma ferramenta de visualização está na sua capacidade de mostrar diferentes tipos de dados de maneira interativa e amigável para a web. Este tutorial apenas arranhou a superfície dos recursos do Bokeh e o leitor é encorajado a se aprofundar no funcionamento da biblioteca. Um ótimo lugar para começar é a [galeria do Bokeh](https://bokeh.pydata.org/en/latest/docs/gallery.html), onde você pode ver uma variedade de visualizações e decidir como aplicar essas técnicas a seus próprios dados. Se você estiver mais inclinado a mergulhar direto em outros exemplos de código, o [notebook online](https://mybinder.org/v2/gh/bokeh/bokeh-notebooks/master?filepath=tutorial%2F00%20-%20Introduction%20and%20Setup.ipynb) do Bokeh é um excelente lugar para começar!
+A força do Bokeh como uma ferramenta de visualização reside na sua capacidade de mostrar diferentes tipos de dados de maneira interativa e amigável para a web. Este tutorial apenas arranhou a superfície dos recursos do Bokeh e o leitor é encorajado a se aprofundar no funcionamento da biblioteca. Um ótimo lugar para começar é a [galeria do Bokeh](https://bokeh.pydata.org/en/latest/docs/gallery.html), onde você pode ver uma variedade de visualizações e decidir como aplicar essas técnicas a seus próprios dados. Se você estiver mais inclinado a mergulhar direto em outros exemplos de código, o [notebook online](https://mybinder.org/v2/gh/bokeh/bokeh-notebooks/master?filepath=tutorial%2F00%20-%20Introduction%20and%20Setup.ipynb) do Bokeh é um excelente lugar para começar!
 
 # Recursos Adicionais
 
