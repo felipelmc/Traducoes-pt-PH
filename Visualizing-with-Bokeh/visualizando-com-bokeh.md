@@ -2,8 +2,8 @@
 title: Visualização de dados com Bokeh e Pandas
 layout: lesson
 slug: visualizacao-de-dados-com-bokeh-e-pandas
-date: 2012-07-17
-translation_date: 2018-07-27
+date: 2018-07-27
+translation_date: 2021-07-19
 authors:
 - Charlie Harper
 reviewers:
