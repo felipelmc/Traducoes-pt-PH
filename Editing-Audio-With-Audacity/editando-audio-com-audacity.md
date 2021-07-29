@@ -1,8 +1,8 @@
 ---
-title: Visualização de dados com Bokeh e Pandas
+title: Editando Áudio com Audacity
 layout: lesson
-slug: visualizacao-de-dados-com-bokeh-e-pandas
-date: 2012-07-17
+slug: editando-audio-com-audacity
+date: 2016-08-05
 translation_date: 2021-07-29
 authors:
 - Brandon Walsh
@@ -26,3 +26,8 @@ redirect_from:
 original: editing-audio-with-audacity
 avatar_alt: Two gramophones facing each other
 ---
+
+
+{% include toc.html %}
+
+## Objetivos do Módulo
