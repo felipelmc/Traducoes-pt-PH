@@ -45,7 +45,7 @@ Primeiro, faça o download dos ficheiros necessários.
 
 Você precisará do ficheiro mp3 das [Variações Goldberg de Bach](https://programminghistorian.org/assets/editing-audio-with-audacity/bach-goldberg-variations.mp3). Para fazer o download, clique com o botão direito [aqui](https://programminghistorian.org/assets/editing-audio-with-audacity/bach-goldberg-variations.mp3) e selecione 'Salvar link como...' para fazer o download do ficheiro para dentro do seu computador como um MP3.
 
-Em seguida, faça o download e instale o *Audacity*, disponível no [site do projeto](https://www.audacityteam.org/). *Audacity* pode ser usado no Mac OSX, Windows ou Linux.
+Em seguida, faça o download e instale o *Audacity*, disponível no [site do projeto](https://www.audacityteam.org/). O *Audacity* pode ser usado no Mac OSX, Windows ou Linux.
 
 Faça o download do programa e clique duas vezes para instalar.
 
@@ -59,13 +59,13 @@ A interface mudará para apresentar os dados carregados:
 
 O eixo y representa amplitude, o que entendemos como intensidade ou volume. Por padrão, o eixo y mede o volume numa escala linear vertical de -1 a 1: os extremos -1 e 1 representam o som gravado mais alto possível sem distorção, enquanto 0 representa o silêncio. Portanto, o silêncio começa com uma linha plana e o som fica mais alto e mais profundo à medida que aumenta de intensidade. Para obter mais informações sobre por que alguns dos números são negativos, consulte a breve [introdução à acústica](https://web.archive.org/web/20161119231053/http://www.indiana.edu:80/~emusic/acoustics/amplitude.htm) de Jeffrey Hass.
 
-As representações de tempo e amplitude do *Audacity* são os seus primeiros e mais simples pontos de referência para edição de sons, e a ferramenta oferece maneiras práticas de navegar entre eles. Eu continuo chamando isso de onda, mas ainda não se parece muito com uma. Vamos dar uma olhada mais de perto, selecionando uma parte da faixa de áudio.
+As representações de tempo e amplitude do *Audacity* são os seus primeiros e mais simples pontos de referência para edição de sons, e a ferramenta oferece maneiras práticas de navegar entre elas. Continuo chamando isso de onda, mas ainda não se parece muito com uma. Vamos dar uma olhada mais de perto, selecionando uma parte da faixa de áudio.
 
 * Clique em algum lugar sobre a onda para começar a selecionar.
 * Arraste para destacar um pedaço da onda (qualquer parte com som funcionará). Se não estiver satisfeito com a seleção, você pode arrastar as bordas de sua seleção para ajustar os limites.
 * Uma vez que tenha um recorte com que esteja satisfeito, selecione 'Zoom' e, em seguida, 'Aumentar Zoom' no menu de exibição.
 
-Se você aumentar o zoom seis ou sete vezes, começará a ver algo que pode se parecer mais com uma onda senoidal:
+Se você aumentar o zoom seis ou sete vezes, começará a ver algo que se parece mais com uma onda senoidal:
 
 {% include figure.html filename="editando-audio-com-audacity-2.png" caption="Visão ampliada da forma de onda de Bach" %}
 
@@ -93,7 +93,7 @@ Você verá algo parecido com isso:
 
 {% include figure.html filename="editando-audio-com-audacity-5.png" caption="Duas faixas carregadas no Audacity" %}
 
-Nossa gravação original do Bach permanece no topo da interface, enquanto nossa nova gravação é adicionada abaixo dela. Por padrão, *Audacity* não irá sobrescrever sua gravação anterior. Ao contrário, ele isola cada uma das gravações, ou faixas, nos permitindo manipular separamente os componentes antes de uní-los numa gravação final. Podemos fazer modificações num sem afetar o outro. Note como, em termos de tempo, a nova faixa, por padrão, foi gravada no início do projeto audacity. Por enquanto, as faixas Bach e vocal começam ao mesmo tempo. Existem potencialmente algumas outras imperfeições em sua gravação pessoal, algumas das quais podemos consertar.
+Nossa gravação original do Bach permanece no topo da interface, enquanto nossa nova gravação é adicionada abaixo dela. Por padrão, *Audacity* não irá sobrescrever sua gravação anterior. Ao contrário, ele isola cada uma das gravações, ou faixas, nos permitindo manipular separadamente os componentes antes de uní-los numa gravação final. Podemos fazer modificações num sem afetar o outro. Note como, em termos de tempo, a nova faixa, por padrão, foi gravada no início do projeto audacity. Por enquanto, as faixas Bach e vocal começam ao mesmo tempo. Existem potencialmente algumas outras imperfeições em sua gravação pessoal, algumas das quais podemos consertar.
 
 Por fim, note como no meu exemplo há duas formas de onda para a gravação do Bach, mas apenas uma para a gravação da minha própria voz. A gravação do Bach foi feita em *estéreo*, o que significa que havia dois feeds de entrada, enquanto a minha gravação própria foi feita em mono. O Audacity permite que você grave em ambos, e qualquer um funcionará para esta lição, então não se preocupe se sua gravação aparecer em estéreo. Você pode mudar de gravação mono para estéreo e vice-versa na barra de ferramentas 'Editar'. Para obter mais informações sobre mono e estéreo, verifique esta [leitura](http://www.diffen.com/difference/Mono_vs_Stereo).
 
@@ -105,7 +105,7 @@ O tópico de engenharia de áudio é vasto e pode ser assunto duma carreira frut
 
 Para utilizar a faixa gravada, precisaremos limpá-la um pouco, isolando e refinando as partes que queremos. Nosso primeiro passo será remover o silêncio indesejado criado no intervalo entre quando comecei a gravar e quando comecei a falar.
 
-* Aproximar o zoom no início do clipe nos dará uma visão do silêncio e, clicando e arrastando as seções da forma de onda, podemos eliminá-las pressionando a tecla delete. 
+* Aproximar o zoom no início do clipe nos dará uma visão do silêncio e, clicando e arrastando as seções da onda sonora, podemos eliminá-las pressionando a tecla delete. 
 
 {% include figure.html filename="editando-audio-com-audacity-6.png" caption="Início da faixa vocal pronto para ser deletado" %}
 
@@ -113,7 +113,7 @@ Para utilizar a faixa gravada, precisaremos limpá-la um pouco, isolando e refin
 
 Essas pequenas pausas podem ser praticamente imperceptíveis, mas são elementos importantes de qualquer faixa de áudio. E queremos que os limites da nova faixa de áudio não contenha dados estranhos. Após a exclusão, você deve ter um clipe de áudio bonito e compacto com apenas um fio de silêncio em cada extremidade.
 
-Para garantir transições suaves entre as faixas, precisaremos introduzir fades ou transições graduais em amplitude. É uma boa ideia incluir uma pequena suavização de áudio de entrada (*fade in*) no início e uma suavização de áudio de saída (*fade out*) no final que o leva ao silêncio. Isso pode ajudar a prevenir cliques e falhas, evitando que o som apareça ou suma de forma repentina.
+Para garantir transições suaves entre as faixas, precisaremos introduzir fades ou transições graduais de amplitude. É uma boa ideia incluir uma pequena suavização de áudio de entrada (*fade in*) no início e uma suavização de áudio de saída (*fade out*) no final que o leva ao silêncio. Isso pode ajudar a prevenir cliques e falhas, evitando que o som apareça ou suma de forma repentina.
 
 * Aproxime o zoom no início da faixa, destaque o início da onda, incluindo apenas um fio de cabelo do seu som-alvo, e selecione 'Suavização de Entrada' no menu 'Efeitos'.
 
@@ -133,11 +133,9 @@ Eliminar o silêncio e o som indesejado preparou o clipe, mas ainda precisamos m
 
 * Mova nosso clipe vocal para a direita, de modo que ele comece após a música de introdução ter tocado por alguns segundos.
 
-
 {% include figure.html filename="editando-audio-com-audacity-10.png" caption="Reposicionando o clipe de áudio no tempo" %}
 
-Se o volume da sua voz em relação à música de introdução parecer desequilibrado, você pode reorganizá-los para serem mais equilibrados. O volume geral duma faixa particular pode ser ajustado usando o controle deslizante de volume da faixa à esquerda de cada painel de faixa. Parece uma pequena escala -/ +:
-
+Se o volume da sua voz em relação à música de introdução parecer desequilibrado, você pode reorganizá-lo para ser mais equilibrado. O volume geral duma faixa particular pode ser ajustado usando o controle deslizante de volume da faixa à esquerda de cada painel de faixa. Parece uma pequena escala -/+:
 
 {% include figure.html filename="editando-audio-com-audacity-11.png" caption="Controle deslizante de volume" %}
 
@@ -153,8 +151,7 @@ Mas, eventualmente, desejaremos mudar totalmente o foco da música de introduç�
 
 * Selecionar 'Crossfade de faixas...' no menu de Efeitos informará ao *Audacity* para suavizar a saída da faixa de cima e ao mesmo tempo suavizar a entrada da faixa de baixo - o posicionamento das faixas importa nesse caso.
 
-*Audacity* irá apresentar opções para o seu crossfade, mas por enquanto está tudo bem utilizar a configuração padrão de 'Ganho Constante'. Esta configuração garante que ambas as faixas serão suavizadas na entrada ao linearmente (para mais informações, verifique a [documentação do Audacity sobre crossfades](http://manual.audacityteam.org/man/crossfade_tracks.html)).
-
+*Audacity* irá apresentar opções para o seu crossfade, mas por enquanto não há problema em utilizar a configuração padrão de 'Ganho Constante'. Esta configuração garante que ambas as faixas serão suavizadas na entrada ao linearmente (para mais informações, verifique a [documentação do Audacity sobre crossfades](http://manual.audacityteam.org/man/crossfade_tracks.html)).
 
 {% include figure.html filename="editando-audio-com-audacity-13.png" caption="Pós-crossfade" %}
 
@@ -170,7 +167,7 @@ Isto irá unir as várias faixas num único ficheiro de áudio e dará a você a
 
 Existem várias opções diferentes para você refinar o processo de exportação, mas a mais importante é o tipo de ficheiro. MP3 e Ogg são boas opções de áudio para exibição na web, pois ambos compactam os ficheiros para que sejam carregados mais rapidamente. Para obter melhores resultados, você pode incluir os dois formatos e exibir um como substituto quando não for compatível com o navegador do usuário. Para obter mais informações, *NCH Software* fornece uma [boa análise técnica das diferentes opções](https://www.nch.com.au/acm/formats.html), enquanto Jonathan Sterne fez um [trabalho fascinante](https://www.dukeupress.edu/MP3/) sobre as implicações culturais de tais decisões de formato. E o W3Schools oferece uma [boa comparação](https://www.w3schools.com/html/html5_audio.asp) desses formatos de ficheiro para uso em desenvolvimento web.
 
-Parabéns! Você produziu com sucesso um mini-podcast. Pode não parecer muito, mas eu frequentemente emprego esses mesmos truques para apresentações, sites e bolsas de estudo. Essa lição não começou de forma alguma a esgotar os muitos tópicos sob esse guarda-chuva. Mas deve ter dado a você algumas ferramentas básicas úteis para trabalhar com som em projetos de humanidades digitais.
+Parabéns! Você produziu com sucesso um mini-podcast. Pode não parecer muito, mas eu frequentemente emprego esses mesmos truques para apresentações, sites e bolsas de estudo. Essa lição não começou de forma alguma a esgotar os muitos tópicos sob esse guarda-chuva, mas deve ter dado a você algumas ferramentas básicas úteis para trabalhar com som em projetos de humanidades digitais.
 
 
 
