@@ -12,15 +12,15 @@
 
 **Algumas sugestões de referências para substituição, caso seja conveniente:**
     
-Para diferença entre Mono e Stereo:
-
-- http://blog.mundodamusica.com.br/qual-e-a-diferenca-entre-mono-e-stereo/   
-- https://www.tunecore.com/pt/blog/2020/02/the-difference-between-mixing-in-mono-vs-stereo-part-1.html
-
 **Para introdução à acústica:**
 
 - https://pt.wikipedia.org/wiki/Amplitude
 - https://www.concepcaoacustica.com/post/amplitude-e-frequ%C3%AAncia-o-que-%C3%A9-uma-onda-sonora
+
+**Para diferença entre Mono e Stereo:**
+
+- http://blog.mundodamusica.com.br/qual-e-a-diferenca-entre-mono-e-stereo/   
+- https://www.tunecore.com/pt/blog/2020/02/the-difference-between-mixing-in-mono-vs-stereo-part-1.html
 
 **Para formatos de áudio:**
 
