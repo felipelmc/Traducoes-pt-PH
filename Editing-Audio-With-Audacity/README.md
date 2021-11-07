@@ -8,7 +8,7 @@
 
 - Enfrentei um pequeno problema no que diz respeito à gravação de um áudio próprio. Segundo a lição original, o Audacity criaria uma nova faixa de áudio ao iníciar a gravação. Mas, quando testei, o Audacity escrevia a gravação por cima da primeira faixa (no caso, a de Bach), sem criar uma nova, mesmo quando essa primeira faixa era silenciada. Precisei criar uma nova manualmente, mas não modifiquei o conteúdo da lição por não ter certeza se essa é uma questão das configurações do meu próprio Audacity ou se de fato, com as novas versões, o padrão de gravação foi alterado. Seria importante fazer esse teste em outro computador;
 
-- Durante o texto, o autor da lição original sugere alguns trabalhos como referência, todos evidentemente em inglês. Trata-se de material muito específico, por exemplo, no caso do link de introdução à acústica e na referência que aponta as diferenças entre *stereo* e *mono*. Devemos buscar versões em português também nesses casos?
+- Durante o texto, o autor da lição original sugere alguns trabalhos como referência, todos evidentemente em inglês. Trata-se de material muito específico, por exemplo, nos casos do link de introdução à acústica e da referência que aponta as diferenças entre *stereo* e *mono*. Devemos buscar versões em português também nesses casos?
 
 **Algumas sugestões de referências para substituição, caso seja conveniente:**
     
