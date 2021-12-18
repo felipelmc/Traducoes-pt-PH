@@ -37,7 +37,7 @@ Esta lição mostra como fazer o download e instalar módulos de Python. Há mui
 Introduzindo Módulos
 -------------------
 
-Uma das melhores coisas sobre o uso de Python é o número de bibliotecas fantásticas de codificação, ampla e facilmente disponíveis, que podem economizar muitas linhas de código ou simplesmente executar uma tarefa específica (como criar um ficheiro CSV ou raspar uma página web) de modo muito mais simples. Ao buscar soluções para problemas no Google, você frequentemente irá encontrar exemplos de código que utiliza bibliotecas quais você nunca ouviu falar antes. Não deixe que isso o assuste! Uma vez que essas bibliotecas estejam instaladas no seu computador, você pode utilizá-las importando-as no início do seu código; você pode importar quantas bibliotecas quiser, por exemplo
+Uma das melhores coisas sobre o uso de Python é o número de bibliotecas fantásticas de codificação, ampla e facilmente disponíveis, que podem economizar muitas linhas de código ou simplesmente executar uma tarefa específica (como criar um ficheiro CSV ou raspar uma página web) de modo muito mais simples. Ao buscar soluções para problemas no Google, você frequentemente irá encontrar exemplos de código que utilizam bibliotecas quais você nunca ouviu falar antes. Não deixe que isso o assuste! Uma vez que essas bibliotecas estejam instaladas no seu computador, você pode utilizá-las importando-as no início do seu código; você pode importar quantas bibliotecas quiser, por exemplo
 
 ``` python
 import csv
