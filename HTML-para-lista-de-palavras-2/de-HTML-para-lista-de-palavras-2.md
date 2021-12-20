@@ -95,7 +95,7 @@ else:
 
 ## Use o Algoritmo para Remover a Marcação HTML
 
-Agora você sabe o suficiente para implementar a segunda parte do algoritmo: remover todas as tags HTML. Nessa parte do algoritmo, queremos:
+Agora você sabe o suficiente para implementar a segunda parte do algoritmo: remover todas as tags HTML. Nessa parte do algoritmo queremos:
 
 - Verificar cada caractere na string *pageContents*, um por um
 - Se o caractere for um colchete angular esquerdo (\<), estamos dentro de uma tag e devemos ignorar os caracteres subsequentes
@@ -138,31 +138,30 @@ def stripTags(pageContents):
 
 Há dois conceitos novos de Python nesse novo código: *continue* e *return*.
 
-A instrução *continue* do Python informa ao interpretador para voltar ao topo do loop delimitador. Dessa forma, se estamos processando caracteres dentro de um par de colchetes angulares, queremos ir para o próximo caractere da string *pageContents* sem adicionar nada à nossa variáveç *text*. 
+A instrução *continue* do Python informa ao interpretador para voltar ao topo do loop delimitador. Dessa forma, se estamos processando caracteres dentro de um par de colchetes angulares, queremos ir para o próximo caractere da string *pageContents* sem adicionar nada à nossa variável *text*. 
 
-Nos nossos exemplos anteriores, usamos `print` extensivamente. Isso mostra o resultado do nosso programa na tela para o usuário ler. Por vezes, no entanto, queremos permitir que uma parte do programa envie informação para outra parte. Quando uma função termina de ser executada, ela pode retornar um valor para o código que a chamou. Se chamássemos *striTags* usando outro programa, faríamos assim:
+Nos nossos exemplos anteriores, usamos `print` extensivamente. Isso mostra o resultado do nosso programa na tela para o usuário ler. Por vezes, no entanto, queremos permitir que uma parte do programa envie informação para outra parte. Quando uma função termina de ser executada, ela pode retornar um valor para o código que a chamou. Se chamássemos *stripTags* usando outro programa, faríamos assim:
 
 
 ``` python
-
 # entendendo a instrução Return
 
 import obo
 
-myText = "This is my <h1>HTML</h1> message"
+myText = "Essa é a minha mensagem <h1>HTML</h1>"
 
 theResult = obo.stripTags(myText)
 ```
 
-Ao utilizar `return`, fomos capazes de salvar o resultado da função *stripTags* diretamente em uma variável que chamamos de 'theResult', que podemos então retomar o processamento conforme necessário usando código adicional.
+Ao utilizar `return`, fomos capazes de salvar o resultado da função *stripTags* diretamente em uma variável que chamamos de 'theResult', que podemos então usar para retomar o processamento conforme necessário usando código adicional.
 
 Note que no nosso exemplo com *stripTags* do início dessa subseção, o valor que queremos retornar agora não é *pageContents*, mas sim o conteúdo que teve a marcação HTML removida.
 
-Para testar nossa nova função *stripTags*, você pode executar *trial-content.py* novamente. Uma vez que redefinimos *stripTags*, o programa *trial-content.py* agora faz algo diferente (e mais próximo do que desejamos). Antes de continuar, garante que entendeu porque o comportamento de *trial-content.py* would change when we only edited *obo.py*.
+Para testar nossa nova função *stripTags*, você pode executar *trial-content.py* novamente. Uma vez que redefinimos *stripTags*, o programa *trial-content.py* agora faz algo diferente (e mais próximo do que desejamos). Antes de continuar, garanta que entendeu porque o comportamento de *trial-content.py* muda ainda que tenhamos alterado somente o *obo.py*.
 
 ## Listas em Python
 
-Agora que temos habilidade de extrair texto bruto das páginas da web, você desejará obter esse texto em um formato que seja fácil de processar. Até agora, quando precisou armazenar informações em programas Python, geralmente usou strings. Houve algumas exceções, no entanto. Na função *stripTags*, você também fez uso de um inteiro ([integer][]) nomeado *inside* para armazenar 1 quando estivesse processando uma tag e 0 quando não fosse o caso. Você pode executar operações matemáticas com inteiros, mas não pode armazenar frações ou números decimais em variáveis inteiras.
+Agora que temos a habilidade de extrair texto bruto das páginas da web, você desejará obter esse texto em um formato que seja fácil de processar. Até agora, quando precisou armazenar informações em programas Python, geralmente usou strings. Houve algumas exceções, no entanto. Na função *stripTags*, você também fez uso de um inteiro ([integer][]) nomeado *inside* para armazenar 1 quando estivesse processando uma tag e 0 quando não fosse o caso. Você pode executar operações matemáticas com inteiros, mas não pode armazenar frações ou números decimais em variáveis inteiras.
 
 
 ``` python
@@ -180,7 +179,6 @@ f.close()
 Um dos [tipos][types] de objeto mais úteis que o Python oferece, no entanto, é a *lista*, uma coleção ordenada de outros objetos (inclusive, portencialmente, outras listas). Converter uma string em uma lista de caracteres ou palavras é simples. Digite ou copie o programa a seguir no seu editor de texto para verificar duas formas de atingir esse objetivo. Compare as duas listas que são impressas no painel da Saída de Comando e veja se consegue descobrir como o código funciona.
 
 ``` python
-
 # string-para-lista.py
 
 # algumas strings
@@ -207,14 +205,14 @@ Considerando tudo que você aprendeu até aqui, agora você é capaz de abrir um
 
 import urllib.request, urllib.error, urllib.parse, obo
 
-url = 'http://www.oldbaileyonline.org/print.jsp?div=t17800628-33'
+url = 'http://www.oldbaileyonline.org/browse.jsp?id=t17800628-33&div=t17800628-33'
 
 response = urllib.request.urlopen(url)
 html = response.read().decode('UTF-8')
 text = obo.stripTags(html)
 wordlist = text.split()
 
-print((wordlist[0:120]))
+print(wordlist[0:120])
 ```
 
 Você deve obter algo como o seguinte.
