@@ -1,0 +1,1 @@
+Seguem os pontos que sugiro revisão:
