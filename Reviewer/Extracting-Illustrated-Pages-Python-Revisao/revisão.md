@@ -1,12 +1,10 @@
 ## Revisão da lição "Extrair Páginas Ilustradas de Bibliotecas Digitais com Python"
 
-Caro João (username), em primeiro lugar agradeço seu interesse em contribuir para o Programming Historian em português! Parabenizo também pelo trabalho: é uma tradução excelente. Seguem os pontos que sugiro revisão:
+Caro João (username), em primeiro lugar gostaria de agradecer seu interesse em contribuir para o Programming Historian em português! Também aproveito a oportunidade para parabenizar pelo trabalho: é uma tradução excelente. Seguem os pontos que sugiro revisão, alguns tentando aproximar a linguagem do leitor brasileiro:
 
 - [ ] Linha 38: a frase "[...] apenas se fez o *download* das páginas com imagens [...]" semânticamente sugere ao leitor (brasileiro, ao menos) que o download é uma tarefa simples. No entanto, me parece que o autor da lição original quis dizer algo como "[...] se fez o *download* apenas das páginas com imagens [...]", isto é, especificando quais páginas foram baixadas;
 
 - [ ] Linha 48: remover a vírgula entre `o número de figuras` e `e assim por diante`;
-
-- [ ] Linha 50: substituir `consequentemente` por `então` ou `portanto`;
 
 - [ ] Linha 52: substituir `nenhumas imagens` por `nenhuma imagem`. Esse plural não é usual no português brasileiro;
 
@@ -16,15 +14,21 @@ Caro João (username), em primeiro lugar agradeço seu interesse em contribuir p
 
 - [ ] Linha 83: sugiro, ao invés de "faça o `cd`", explicar brevemente com "altere seu diretório de trabalho com o comando `cd` [...]";
 
-- [ ] Linha 92: ao invés de "*notebooks* do Jupyter", simplesmente "*Jupyter notebooks*", sem tradução, ou "*notebooks* Jupyter"; 
+- [ ] Linha 92: ao invés de "*notebooks* do Jupyter", simplesmente "*Jupyter notebooks*" (recomendado), sem tradução, ou "*notebooks* Jupyter"; 
 
 - [ ] Linha 120: substituir `em cima` por `acima`;
 
+- [ ] Linha 127: substituir `a Miniconda` por `o Miniconda`;
+
 - [ ] Linha 127: substituir `na seu shell` por `no seu shell`;
+
+- [ ] Linha 133: "do `conda`" ao invés de "da `conda`";
 
 - [ ] Linha 133: ao invés de `reverteremos`, `recorreremos`;
 
-- [ ] Linha 176: "o `conda`" ao invés de "a `conda`". Além disso, substituir `solicita se quer` por `pergunta se deseja`;
+- [ ] Linha 133: "pelo `conda`" ao invés de "pela `conda`";
+
+- [ ] Linha 176: "o `conda`" ao invés de "a `conda`". Além disso, substituir `solicita se quer` por `lhe pergunta se deseja`;
 
 - [ ] Linha 179: "o `conda`" ao invés de "a `conda`";
 
@@ -44,9 +48,7 @@ Caro João (username), em primeiro lugar agradeço seu interesse em contribuir p
 
 - [ ] Linha 290: `além das oito listadas` ao invés de `que as oito listadas`;
 
-- [ ] Linha 292: `via Google` ao invés de `via o Google`;
-
-- [ ] Linha 298: `tenham sido propostas` ao invés de `foram propostas` e `detectando` ao invés de `detetando`;
+- [ ] Linha 298: `tenham sido propostas` ao invés de `foram propostas`;
 
 - [ ] Linha 305: Retificar `estra`;
 
@@ -54,9 +56,7 @@ Caro João (username), em primeiro lugar agradeço seu interesse em contribuir p
 
 - [ ] Linha 370: `a API` ao invés de `o API`;
 
-- [ ] Linha 374: `uma query` ao invés de `um query`. Caso dejese traduzir, `consulta` é um bom equivalente;
-
-- [ ] Linha 435: `na verdade, eu descobri [...]` no lugar de `ao invés, eu descobri [...]`;
+- [ ] Linha 374: `uma query` ao invés de `um query`;
 
 - [ ] Linha 466: retificar para `a RESTful API` e `uma URL`;
 
