@@ -1,7 +1,7 @@
 ---
 title: Palavras-chave em Contexto (Usando n-gramas) com Python
 layout: lesson
-slug: palavras-chave-em-contexto-usando-n-gramas
+slug: palavras-chave-em-contexto-usando-n-grams
 date: 2012-07-17
 translation_date: 2022-01-14
 authors:
@@ -23,8 +23,8 @@ review-ticket:
 activity: apresentar
 topics: [python]
 abstract: "Essa lição toma os pares de frequência criados na lição 'Contagem de Frequências' e os apresenta em um ficheiro HTML."
-redirect_from: /licoes/palavras-chave-em-contexto-usando-n-gramas
-original: keywords-in-context-using-n-gramas
+redirect_from: /licoes/palavras-chave-em-contexto-usando-n-grams
+original: keywords-in-context-using-n-grams
 avatar_alt: A figure dropping two bottles of alcohol
 doi:
 ---
