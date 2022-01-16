@@ -335,7 +335,441 @@ O último passo para essa função é garantir que, quando salvarmos nossas pág
 filename = query + '/' + 'search-result' + str(startValue)
 ```
 
-*Parei na linha 585*.
+Caso seu computador esteja executando o Windows, você precisará de uma barra invertida em vez da barra do exemplo acima. Adicione a linha acima à sua função `getSearchResults` no lugar da descrição atual do `filename`.
+
+Se estiver executando o Windows, é provável que seu programa `downloadSearches.py` falhe quando você o executar porque está tentando criar um diretório com um \* nele. O Windows não gosta disso. Para resolver esse problema podemos usar [expressões regulares][] para remover qualquer caractere não compatível com o Windows. Usamos expressões regulares anteriormente em [Contagem de Frequências][]. Para remover caracteres não-alfanuméricos da *query*, primeiro importe a biblioteca de expressões regulares imediatamente após importar a biblioteca `os`, e depois use a função `re.sub()` para criar uma nova string chamada `cleanQuery` que contém apenas caracteres alfanuméricos. Depois você precisará substituir `cleanQuery` como a variável usada nas declarações de `os.path.exists()`, `os.makedirs()` e `filename`.
+
+``` python
+import urllib.request, math, os, re
+cleanQuery = re.sub(r'\W+', '', query)
+if not os.path.exists(cleanQuery):
+    os.makedirs(cleanQuery)
+
+...
+
+filename = cleanQuery + '/' + 'search-result' + str(startValue)
+```
+
+A versão final da sua função deve se parecer com isso:
+
+``` python
+# cria URLs para páginas de resultados de busca e armazena os ficheiros.
+def getSearchResults(query, kwparse, fromYear, fromMonth, toYear, toMonth, entries):
+
+    import urllib.request, math, os, re
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    if not os.path.exists(cleanQuery):
+        os.makedirs(cleanQuery)
+
+    startValue = 0
+
+    # Determina quantos ficheiros precisam ser baixados
+    pageCount = entries / 10
+    pageCount = math.ceil(pageCount)
+
+    for pages in range(1, pageCount +1):
+
+        # cada parte do URL. Dividido para facilitar a leitura
+        url = 'https://www.oldbaileyonline.org/search.jsp?gen=1&form=searchHomePage&_divs_fulltext='
+        url += query
+        url += '&kwparse=' + kwparse
+        url += '&_divs_div0Type_div1Type=sessionsPaper_trialAccount'
+        url += '&fromYear=' + fromYear
+        url += '&fromMonth=' + fromMonth
+        url += '&toYear=' + toYear
+        url += '&toMonth=' + toMonth
+        url += '&start=' + str(startValue)
+        url += '&count=0'
+
+        # faz o download da página e salva o resultado 
+        response = urllib.request.urlopen(url)
+        webContent = response.read().decode('UTF-8')
+        filename = cleanQuery + '/' + 'search-result' + str(startValue)
+        f = open(filename + ".html", 'w')
+        f.write(webContent)
+        f.close
+
+        startValue = startValue + 10
+```
+
+Dessa vez dizemos ao programa para fazer o download dos julgamentos e armazená-los em um novo diretório ao invés do nosso diretório `programming-historian`. Execute o programa `download-searches.py` mais uma vez para se certificar de que ele funcionou e que você entendeu como armazenar os ficheiros em um diretório particular usando Python.
+
+### Fazendo o download das entradas de julgamento individuais
+
+A este ponto, criamos uma função que é capaz de fazer o download de todos os ficheiros HTML de resultados de busca a partir do website *Old Bailey Online* para uma busca avançada que definidos e desenvolvemos de forma programática. Agora o próximo passo do algoritmo: extrair os URLs de cara transcrição de julgamento dos ficheiros HTML de resultados de busca. Nas lições que precedem esta (ex.: [Download de Páginas Web com Python][]), trabalhamos com as versões para exibição das transcrições dos julgamentos, e então continuaremos a fazer isso. Sabemos que a versão de exibição do julgamento de Benjamin Bowsey está localizada no URL:
+
+```
+http://www.oldbaileyonline.org/print.jsp?div=t17800628-33
+```
+
+Da mesma forma que alterar as *query strings* nos URLs gera resultados de busca diferentes, alterar o URL dos registros de julgamento - no caso, substituir um ID de julgamento por outro - obterá a transcrição para aquele novo julgamento. Isso significa que para encontrar e fazer o download dos 13 ficheiros que buscamos, tudo que precisamos são esses IDs de julgamento. Uma vez que sabemos que essas páginas de resultados de busca geralmente contém um link para as páginas descritas, há uma boa chance de que consigamos encontrar esses links integrados ao código HTML. Se formos capazes de raspar essa informação das páginas de resultados de busca que fizemos download, podemos então usar essa informação para gerar uma URL que nos permitirá fazer o download de cada transcrição de julgamento. Essa é uma técnica que você irá utilizar para a maioria das páginas de resultados de busca, não só o *Old Bailey Online*! Para fazer isso, primeiro precisamos encontrar onde os IDs de julgamento estão no código HTML dos ficheiros que fizemos download, e depois determinar uma maneira de isolá-los consistentemente usando código de modo que, independentemente de qual página de resultado de busca fizermos o download, sejamos capazes de encontrar as transcrições de julgamento. Primeiro abra `search-results0.html` no Komodo Edit e dê uma olhada na lista de julgamentos. A primeira entrada começa com "Anne Smith", então você pode usar o recurso `find` no Komodo Edit para pular imediatamente para o lugar certo. Observe que o nome de Anne faz parte de um link:
+
+```
+browse.jsp?id=t17160113-18&amp;div=t17160113-18&amp;terms=mulatto*_negro*#highlight
+```
+
+Perfeito, o link contém o ID do julgamento! Percorra as entradas restantes e você verá que isso é verdade em todos os casos. Para a nossa sorte, o site é bem formatado e parece que cada link começa com `browse.jsp?id=` seguido pelo ID do julgamento e termina com um `&`, no caso de Anne: `browse.jsp?id=t17160113-18&`. Podemos escrever algumas linhas de código que sejam capazes de isolar esses IDs. Veja a função a seguir. Essa função também usa a biblioteca `os`, nesse caso para listar todos os ficheiros localizados no diretório criado na seção anterior. A biblioteca `os` possui uma gama de funções úteis que imitam os tipos de tarefas que você esperaria ser capaz de fazer com o seu mouse no Mac Finder ou Windows, como abrir, fechar, criar, deletar e mover ficheiros e diretórios, e é uma boa biblioteca a ser masterizada - ou pelo menos se familiarizar.
+
+``` python
+def getIndivTrials(query):
+    import os, re
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    searchResults = os.listdir(cleanQuery)
+
+    print(searchResults)
+```
+
+Crie e execute um novo programa chamado `extract-trials-ids.py` com o código a seguir. Certifique-se de inserir o mesmo valor nos argumentos da *query* como fez no exemplo anterior:
+
+``` python
+import obo
+
+obo.getIndivTrials("mulatto*+negro*")
+```
+
+Se tudo correu bem, você deve ver uma lista contendo o nome de todos os ficheiros no seu novo diretório `mulatto*+negro*`, que a essa altura devem ser as duas páginas de resultados de busca. Certifique-se de que isso funcionou antes de seguir em frente. Uma vez que armazenamos todas as páginas de resultados de busca com um nome de ficheiro que inclui `search-results`, agora desejamos abrir todos os ficheiros cujo nome contenha `search-results` e extrair todos os IDs de julgamento encontrados neles. Nesse caso sabemos que temos 2, mas desejamos que nosso código seja o mais reutilizável possível (com razão, é claro!). Restringir essa ação a ficheiros denominados `search-results` significará que este programa funcionará como pretendido, mesmo que o diretório contenha muitos outros ficheiros não relacionados, já que o programa ignorará qualquer coisa com nome diferente.
+
+Adicione o código a seguir à sua função `getIndivTrials()`, que verificará se cada ficheiro contém `search-results` em seu nome. Em caso verdadeiro, o ficheiro será aberto e o conteúdo será salvo à variável chamada `text`. Essa variável `text` será analisada na busca por um ID de julgamento, que sabemos que sempre segue `browse.jsp?id=`. Se e quando o ID de julgamento for encontrado, ele será armazenado a uma lista e exibido na Saída de Comando, que nos deixa com todas as informações que precisamos para então escrever o programa que fará o download dos julgamentos desejados.
+
+``` python
+def getIndivTrials(query):
+    import os, re
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    searchResults = os.listdir(cleanQuery)
+
+    urls = []
+
+    # encontra as páginas de resultados de busca
+    for files in searchResults:
+        if files.find("search-result") != -1:
+            f = open(cleanQuery + "/" + files, 'r')
+            text = f.read().split(" ")
+            f.close()
+
+            # busca os IDs de julgamento
+            for words in text:
+                if words.find("browse.jsp?id=") != -1:
+                    # isola o ID
+                    urls.append(words[words.find("id=") +3: words.find("&")])
+
+    print(urls)
+```
+
+Essa última linha do `for` *loop* pode parecer confusa, mas certifique-se de que entendeu antes de seguir em frente. A variável `words` é checada para verificar se contém os caracteres `id=` (sem aspas), que obviamente se referem a um ID específico de transcrição de julgamento. Caso contenha, usamos o método de string `slice` para capturar apenas o trecho entre `id=` e `&` e o adicionamos à lista de url. Se soubéssemos as posições exatas dos índices dessa substring, poderíamos ter usado esses valores numéricos no lugar. No entanto, ao utilizar o método de string `find()`, criamos um programa muito mais flexível. O código a seguir faz exatamente a mesma coisa que essa última linha, mas de maneira menos condensada:
+
+``` python
+idStart = words.find("id=") + 3
+idEnd = words.find("&")
+trialID = words[idStart: idEnd]
+
+urls.append(trialID)
+```
+
+Ao executar novamente o programa `extract-trial-ids.py`, você deve ver uma lista de todos os IDs de julgamento. Podemos adicionar algumas linhas extras para transformá-los em URLs propriamente ditas e fazer o download de toda a lista para o nosso novo diretório. Também vamos usar a biblioteca `time` para pausar nosso programa por 3 segundos entre cada download - uma técnica chamada *throttling* (estrangulamento). É considerada uma boa forma de não sobrecarregar o servidor de alguém com muitas solicitações por segundo; e o pequeno retardamento torna mais fácil que todos esses ficheiros serão de fato baixados ao invés de ocorrer um [time out][]. Adicione o código a seguir ao final da sua função `getIndivTrials()`. Esse código vai gerar um URL para cada página individualmente, fará o download da página no seu computador, colocá-lo no seu diretório, armazenar o ficheiro e pausar por 3 segundos antes de continuar para o próximo julgamento. Todo esse trabalho está contido num `for` *loop* e será executado uma vez para cada julgamento na sua lista de urls.
+
+
+``` python
+def getIndivTrials(query):
+    #...
+    import urllib.request, time
+
+    # importa funções python built-in para criar caminhos de ficheiro
+    from os.path import join as pjoin
+
+    for items in urls:
+        # gera o URL
+        url = "http://www.oldbaileyonline.org/print.jsp?div=" + items
+
+        # faz o download da página
+        response = urllib.request.urlopen(url)
+        webContent = response.read().decode('UTF-8')
+
+        # cria o nome do ficheiro e coloca-o no novo diretório
+        filename = items + '.html'
+        filePath = pjoin(cleanQuery, filename)
+
+        # armazena o ficheiro
+        f = open(filePath, 'w')
+        f.write(webContent)
+        f.close
+
+        # pausa por 3 segundos
+        time.sleep(3)
+```
+
+Se unirmos tudo em uma única função, ela deve se parecer com isso (Note que adicionamos todas as chamadas por `import` no início para manter as coisas claras):
+
+``` python
+def getIndivTrials(query):
+    import os, re, urllib.request, time
+
+    # importa funções python built-in para criar caminhos de ficheiro
+    from os.path import join as pjoin
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    searchResults = os.listdir(cleanQuery)
+
+    urls = []
+
+    # encontra páginas de resultados de busca
+    for files in searchResults:
+        if files.find("search-result") != -1:
+            f = open(cleanQuery + "/" + files, 'r')
+            text = f.read().split(" ")
+            f.close()
+
+            # busca por IDs de julgamento
+            for words in text:
+                if words.find("browse.jsp?id=") != -1:
+                    # isola o id
+                    urls.append(words[words.find("id=") +3: words.find("&")])
+
+    # novo daqui em diante!
+    for items in urls:
+        # gera o URL
+        url = "http://www.oldbaileyonline.org/print.jsp?div=" + items
+
+        # faz o download da página
+        response = urllib.request.urlopen(url)
+        webContent = response.read().decode('UTF-8')
+
+        # cria o nome do ficheiro e coloca-o no novo diretório
+        filename = items + '.html'
+        filePath = pjoin(cleanQuery, filename)
+
+        # armazena o ficheiro
+        f = open(filePath, 'w')
+        f.write(webContent)
+        f.close
+
+        # pausa por 3 segundos
+        time.sleep(3)
+```
+
+Vamos adicionar a mesma pausa de três segundos à nossa função `getSearchResults` para ser amigável aos *servers* do *Old Bailey Online*:
+
+``` python
+# cria URLs para páginas de resultados de busca e armazena os ficheiros.
+def getSearchResults(query, kwparse, fromYear, fromMonth, toYear, toMonth, entries):
+
+    import urllib.request, math, os, re, time
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    if not os.path.exists(cleanQuery):
+        os.makedirs(cleanQuery)
+
+    startValue = 0
+
+    # Determina quantos ficheiros precisam ser baixados
+    pageCount = entries / 10
+    pageCount = math.ceil(pageCount)
+
+    for pages in range(1, pageCount +1):
+
+        # cada parte do URL. Dividido para facilitar a leitura
+        url = 'https://www.oldbaileyonline.org/search.jsp?gen=1&form=searchHomePage&_divs_fulltext='
+        url += query
+        url += '&kwparse=' + kwparse
+        url += '&_divs_div0Type_div1Type=sessionsPaper_trialAccount'
+        url += '&fromYear=' + fromYear
+        url += '&fromMonth=' + fromMonth
+        url += '&toYear=' + toYear
+        url += '&toMonth=' + toMonth
+        url += '&start=' + str(startValue)
+        url += '&count=0'
+
+        # faz o download da página e armazena o resultado
+        response = urllib.request.urlopen(url)
+        webContent = response.read().decode('UTF-8')
+        filename = cleanQuery + '/' + 'search-result' + str(startValue)
+        f = open(filename + ".html", 'w')
+        f.write(webContent)
+        f.close
+
+        startValue = startValue + 10
+
+        # pausa por 3 segundos
+        time.sleep(3)
+```
+
+Finalmente, chame a função no programa `download-searches.py`:
+
+``` python
+#download-searches.py
+import obo
+
+query = 'mulatto*+negro*'
+
+obo.getSearchResults(query, "advanced", "1700", "00", "1750", "99", 13)
+
+obo.getIndivTrials(query)
+```
+
+Agora você criou um programa que é capaz de fazer a solicitação e o download de ficheiros do *website* *Old Bailey* baseado em parâmetros de busca que você definiu, tudo sem visitar o *site*!
+
+### No caso de um ficheiro não ser baixado
+
+Verifique se o download dos treze ficheiros foi realizado corretamente. Se esse for o caso para você, ótimo! No entanto, há a possibilidade de que esse programa tenha parado no meio do caminho. Isso porque nosso programa, ao ser executado na nossa máquina, depende de dois fatores além do nosso controle imediato: a velocidade da internet e a o tempo de resposta do *server* do *Old Bailey Online* naquele momento. Uma coisa é pedir que o Python faça o download de um único ficheiro, mas quando começamos a solicitar um ficheiro a cada três segundos, há grandes chances de ocorrer um *time out* no *server* ou que ele falhe em nos enviar o ficheiro que estamos buscando.
+
+Se estivermos usando um navegador *web* para fazer essas solicitações, eventualmente receberíamos uma mensagem de que "a conexão se esgotou" ou algo do tipo. Todos nós vemos isso de tempos em tempos. No entanto, nosso programa não foi desenvolvido para lidar ou retransmitir essas mensagens de erro, então você só perceberá o problema quando o programa não tiver retornado o número esperado de ficheiros ou simplesmente não fizer nada. Para evitar frustrações e incertezas, queremos um sistema à prova de falha em nosso programa que tentará baixar cada julgamento. Se por alguma razão ele falhar, apontaremos o problema e passaremos para o próximo julgamento.
+
+Para fazer isso, utilizaremos os mecanismos para lidar com erros do Python, [try / except][], bem como uma nova biblioteca: `socket`. `Try` e `Except` são muito parecidos com um `if / else` *statement*. Quando você solicita que o Python `try` (tente) algo, ele tentará executar o código; caso o código falhe em alcançar o que você definiu, ele executará o código em `except` (exceção).  Podemos usar isso a nosso favor dizendo ao programa para tentar fazer o download de uma página. Caso o programa falhe, solicitaremos que ele nos informe qual ficheiro falhou e depois siga. Para fazer isso precisamos usar a biblioteca `socket`, que nos permitirá definir um limite de tempo para um *download* antes de seguir em frente. Isso envolve alterar a função `getIndivTrials`.
+
+Primeiro precisamos carregar a biblioteca `socket`, o que deve ser feito da mesma forma que todos as outras importações de biblioteca. Depois, precisamos importar a biblioteca `urllib.error`, que nos permite lidar com erros de *download*. Também precisamos definir o tamanho do *timeout* padrão do socket - por quanto tempo desejamos tentar fazer o *download* de uma página antes de desistirmos. Isso deve entrar imediatamente após o comentário que começa com `# faz o download da página`:
+
+
+``` python
+    import os, re, urllib.request, urllib.error, time, socket
+
+    #...
+        #download the page
+        socket.setdefaulttimeout(10)
+```
+
+Então, precisamos de uma nova lista de Python que armazenará todas as urls cujo download falhou. Vamos chamá-la de `failedAttempts` e você pode inserí-la imediatamente após as instruções de importação:
+
+
+``` python
+failedAttempts = []
+```
+
+Finalmente, podemos adicionar o `try / except` *statement*, que é adicionado de forma muito similar a como um `if / else` *statement* seria. Nesse caso, vamos colocar todo o código desenvolvido para fazer o download e armazenar os julgamentos no `try` *statement*, e no `except` *statement* vamos dizer ao programa o que desejamos que ele faça caso ele falhe. Aqui, vamos adicionar o url cujo download falhou à nossa nova lista, `failedAttempts`:
+
+``` python
+#...
+
+        socket.setdefaulttimeout(10)
+
+        try:
+            response = urllib2.urlopen(url)
+            webContent = response.read().decode('UTF-8')
+
+            # cria o nome de ficheiro e coloca-o no novo diretório "trials"
+            filename = items + '.html'
+            filePath = pjoin(newDir, filename)
+
+            # armazena o ficheiro
+            f = open(filePath, 'w')
+            f.write(webContent)
+            f.close
+        except urllib.error.URLError:
+            failedAttempts.append(url)
+```
+
+Finalmente, diremos ao programa para exibir os conteúdos da lista na Saída de Comando de modo que saibamos quais ficheiros falharam no download. Isso deve ser adicionado nas linhas finais da função:
+
+``` python
+print("failed to download: " + str(failedAttempts))
+```
+
+Agora ao executarmos o programa, caso haja algum problema no download de um ficheiro específico, você receberá uma mensagem na janela de Saída de Comando do Komodo Edit. Essa mensagem irá conter quaisquer URLs dos ficheiros que falharam no download. Caso haja apenas um ou dois, é provavelmente mais fácil simplesmente visitar as páginas manualmente e usar o recurso de "Salvar Como" do seu navegador. Caso esteja se sentindo aventureiro, você poderia modificar o programa para automaticamente fazer o download dos ficheiros faltantes. A versão final das suas funções `getSearchResults()` e `getIndivTrials()` deve se parecer com isso:
+
+``` python
+# cria URLs para páginas de resultados de busca e armazena os ficheiros.
+def getSearchResults(query, kwparse, fromYear, fromMonth, toYear, toMonth, entries):
+
+    import urllib.request, math, os, re, time
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    if not os.path.exists(cleanQuery):
+        os.makedirs(cleanQuery)
+
+    startValue = 0
+
+    # determina quantos ficheiros precisam ser baixados.
+    pageCount = entries / 10
+    pageCount = math.ceil(pageCount)
+
+    for pages in range(1, pageCount +1):
+
+        # cada parte do URL. Dividido para facilitar a leitura
+        url = 'https://www.oldbaileyonline.org/search.jsp?gen=1&form=searchHomePage&_divs_fulltext='
+        url += query
+        url += '&kwparse=' + kwparse
+        url += '&_divs_div0Type_div1Type=sessionsPaper_trialAccount'
+        url += '&fromYear=' + fromYear
+        url += '&fromMonth=' + fromMonth
+        url += '&toYear=' + toYear
+        url += '&toMonth=' + toMonth
+        url += '&start=' + str(startValue)
+        url += '&count=0'
+
+        # faz o download da página e salva o resultado
+        response = urllib.request.urlopen(url)
+        webContent = response.read().decode('UTF-8')
+        filename = cleanQuery + '/' + 'search-result' + str(startValue)
+        f = open(filename + ".html", 'w')
+        f.write(webContent)
+        f.close
+
+        startValue = startValue + 10
+
+        # pausa por 3 segundos
+        time.sleep(3)
+
+def getIndivTrials(query):
+    import os, re, urllib.request, urllib.error, time, socket
+
+    failedAttempts = []
+
+    # importa funções python built-in para criar caminhos de ficheiro
+    from os.path import join as pjoin
+
+    cleanQuery = re.sub(r'\W+', '', query)
+    searchResults = os.listdir(cleanQuery)
+
+    urls = []
+
+    # encontra páginas de resultados de busca
+    for files in searchResults:
+        if files.find("search-result") != -1:
+            f = open(cleanQuery + "/" + files, 'r')
+            text = f.read().split(" ")
+            f.close()
+
+            # busca por IDs de julgamento
+            for words in text:
+                if words.find("browse.jsp?id=") != -1:
+                    #isolate the id
+                    urls.append(words[words.find("id=") +3: words.find("&")])
+
+    for items in urls:
+        # gera o URL
+        url = "http://www.oldbaileyonline.org/print.jsp?div=" + items
+
+        # faz o download da página
+        socket.setdefaulttimeout(10)
+        try:
+            response = urllib.request.urlopen(url)
+            webContent = response.read().decode('UTF-8')
+
+            # cria o nome do ficheiro e coloca-o no novo diretório
+            filename = items + '.html'
+            filePath = pjoin(cleanQuery, filename)
+
+            # armazena o ficheiro
+            f = open(filePath, 'w')
+            f.write(webContent)
+            f.close
+        except urllib.error.URLError:
+            failedAttempts.append(url)
+
+        # pausa por 3 segundos
+        time.sleep(3)
+
+    print("failed to download: " + str(failedAttempts))
+```
+
+## Leituras Adicionais
+
+Para usuários mais avançados, ou para se tornar um usuário mais avançado, você pode achar que vale a pena ler sobre como alcançar esse mesmo processo usando *Aplication Programming Interfaces* (API). Um *website* com uma API geralmente proverá instruções de como solicitar certos documentos. É um processo bastante similar ao que acabamos de fazer interpretando a *Query String* de URL, mas sem o trabalho de investigação adicional necessário para decifrar o que cada variável faz. Caso esteja interessado no *Old Bailey Online*, eles recentemente liberaram uma API e a documentação pode ajudar bastante:
+
+-   Old Bailey Online API
+    (<http://www.oldbaileyonline.org/static/DocAPI.jsp>)
+-   Python Best way to create directory if it doesn’t exist for file write? (<http://stackoverflow.com/questions/273192/python-best-way-to-create-directory-if-it-doesnt-exist-for-file-write>)
 
   [Old Bailey Online]: http://www.oldbaileyonline.org/
   [Automated Downloading with WGET]: /lessons/automated-downloading-with-wget
@@ -345,8 +779,8 @@ filename = query + '/' + 'search-result' + str(startValue)
   [Download de Páginas Web com Python]: /licoes/download-paginas-web-python
   [De HTML para Lista de Palavras 2]: /licoes/HTML-lista-palavras2
   [range]: https://docs.python.org/3/tutorial/controlflow.html#the-range-function
-  [regular expressions]: https://docs.python.org/3/library/re.html
-  [Counting Frequencies]: /lessons/counting-frequencies
+  [expressões regulares]: https://docs.python.org/3/library/re.html
+  [Contagem de Frequências]: /licoes/contagem-frequencias
   [time out]: http://www.checkupdown.com/status/E408.html
   [Básico de Programação em Python]: licoes/introducao-instalacao-python
   [try / except]: http://docs.python.org/tutorial/errors.html
