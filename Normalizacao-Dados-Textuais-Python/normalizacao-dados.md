@@ -41,20 +41,20 @@ A lista que criamos na lição [De HTML para Lista de Palavras (2)][] precisa se
 -   `html-to-list1.py`
 -   `obo.py`
 
-Caso não tenha esses ficheiros das lições anteriores, você pode fazer o download de um [zip][].
+Caso não tenha esses ficheiros das lições anteriores, você pode fazer o *download* de um [zip][].
 
 ## Limpando a Lista
 
-Na lição [De HTML para Lista de Palavras (2)][], escrevemos um programa em Python chamado `html-to-list1.py` que fazia o download de uma [página web][], removia a formatação HTML e os metadados e retornava uma lista de "palavras" como a apresentada abaixo. Tecnicamente, essas entidades são chamadas de "*tokens*" ao invés de "palavras". Elas incluem alguns elementos que, estritamente falando, não são palavras (como a abreviação &c. para "etcetera"). Elas também incluem elementos que podem ser considerados composições de mais de uma palavra. O possessivo "Akerman's", por exemplo, é ocasionalmente analisado por linguistas como duas palavras: "Akerman" e um marcador de posse. "o'clock" é uma palavra ou duas? E assim por diante.
+Na lição [De HTML para Lista de Palavras (2)][], escrevemos um programa em Python chamado `html-to-list1.py` que fazia o *download* de uma [página web][], removia a formatação HTML e os metadados e retornava uma lista de "palavras" como a apresentada abaixo. Tecnicamente, essas entidades são chamadas de "*tokens*" ao invés de "palavras". Elas incluem alguns elementos que, estritamente falando, não são palavras (como a abreviação &c. para "etcetera"). Elas também incluem elementos que podem ser considerados composições de mais de uma palavra. O possessivo "Akerman's", por exemplo, é ocasionalmente analisado por linguistas como duas palavras: "Akerman" e um marcador de posse. "o'clock" é uma palavra ou duas? E assim por diante.
 
-Volte ao seu programa `html-to-list1.py` e garanta que seu resultado se assemelha ao seguinte:
+Volte ao seu programa `html-to-list1.py` e certifique-se de que seu resultado se assemelha ao seguinte:
 
 
 ``` python
 ['324.', '\xc2\xa0', 'BENJAMIN', 'BOWSEY', '(a' 'blackmoor', ')', 'was', 'indicted', 'for', 'that', 'he', 'together', 'with', 'five', 'hundred', 'other', 'persons', 'and', 'more,', 'did,', 'unlawfully,' 'riotously,', 'and', 'tumultuously', 'assemble', 'on', 'the', '6th', 'of', 'June', 'to', 'the', 'disturbance', 'of', 'the', 'public', 'peace', 'and', 'did', 'begin', 'to', 'demolish', 'and', 'pull', 'down', 'the', 'dwelling', 'house', 'of', '\xc2\xa0', 'Richard', 'Akerman', ',', 'against', 'the', 'form', 'of', 'the', 'statute,', '&amp;c.', '\xc2\xa0', 'ROSE', 'JENNINGS', ',', 'Esq.', 'sworn.', 'Had', 'you', 'any', 'occasion', 'to', 'be', 'in', 'this', 'part', 'of', 'the', 'town,', 'on', 'the', '6th', 'of', 'June', 'in', 'the', 'evening?', '-', 'I', 'dined', 'with', 'my', 'brother', 'who', 'lives', 'opposite', 'Mr.', "Akerman's", 'house.', 'They', 'attacked', 'Mr.', "Akerman's", 'house', 'precisely', 'at', 'seven', "o'clock;", 'they', 'were', 'preceded', 'by', 'a', 'man', 'better', 'dressed', 'than', 'the', 'rest,', 'who']
 ```
 
-Por si só, a habilidade de separar um documento em palavras não é muito útil, já que somos capazes de ler. Podemos usar o texto, no entanto, para executar tarefas que não são sempre possíveis sem softwares especiais. Começaremos agora calculando as frequências dos *tokens* e outras unidades linguísticas, uma forma clássica de mensurar textos. 
+Por si só, a habilidade de separar um documento em palavras não é muito útil, já que somos capazes de ler. Podemos usar o texto, no entanto, para executar tarefas que não são sempre possíveis sem *softwares* especiais. Começaremos agora calculando as frequências dos *tokens* e outras unidades linguísticas, uma forma clássica de mensurar textos. 
 
 Está claro que a nossa lista precisará de uma limpeza antes de conseguirmos utilizá-la para contar frequências. Em linha com as práticas estabelecidas em [De HTML para Lista de Palavras (1)][], vamos tentar descrever nosso algoritmo em português primeiro. Desejamos saber a frequência de cada palavra com sentido que aparece na transcrição do julgamento. Desse modo, as etapas envolvidas podem ser semelhantes a estas:
 
@@ -65,7 +65,7 @@ Está claro que a nossa lista precisará de uma limpeza antes de conseguirmos ut
 
 ## Converter para Minúsculas
 
-Tipicamente tokens são convertidos em letras minúsculas ao contar frequências, então faremos isso através do método de string `lower` que foi introduzido em [Manipular strings com Python][]. Já que este é um método de string, devemos aplicá-lo à string: `text` no programa `html-to-list1.py`. Ajuste `html-to-list1.py` adicionando a *string tag* `lower()` ao final da string *text*. 
+Tipicamente tokens são convertidos em letras minúsculas ao contar frequências, então faremos isso através do método de string `lower` que foi introduzido em [Manipular strings com Python][]. Já que este é um método de string, devemos aplicá-lo à string: `text` no programa `html-to-list1.py`. Ajuste `html-to-list1.py` adicionando a *string tag* `lower()` ao final da string `text`. 
 
 
 ``` python
@@ -122,7 +122,7 @@ def stripNonAlphaNum(text):
     return re.compile(r'\W+', re.UNICODE).split(text)
 ```
 
-A expressão regular no código acima é o material dentro da string, em outras palavras `W+`. `W` é uma abreviatura para a classe de caracteres não-alfanuméricos. Numa expressão regular de Python, o sinal de adição (+) encontra uma ou mais cópias de um determinado caractere. `re.UNICODE` informa ao interpretador que desejamos incluir caracteres de outras línguas do mundo em nossa definição de alfanumérico, assim como de "A" a "Z", "a" a "z" e 0-9 do português. Expressões regulares devem ser *compiladas* antes de poderem ser utilizadas, que é o que o resto do comando faz. Não se preocupe em compreender a parte da compilação agora.
+A expressão regular no código acima é o material dentro da string, em outras palavras: `W+`. `W` é uma abreviatura para a classe de caracteres não-alfanuméricos. Numa expressão regular de Python, o sinal de adição (+) encontra uma ou mais cópias de um determinado caractere. `re.UNICODE` informa ao interpretador que desejamos incluir caracteres de outros idiomas do mundo em nossa definição de alfanumérico, assim como de "A" a "Z", "a" a "z" e 0-9 do português. Expressões regulares devem ser *compiladas* antes de poderem ser utilizadas, que é o que o resto do comando faz. Não se preocupe em compreender a parte da compilação agora.
 
 Agora que refinamos nosso programa `html-to-list1.py`, ele se parece com isto:
 
@@ -140,7 +140,7 @@ wordlist = obo.stripNonAlphaNum(text)
 print(wordlist)
 ```
 
-Ao executar o programa e verificar a saída no painel "Saída de Comando", verá que ele fez um bom trabalho. Esse código irá dividir formas hifenizadas como "coach-wheels" em duas palavras e transformar o possessivo "s" ou "o'clock" em palavras separadas ao perderem o apóstrofo. Ainda assim, o código faz uma aproximação boa o suficiente para os nossos objetivos e devemos agora passar para a contagem de frequências antes de tentar melhorá-lo. (Caso você trabalhe com fontes em mais de um idioma, você precisa aprender um pouco mais a respeito do padrão [Unicode][] e sobre o [suporte de Python][] a ele.)
+Ao executar o programa e verificar a saída no painel "Saída de Comando", verá que ele fez um bom trabalho. Esse código irá dividir formas hifenizadas como "coach-wheels" em duas palavras e irá transformar o possessivo "s" ou "o'clock" em palavras separadas ao perderem o apóstrofo. Ainda assim, o código faz uma aproximação boa o suficiente para os nossos objetivos e devemos agora passar para a contagem de frequências antes de tentar melhorá-lo. (Caso você trabalhe com fontes em mais de um idioma, você precisa aprender um pouco mais a respeito do padrão [Unicode][] e sobre o [suporte de Python][] a ele.)
 
 ## Leituras Sugeridas
 
@@ -148,7 +148,7 @@ Para praticar mais as Expressões Regulares, o capítulo 7 de "[Dive into Python
 
 ### Sincronização de Código 
 
-Para acompanhar as lições futuras, é importante que você tenha os ficheiros e programas corretos no seu diretório *programming historian*. Ao final de cada capítulo nesta série você pode fazer o download do ficheiro zip do programming historian para garantir que possui o código correto. 
+Para acompanhar as lições futuras, é importante que você tenha os ficheiros e programas corretos no seu diretório *programming historian*. Ao final de cada capítulo nesta série você pode fazer o *download* do ficheiro zip do programming historian para garantir que possui o código correto. 
 
 -   python-lessons4.zip ([zip sync][])
 

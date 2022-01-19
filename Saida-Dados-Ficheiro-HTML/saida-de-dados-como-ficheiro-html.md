@@ -49,7 +49,7 @@ Na lição anterior, você aprendeu como incorporar a mensagem "*Hello World!*" 
 
 ## Metadados
 
-A distinção entre dados e metadados é crucial para a ciência da informação. Metadados são dados sobre dados. Esse conceito já deve ser bastante familiar a você, ainda que você não tenha escutado esse termo anteriormente. Considere um livro tradicional. Se considerarmos que o texto do livro é um dado, há uma série de outras características associadas a esse texto, mas que podem ou não estar explicitamente exibidos no livro. O título da obra, o autor, a editora, o local e a data de publicação são metadados que tipicamente estão apresentados na obra. O local e a data de escrita, o nome do editor de texto, os dados de catalogação da Biblioteca do Congresso, o nome da fonte usada para formatar o livro às vezes são exibidos nele. A pessoa que comprou uma cópia particular pode ou não escrever seu nome no livro. Se o livro pertence à coleção de uma biblioteca, essa biblioteca manterá metadados adicionais, apenas alguns dos quais serão fisicamente anexados ao livro. O registro de empréstimo, por exemplo, geralmente são mantidos em algum tipo de banco de dados conectados ao livro por um identificador único. Bibliotecas, arquivos e museus possuem sistemas elaborados para gerar e manter controle de metadados.
+A distinção entre dados e metadados é crucial para a ciência da informação. Metadados são dados sobre dados. Esse conceito já deve ser bastante familiar a você, ainda que você não tenha escutado esse termo anteriormente. Considere um livro tradicional. Se considerarmos que o texto do livro é um dado, há uma série de outras características associadas a esse texto, mas que podem ou não estar explicitamente exibidas no livro. O título da obra, o autor, a editora, o local e a data de publicação são metadados que tipicamente estão apresentados na obra. O local e a data de escrita, o nome do editor de texto, os dados de catalogação da Biblioteca do Congresso e o nome da fonte usada para formatar o livro às vezes são exibidos nele. A pessoa que comprou uma cópia particular pode ou não escrever seu nome no livro. Se o livro pertence à coleção de uma biblioteca, essa biblioteca manterá metadados adicionais, apenas alguns dos quais serão fisicamente anexados ao livro. Os registros de empréstimo, por exemplo, geralmente são mantidos em algum tipo de banco de dados conectado ao livro por um identificador único. Bibliotecas, arquivos e museus possuem sistemas elaborados para gerar e manter controle de metadados.
 
 Quando estiver trabalhando com dados digitais, é uma boa ideia incorporar metadados nos seus próprios ficheiros sempre que possível. Nós agora desenvolveremos algumas estratégias básicas para tornar nossos ficheiros *autodocumentados*. No nosso *wrapper*, queremos incluir informações dinâmicas sobre o ficheiro, como o horário e a data em que foi criado, assim como um título HTML relevante para este ficheiro. Nesse caso poderíamos simplesmente nomeá-lo por conta própria, mas quando começarmos a trabalhar com múltiplos ficheiros, criar documentos *autodocumentados* automaticamente economizará muito tempo, então vamos praticar agora. E para isso, precisaremos aprender a tirar proveito de algumas opções mais poderosas de formatação de string.
 
@@ -87,7 +87,7 @@ Nesses exemplos, `%s` em uma string indica que outra string será incorporada na
 
 ## Ficheiro de dados Autodocumentado
 
-Vamos agrupar na forma de função alguns dos códigos que já escrevemos. Uma delas receberá uma URL e retornará uma string de texto em letras minúsculas a partir da página web. Copie esse código no módulo `obo.py`:
+Vamos agrupar alguns dos códigos que já escrevemos na forma de função. Uma delas receberá uma URL e retornará uma string de texto em letras minúsculas a partir da página web. Copie esse código no módulo `obo.py`:
 
 
 ``` python
@@ -101,7 +101,7 @@ def webPageToText(url):
     return text
 ```
 
-Também vamos desejar uma função que toma uma string de qualquer tipo e a torne o corpo de um ficheiro HTML que é aberto automaticamente no Firefox. Essa função deve incluir alguns metadados básicos, como o horário e a data que foi criado e o nome do programa que o criou. Estude o código a seguir cuidadosamente e depois copie-o no módulo `obo.py`. 
+Também vamos desejar uma função que tome uma string de qualquer tipo e a torne o corpo de um ficheiro HTML que é aberto automaticamente no Firefox. Essa função deve incluir alguns metadados básicos, como o horário e a data que foi criado e o nome do programa que o criou. Estude o código a seguir cuidadosamente e depois copie-o no módulo `obo.py`. 
 
 ### Instruções para Mac
 
@@ -168,8 +168,7 @@ def wrapStringInHTMLWindows(program, url, body):
 ```
 \*\*\*
 
-Note que essa função faz uso do operador de formatação de string sobre o qual acabamos de aprender. Caso ainda tenha problemas com essa ideia, verifique o ficheiro HTML que foi aberto numa nova guia do Firefox e deve ver como isso funcionou. Se ainda estiver preso nisso, dê uma olhada em
-
+Note que essa função faz uso do operador de formatação de string sobre o qual acabamos de aprender. Caso ainda tenha problemas com essa ideia, verifique o ficheiro HTML que foi aberto numa nova guia do Firefox e verá como isso funcionou. Se ainda estiver preso nisso, dê uma olhada em
 
 ```
 URL: http://www.oldbaileyonline.org/browse.jsp?id=t17800628-33&div=t17800628-33

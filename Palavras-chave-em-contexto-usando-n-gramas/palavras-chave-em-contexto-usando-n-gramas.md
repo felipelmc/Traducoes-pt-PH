@@ -37,7 +37,7 @@ Como em [Saída de Dados como um Ficheiro HTML][], essa lição toma os pares de
 
 Uma vez que as KWICs forem criadas, elas são envolvidas em HTML (isto é, passam pelo *HTML wrapper*) e enviadas ao navegador, onde podem ser visualizadas. Isso reforça o que foi aprendido em [Saída de Dados como um Ficheiro HTML][1], optando por uma saída ligeiramente diferente.
 
-Ao final dessa lição, você será capaz de extrair todas os n-gramas possíveis de um texto. Na próxima lição, você aprenderá como gerar todos os n-gramas que uma determinada palavra-chave em um documento baixado da internet e exibí-los claramente na janela do navegador.
+Ao final dessa lição, você será capaz de extrair todos os n-gramas possíveis de um texto. Na próxima lição, você aprenderá como gerar todos os n-gramas de uma determinada palavra-chave em um documento baixado da internet e a exibí-los claramente na janela do navegador.
 
 ## Ficheiros Necessários para esta Lição
 
@@ -47,7 +47,7 @@ Caso não possua esses ficheiros da lição anterior, você pode fazer o *downlo
 
 ## De Texto para N-gramas e para KWIC
 
-Agora que você já sabe como coletar o conteúdo textual de uma página web automaticamente com Python e começou a usar strings, listas e dicionários para processamento de texto, há muitas outras coisas que você pode fazer com texto além de contar frequências. Pessoas que estudam com propriedades estatísticas da linguagem descobriram que estudar sequências lineares de unidades linguísticas pode nos dizer muito a respeito de um texto. Essas sequências lineares são conhecidas como bigramas (2 unidades), trigramas (3 unidades) de forma geral como n-gramas.
+Agora que você já sabe como coletar o conteúdo textual de uma página *web* automaticamente com Python e começou a usar strings, listas e dicionários para processamento de texto, há muitas outras coisas que você pode fazer com texto além de contar frequências. Pessoas que estudam propriedades estatísticas da linguagem descobriram que estudar sequências lineares de unidades linguísticas pode nos dizer muito a respeito de um texto. Essas sequências lineares são conhecidas como bigramas (2 unidades), trigramas (3 unidades) e de forma geral como n-gramas.
 
 Você provavelmente já viu n-gramas muitas vezes antes. Eles são comumente utilizados em páginas de resultados de pesquisa para oferecer uma prévia de onde sua palavra-chave aparece em um documento e qual é o texto ao redor da palavra-chave. Essa aplicação de n-gramas é conhecida como palavras-chave em contexto (*keywords in context*, às vezes abreviada como KWIC). Por exemplo, se a string em questão fosse "*it was the best of times it was the worst of times it was the age of wisdom it was the age of foolishness*", então o 7-grama para a palavra-chave "*wisdom*" seria:
 
@@ -61,7 +61,7 @@ O que faremos a seguir é desenvolver a habilidade de exibir KWIC para qualquer 
 
 ## De Texto para N-gramas
 
-Uma vez que desejamos trabalhar com palavras ao invés de caracteres ou fonemas, será muito mais fácil criar um n-grama usando uma lista de palavras em vez de strings. Como você já sabe, o Python pode facilmente transformar strings em uma lista usando a operação `split`. Uma vez dividida, torna-se simples recuperar uma subsequência de palavras adjacentes na lista usando um `slice`, representada por dois índices separados por dois pontos. Isso foi introduzido ao trabalhar com strings em [Manipular strings com Python][]:
+Uma vez que desejamos trabalhar com palavras ao invés de caracteres ou fonemas, será muito mais fácil criar um n-grama usando uma lista de palavras em vez de strings. Como você já sabe, o Python pode facilmente transformar strings em uma lista usando a operação `split`. Uma vez dividida, torna-se simples recuperar uma subsequência de palavras adjacentes na lista usando um `slice`, representado por dois índices separados por dois pontos. Isso foi introduzido ao trabalhar com strings em [Manipular strings com Python][]:
 
 ``` python
 message9 = "Olá Mundo"

@@ -39,7 +39,7 @@ Sua lista agora está limpa o suficiente para que você possa começar a analisa
 
 - `obo.py`
 
-Caso não possua esse ficheiro, você pode fazer o download do ficheiro ([zip][]) que contém todo o código das lições anteriores desta série.
+Caso não possua esse ficheiro, você pode fazer o *download* do ficheiro ([zip][]) que contém todo o código das lições anteriores desta série.
 
 ## Frequências
 
@@ -100,7 +100,7 @@ print("Frequencies\n" + str(wordfreq) + "\n")
 print("Pairs\n" + str(list(zip(wordlist, wordfreq))))
 ```
 
-Caso estude essa *list comprehension* cuidadosamente, descobrirá que ela faz exatamente o mesmo que o `for` *loop* no exemplo anterior, mas de maneira condensada. Qualquer um dos métodos funcionará bem, então use a versão com a qual se sente mais confortável.
+Se estudar essa *list comprehension* cuidadosamente, descobrirá que ela faz exatamente o mesmo que o `for` *loop* no exemplo anterior, mas de maneira condensada. Qualquer um dos métodos funcionará bem, então use a versão com a qual se sente mais confortável.
 
 Em geral é prudente utilizar um código que você entenda ao invés de um código que seja executado mais rapidamente.
 
@@ -134,7 +134,7 @@ print(m[1][0])
 -> m
 ```
 
-Para manter controle sobre as frequências, utilizaremos outro tipo de objeto Python, um dicionário. O dicionário é uma coleção não ordenada de objetos. Isso significa que você não pode utilizar índices para recuperar seus elementos. Você pode, por outro lado, buscá-los utilizando uma chave, ou *key* no inglês (daí o nome "dicionário"). Estude o exemplo a seguir:
+Para manter controle sobre as frequências, utilizaremos outro tipo de objeto Python: um dicionário. O dicionário é uma coleção não ordenada de objetos. Isso significa que você não pode utilizar índices para recuperar seus elementos. Você pode, por outro lado, buscá-los utilizando uma chave, ou *key* no inglês (daí o nome "dicionário"). Estude o exemplo a seguir:
 
 
 ``` python
@@ -201,7 +201,7 @@ for s in sorteddict: print(str(s))
 
 ## Removendo *Stop Words*
 
-Quando vemos o output do nosso programa `html-to-freq.py`, verificamos que muitas das palavras mais frequentes no texto são palavras funcionais como *the*, *of*, *to* e *and*.
+Quando vemos o resultado do nosso programa `html-to-freq.py`, verificamos que muitas das palavras mais frequentes no texto são palavras funcionais como *the*, *of*, *to* e *and*.
 
 ``` python
 (192, 'the')
@@ -219,7 +219,7 @@ Quando vemos o output do nosso programa `html-to-freq.py`, verificamos que muita
 (36, 'it')
 ```
 
-Essas palavras são geralmente as mais comuns em qualquer texto de língua inglesa, então elas não nos dizem muito a respeito do julgamento de Bowsey. Em geral, estamos mais interessados em encontrar as palavras que nos auxiliarão a diferenciar esse texto de outros textos sobre outros assuntos. Desse modo, vamos remover as palavras funcionais comuns. Utilizaremos a lista a seguir, adaptada de uma publicada *online* por [cientistas da computação em Glasgow][]. Copie-a e adicione-a no início da biblioteca `obo.py` que você está construindo.
+Essas palavras são geralmente as mais comuns em qualquer texto de língua inglesa, então elas não nos dizem muito a respeito do julgamento de Bowsey. Em geral, estamos mais interessados em encontrar as palavras que nos auxiliarão a diferenciar esse texto de outros textos sobre outros assuntos. Desse modo, vamos remover as palavras funcionais comuns. Utilizaremos a lista a seguir, adaptada de uma publicação *online* por [cientistas da computação em Glasgow][]. Copie-a e adicione-a no início da biblioteca `obo.py` que você está construindo.
 
 ``` python
 stopwords = ['a', 'about', 'above', 'across', 'after', 'afterwards']
@@ -350,7 +350,7 @@ Pilgrim, Diving into Python
 
 ## Sincronização de Código
 
-Para acompanhar lições futuras, é importante ter os ficheiros e programas corretos no seu diretório “programming-historian”. No final de cada lição, é possível fazer o download do ficheiro zip “programming-historian” para garantir que possui o código correto.
+Para acompanhar lições futuras, é importante ter os ficheiros e programas corretos no seu diretório “programming-historian”. No final de cada lição, é possível fazer o *download* do ficheiro zip “programming-historian” para garantir que possui o código correto.
 
 -   programming-historian-5 ([zip sync][])
 
